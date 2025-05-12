@@ -1,0 +1,11 @@
+# logs
+data/run-logs/
+*.log
+
+# executables
+*.out
+*.o
+
+# editor data
+.vscode/
+*.swp
