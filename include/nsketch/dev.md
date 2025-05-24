@@ -1,2 +1,2 @@
 # Dev note
-internal headers
+internal general headers
