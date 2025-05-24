@@ -8,3 +8,6 @@
 # editor data
 .vscode/
 *.swp
+
+# main build directory
+/build/
