@@ -21,14 +21,14 @@ matrix (xSize, std::vector<GridPixel>(ySize))
 
 // change grid size
 void Grid::setGridSize(int xSize, int ySize) {
+    this->matrix.resize(xSize);
 
+    for (int i = 0; i < xSize; i++) {
+        this->matrix[i].resize(ySize);
+    };
 };
 
-// automatically get window size and resize the grid to match
-void Grid::updateGridSize() {
-
-};
-
+// get a pointer to a pixel (used if you need full control compared to setPixel)
 GridPixel* Grid::getPixel(int xPos, int yPos) {
     return &this->matrix[xPos][yPos];
 };

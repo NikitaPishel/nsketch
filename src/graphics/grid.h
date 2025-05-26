@@ -22,7 +22,6 @@ public:
 
     Grid(int xSize, int ySize);
     void setGridSize(int xSize, int ySize);
-    void updateGridSize();
     void setPixel(int xPos, int yPos, char symbol, int textColor, int backColor);
 
     GridPixel* getPixel(int xPos, int yPos);
