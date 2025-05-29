@@ -4,21 +4,24 @@
 #include "grid.h"
 #include "include/nsketch/canvas.h"
 
-Canvas::Canvas() {
+namespace gph {
+    // Canvas constructor
+    Canvas::Canvas() {
 
-};
+    }
 
-// set the canvas size
-void Canvas::setSize() {
-    
-};
+    // set the canvas size
+    void Canvas::setSize() {
+        
+    }
 
-// automatically canvas canvas to the terminal size
-void Canvas::updateSize() {
-    
+    // automatically canvas canvas to the terminal size
+    void Canvas::updateSize() {
+        
+    }
+
+    // add a whole texture to the grid
+    void Canvas::addTexture() {
+
+    }
 }
-
-// add a whole texture to the grid
-void Canvas::addTexture() {
-
-};
