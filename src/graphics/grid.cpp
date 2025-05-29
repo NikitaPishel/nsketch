@@ -6,7 +6,7 @@
 using namespace gph;
 
 // set GridPixel instance init values
-GridPixel::GridPixel(): symbol(' '), backColor(0), textColor(7) {
+Grid::GridPixel::GridPixel(): symbol(' '), backColor(0), textColor(7) {
 
 };
 
@@ -29,7 +29,7 @@ void Grid::setGridSize(int xSize, int ySize) {
 };
 
 // get a pointer to a pixel (used if you need full control compared to setPixel)
-GridPixel* Grid::getPixel(int xPos, int yPos) {
+Grid::GridPixel* Grid::getPixel(int xPos, int yPos) {
     return &this->matrix[xPos][yPos];
 };
 
@@ -52,8 +52,8 @@ void Grid::setPixel(
 int main() {
     Grid myMatrix(5, 5);
     
-    GridPixel* pix1 = myMatrix.getPixel(0, 0);
-    GridPixel* pix2 = myMatrix.getPixel(1, 0);
+    Grid::GridPixel* pix1 = myMatrix.getPixel(0, 0);
+    Grid::GridPixel* pix2 = myMatrix.getPixel(1, 0);
     
     pix1->symbol = '1';
     pix2->symbol = '2';
