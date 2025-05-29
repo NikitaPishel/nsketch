@@ -4,8 +4,8 @@
 #include "grid.h"
 
 namespace gph {
-    // set GridPixel instance init values
-    Grid::GridPixel::GridPixel(): symbol(' '), backColor(0), textColor(7) {
+    // set Pixel instance init values
+    Grid::Pixel::Pixel(): symbol(' '), backColor(0), textColor(7) {
 
     }
 
@@ -13,7 +13,7 @@ namespace gph {
     Grid::Grid  (int xSize, int ySize): 
     xSize(xSize), 
     ySize(ySize),
-    matrix (xSize, std::vector<GridPixel>(ySize)) {
+    matrix (xSize, std::vector<Pixel>(ySize)) {
 
     }
 
@@ -27,13 +27,13 @@ namespace gph {
     }
 
     // get a pointer to a pixel (used if you need full control compared to setPixel)
-    Grid::GridPixel* Grid::getPixel(int xPos, int yPos) {
+    Grid::Pixel* Grid::getPixel(int xPos, int yPos) {
         return &this->matrix[xPos][yPos];
     }
 
     // update pixel parameters (or add a pixel)
     void Grid::setPixel(int xPos, int yPos, char symbol, int textColor, int backColor) {
-        GridPixel& slctPixel = this->matrix[xPos][yPos];
+        Pixel& slctPixel = this->matrix[xPos][yPos];
         slctPixel.symbol = symbol;
         slctPixel.textColor = textColor;
         slctPixel.backColor = backColor;
@@ -43,8 +43,8 @@ namespace gph {
 int main() {
     Grid myMatrix(5, 5);
     
-    Grid::GridPixel* pix1 = myMatrix.getPixel(0, 0);
-    Grid::GridPixel* pix2 = myMatrix.getPixel(1, 0);
+    Grid::Pixel* pix1 = myMatrix.getPixel(0, 0);
+    Grid::Pixel* pix2 = myMatrix.getPixel(1, 0);
     
     pix1->symbol = '1';
     pix2->symbol = '2';
