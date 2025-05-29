@@ -6,22 +6,38 @@
 
 namespace gph {
     // Canvas constructor
-    Canvas::Canvas() {
+    Canvas::Canvas(int xSize, int ySize): canvas(xSize, ySize) {
+    }
 
+    // get horizontal canvas size
+    int Canvas::getYSize() {
+        return this->canvas.xSize;
+    }
+    
+    // get vertical canvas size
+    
+    int Canvas::getYSize() {
+        return this->canvas.ySize;
     }
 
     // set the canvas size
-    void Canvas::setSize() {
-        
+    void Canvas::setSize(int xSize, int ySize) {
+        this->canvas.setGridSize(xSize, ySize);
     }
 
-    // automatically canvas canvas to the terminal size
+    // automatically set the canvas size to the terminal size
     void Canvas::updateSize() {
-        
+        winsize window = getWinSize();
+        this->setSize(window.ws_row, window.ws_col);
+    }   
+
+    // add a texture to the canvas
+    void Canvas::addTexture(int xPos, int yPos) {
+
     }
 
-    // add a whole texture to the grid
-    void Canvas::addTexture() {
-
+    // Render and display current canvas
+    void Canvas::render() {
+        
     }
 }

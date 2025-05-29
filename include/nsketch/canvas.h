@@ -5,14 +5,24 @@
 namespace gph {
     class Canvas {
     public:
-        Canvas();
-        void setSize();
+        // Constructor
+        Canvas(int xSize, int ySize);
+
+        // Canvas size
+        int getXSize();
+        int getYSize();
+        void setSize(int xSize, int ySize);
         void updateSize();
-        void setPixel();
-        void addTexture();
+
+        // Adding pixels to the canvas
+        void addPixel(int xPos, int yPos, char symbol, int textColor, int backColor);
+        void addTexture(int xPos, int yPos);
+
+        // Displaying data
+        void render();
 
     private:
-        Grid grid;
+        Grid canvas;
     };
 };
 #endif
