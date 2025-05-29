@@ -2,16 +2,15 @@
 #define CANVAS_H
 #include "grid.h"
 
-class canvas {
+class Canvas {
 public:
-    canvas();
-    setSize();
-    updateSize();
-    setPixel();
+    Canvas();
+    void setSize();
+    void updateSize();
+    void setPixel();
+    void addTexture();
 
 private:
-    int xSize;
-    int ySize;
     Grid grid;
 };
 
