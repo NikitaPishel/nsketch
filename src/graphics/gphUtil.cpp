@@ -11,5 +11,7 @@ namespace gph {
         if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &window) == -1) {
             std::cerr << "Failed to get window size\n";
         }
+
+        return window;
     };
 };

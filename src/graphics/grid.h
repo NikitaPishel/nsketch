@@ -7,9 +7,9 @@ public:
     int xSize;
     int ySize;
 
-    Grid(int xSize, int ySize);
+    Grid(int xSize = 0, int ySize = 0);
     void setGridSize(int xSize, int ySize);
-    void setPixel(int xPos, int yPos, char symbol, int textColor, int backColor);
+    void setPixel(int xPos, int yPos, char symbol = ' ', int textColor = 0, int backColor = 0);
 
     struct GridPixel {
         char symbol;

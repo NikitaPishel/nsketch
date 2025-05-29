@@ -33,15 +33,8 @@ Grid::GridPixel* Grid::getPixel(int xPos, int yPos) {
     return &this->matrix[xPos][yPos];
 };
 
-// update pixel parameters
-void Grid::setPixel(
-    int xPos,
-    int yPos,
-    char symbol = ' ',
-    int textColor = 0,
-    int backColor = 0
-    
-) {
+// update pixel parameters (or add a pixel)
+void Grid::setPixel(int xPos, int yPos, char symbol, int textColor, int backColor) {
     GridPixel& slctPixel = this->matrix[xPos][yPos];
     slctPixel.symbol = symbol;
     slctPixel.textColor = textColor;
