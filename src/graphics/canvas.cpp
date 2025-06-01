@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include "gphUtil.h"
 #include "grid.h"
-#include "include/nsketch/canvas.h"
+#include "nsketch/gph/canvas.h"
 
 namespace gph {
     // Canvas constructor
@@ -38,6 +38,6 @@ namespace gph {
 
     // Render and display current canvas
     void Canvas::render() {
-        
+
     }
 }

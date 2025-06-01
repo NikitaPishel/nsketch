@@ -1,9 +1,13 @@
 #ifndef CANVAS_H
 #define CANVAS_H
 #include "grid.h"
+#include "nsketch/gph/texture.h"
 
 namespace gph {
     class Canvas {
+        private:
+            Grid canvas;
+
     public:
         // Constructor
         Canvas(int xSize, int ySize);
@@ -20,9 +24,6 @@ namespace gph {
 
         // Displaying data
         void render();
-
-    private:
-        Grid canvas;
     };
 };
 #endif
