@@ -5,7 +5,7 @@
 
 namespace gph {
     // class Texture is used to draw blocks of pixels on a canvas
-    // there is no setSize, so it is encapsulated from size changes
+    // it is different from grid by typization, static size, setPixel handling and additional methods
     class Texture {
     private:
         Grid grid;
@@ -21,6 +21,9 @@ namespace gph {
 
         // Add a pixel to the texture
         void setPixel(int xPos, int yPos, char symbol = ' ', std::string textColor = "white", std::string backColor = "black");
+
+        // get a serialized copy of a grid
+        std::vector<char> serialized();
     };
 }
 

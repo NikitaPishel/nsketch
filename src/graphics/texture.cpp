@@ -28,4 +28,8 @@ namespace gph {
         grid.setPixel(xPos, yPos, symbol, textColorId, backColorId);
     }
 
+    std::vector<char> Texture::serialized() {
+        return this->grid.serialized();
+    }
+
 }

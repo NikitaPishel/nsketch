@@ -1,6 +1,7 @@
 #ifndef CANV_GRID_H
 #define CANV_GRID_H
 #include <vector>
+#include <cstdint>
 
 namespace gph {
     // matrix holder class with basic matrix control
@@ -25,6 +26,9 @@ namespace gph {
         void setGridSize(int xSize, int ySize);
         void setPixel(int xPos, int yPos, char symbol = ' ', int textColor = 0, int backColor = 0);
         Pixel* getPixel(int xPos, int yPos);
+
+        // get a serialized copy of a matrix
+        std::vector<char> serialized();
         
     private:
         // Pixel grid itself

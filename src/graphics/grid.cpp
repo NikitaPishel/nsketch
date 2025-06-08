@@ -38,6 +38,29 @@ namespace gph {
         slctPixel.textColor = textColor;
         slctPixel.backColor = backColor;
     }
+
+    std::vector<char> Grid::serialized() {
+        std::vector<char> buffer;
+
+        auto append = [&](const void* data, std::size_t size) {
+            const char* bytes = reinterpret_cast<const char*>(data);
+            buffer.insert(buffer.end(), bytes, bytes + size);
+        };
+
+        append(&this->xSize, sizeof(this->xSize));
+        append(&this->ySize, sizeof(this->ySize));
+
+        for (int y = 0; y < this->ySize; ++y) {
+            for (int x = 0; x < this->xSize; ++x) {
+                const Grid::Pixel* p = this->getPixel(x, y);
+                append(&p->symbol, sizeof(p->symbol));
+                append(&p->textColor, sizeof(p->textColor));
+                append(&p->backColor, sizeof(p->backColor));
+            }
+        }
+
+        return buffer;
+    }
 }
 /*
 int main() {

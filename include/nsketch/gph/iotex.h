@@ -5,6 +5,7 @@
 #include <fstream>
 #include <unordered_map>
 #include "nsketch/gph/texture.h"
+#include "grid.h"
 
 namespace gph {
 
@@ -23,6 +24,10 @@ namespace gph {
     private:
         // Map of textures; Used to store textures and their later identification by the index.
         std::unordered_map<std::string, Texture> textures;
+
+        // deserialize grid
+        // as it is the method used to input output, it is the one to deserialize the grid
+        Grid deserializeGrid(const std::vector<char>& data);
 
     };
 }
