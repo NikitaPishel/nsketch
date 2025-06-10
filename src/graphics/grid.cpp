@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <cstdint>
+#include <cstring>
 #include "gphUtil.h"
 #include "grid.h"
 
@@ -61,6 +62,43 @@ namespace gph {
         }
 
         return buffer;
+    }
+
+    // Serialized Grid constructor
+    SerGrid::SerGrid(std::vector<char> buffer): buffer(buffer) {
+
+    }
+
+    // return unserialized buffer data
+    Grid SerGrid::unserialized() {
+        std::size_t offset = 0;
+
+        auto read = [&](void* data, std::size_t size) {
+            std::memcpy(data, this->buffer.data() + offset, size);
+            offset += size;
+        };
+
+        int xSize, ySize;
+        read(&xSize, sizeof(xSize));
+        read(&ySize, sizeof(ySize));
+
+        Grid grid(xSize, ySize);
+
+        for (int y = 0; y < ySize; ++y) {
+            for (int x = 0; x < xSize; ++x) {
+                char symbol;
+                int textColor;
+                int backColor;
+
+                read(&symbol, sizeof(symbol));
+                read(&textColor, sizeof(textColor));
+                read(&backColor, sizeof(backColor));
+
+                grid.setPixel(x, y, symbol, textColor, backColor);
+            }
+        }
+
+        return grid;
     }
 }
 /*

@@ -4,6 +4,10 @@
 #include <cstdint>
 
 namespace gph {
+
+    // for circular dependency
+    class SerGrid;
+
     // matrix holder class with basic matrix control
     class Grid {
     public:
@@ -34,6 +38,16 @@ namespace gph {
         // Pixel grid itself
         std::vector<std::vector<Pixel>> matrix;
 
+    };
+
+    class SerGrid {
+        std::vector<char> buffer;
+
+        // constructor
+        SerGrid(std::vector<char> buffer);
+
+        // get unserialized grid
+        Grid unserialized();
     };
 }
 
