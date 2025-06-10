@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <cstdint>
 #include "gphUtil.h"
 #include "grid.h"
 
@@ -32,7 +33,7 @@ namespace gph {
     }
 
     // update pixel parameters (or add a pixel)
-    void Grid::setPixel(int xPos, int yPos, char symbol, int textColor, int backColor) {
+    void Grid::setPixel(int xPos, int yPos, char symbol, int8_t textColor, int8_t backColor) {
         Pixel& slctPixel = this->matrix[xPos][yPos];
         slctPixel.symbol = symbol;
         slctPixel.textColor = textColor;
@@ -52,10 +53,10 @@ namespace gph {
 
         for (int y = 0; y < this->ySize; ++y) {
             for (int x = 0; x < this->xSize; ++x) {
-                const Grid::Pixel* p = this->getPixel(x, y);
-                append(&p->symbol, sizeof(p->symbol));
-                append(&p->textColor, sizeof(p->textColor));
-                append(&p->backColor, sizeof(p->backColor));
+                const Grid::Pixel* pix = this->getPixel(x, y);
+                append(&pix->symbol, sizeof(pix->symbol));
+                append(&pix->textColor, sizeof(pix->textColor));
+                append(&pix->backColor, sizeof(pix->backColor));
             }
         }
 

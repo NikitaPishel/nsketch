@@ -1,4 +1,5 @@
 #include <string>
+#include <cstdint>
 #include "gphUtil.h"
 #include "nsketch/gph/texture.h"
 #include "grid.h"
@@ -30,7 +31,7 @@ namespace gph {
         grid.setPixel(xPos, yPos, symbol, textColorId, backColorId);
     }
 
-    void Texture::setPixelByColorId(int xPos, int yPos, char symbol, int textColor, int backColor) {
+    void Texture::setPixelByColorId(int xPos, int yPos, char symbol, int8_t textColor, int8_t backColor) {
         grid.setPixel(xPos, yPos, symbol, textColor, backColor);
     }
 

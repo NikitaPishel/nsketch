@@ -16,7 +16,7 @@ namespace gph {
     private:
         Colors();
 
-        std::unordered_map<std::string, int> colorMap;
+        std::unordered_map<std::string, int8_t> colorMap;
 
         Colors(const Colors&) = delete;
         Colors& operator=(const Colors&) = delete;

@@ -10,12 +10,11 @@ namespace gph {
     }
 
     // get horizontal canvas size
-    int Canvas::getYSize() {
+    int Canvas::getXSize() {
         return this->canvas.xSize;
     }
     
     // get vertical canvas size
-    
     int Canvas::getYSize() {
         return this->canvas.ySize;
     }
