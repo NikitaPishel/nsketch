@@ -5,7 +5,7 @@
 
 namespace gph {
 
-    Texture::Texture(int xSize, int ySize) : grid(xSize, ySize),  colors(Colors::getInstance()) {
+    Texture::Texture(int xSize, int ySize) : grid(xSize, ySize) {
 
     }
 
@@ -22,10 +22,16 @@ namespace gph {
     }
 
     void Texture::setPixel(int xPos, int yPos, char symbol, std::string textColor, std::string backColor) {
-        int textColorId = this->colors.getColorID(textColor);
-            int backColorId = this->colors.getColorID(backColor);
+        const Colors& colors = Colors::getInstance();
+
+        int textColorId = colors.getColorID(textColor);
+            int backColorId = colors.getColorID(backColor);
 
         grid.setPixel(xPos, yPos, symbol, textColorId, backColorId);
+    }
+
+    void Texture::setPixelByColorId(int xPos, int yPos, char symbol, int textColor, int backColor) {
+        grid.setPixel(xPos, yPos, symbol, textColor, backColor);
     }
 
     std::vector<char> Texture::serialized() {

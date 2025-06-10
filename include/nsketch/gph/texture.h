@@ -9,7 +9,6 @@ namespace gph {
     class Texture {
     private:
         Grid grid;
-        const Colors& colors; // as it uses colors singleton
 
     public:
         // Constructor
@@ -21,6 +20,7 @@ namespace gph {
 
         // Add a pixel to the texture
         void setPixel(int xPos, int yPos, char symbol = ' ', std::string textColor = "white", std::string backColor = "black");
+        void setPixelByColorId(int xPos, int yPos, char symbol = ' ', int textColor = 0, int backColor = 0);
 
         // get a serialized copy of a grid
         std::vector<char> serialized();
