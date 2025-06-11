@@ -6,7 +6,7 @@
 namespace gph {
 
     // for circular dependency
-    class SerGrid;
+    class GridBuffer;
 
     // matrix holder class with basic matrix control
     class Grid {
@@ -29,10 +29,10 @@ namespace gph {
         Grid(int xSize = 0, int ySize = 0);
         void setGridSize(int xSize, int ySize);
         void setPixel(int xPos, int yPos, char symbol = ' ', int8_t textColor = 0, int8_t backColor = 0);
-        Pixel* getPixel(int xPos, int yPos);
+        Pixel& getPixel(int xPos, int yPos);
 
         // get a serialized copy of a matrix
-        std::vector<char> serialized();
+        GridBuffer newBuffer();
         
     private:
         // Pixel grid itself
@@ -40,14 +40,16 @@ namespace gph {
 
     };
 
-    class SerGrid {
+    class GridBuffer {
+    private:
         std::vector<char> buffer;
 
+    public:
         // constructor
-        SerGrid(std::vector<char> buffer);
+        GridBuffer(std::vector<char> buffer);
 
-        // get unserialized grid
-        Grid unserialized();
+        // return unserialized grid form the buffer
+        Grid unpack();
     };
 }
 

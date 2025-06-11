@@ -6,6 +6,11 @@
 #include "grid.h"
 
 namespace gph {
+    // Serialized Grid constructor
+    GridBuffer::GridBuffer(std::vector<char> buffer): buffer(buffer) {
+
+    }
+
     // set Pixel instance init values
     Grid::Pixel::Pixel(): symbol(' '), backColor(0), textColor(7) {
 
@@ -29,8 +34,8 @@ namespace gph {
     }
 
     // get a pointer to a pixel (used if you need full control compared to setPixel)
-    Grid::Pixel* Grid::getPixel(int xPos, int yPos) {
-        return &this->matrix[xPos][yPos];
+    Grid::Pixel& Grid::getPixel(int xPos, int yPos) {
+        return this->matrix[xPos][yPos];
     }
 
     // update pixel parameters (or add a pixel)
@@ -41,12 +46,12 @@ namespace gph {
         slctPixel.backColor = backColor;
     }
 
-    std::vector<char> Grid::serialized() {
-        std::vector<char> buffer;
+    GridBuffer Grid::newBuffer() {
+        std::vector<char> binGrid;
 
         auto append = [&](const void* data, std::size_t size) {
             const char* bytes = reinterpret_cast<const char*>(data);
-            buffer.insert(buffer.end(), bytes, bytes + size);
+            binGrid.insert(binGrid.end(), bytes, bytes + size);
         };
 
         append(&this->xSize, sizeof(this->xSize));
@@ -54,23 +59,20 @@ namespace gph {
 
         for (int y = 0; y < this->ySize; ++y) {
             for (int x = 0; x < this->xSize; ++x) {
-                const Grid::Pixel* pix = this->getPixel(x, y);
-                append(&pix->symbol, sizeof(pix->symbol));
-                append(&pix->textColor, sizeof(pix->textColor));
-                append(&pix->backColor, sizeof(pix->backColor));
+                const Grid::Pixel pix = this->getPixel(x, y);
+                append(&pix.symbol, sizeof(pix.symbol));
+                append(&pix.textColor, sizeof(pix.textColor));
+                append(&pix.backColor, sizeof(pix.backColor));
             }
         }
+        
+        GridBuffer buffer(binGrid);
 
         return buffer;
     }
 
-    // Serialized Grid constructor
-    SerGrid::SerGrid(std::vector<char> buffer): buffer(buffer) {
-
-    }
-
     // return unserialized buffer data
-    Grid SerGrid::unserialized() {
+    Grid GridBuffer::unpack() {
         std::size_t offset = 0;
 
         auto read = [&](void* data, std::size_t size) {

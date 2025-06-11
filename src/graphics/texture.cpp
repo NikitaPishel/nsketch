@@ -1,11 +1,11 @@
 #include <string>
+#include <vector>
 #include <cstdint>
 #include "gphUtil.h"
 #include "nsketch/gph/texture.h"
 #include "grid.h"
 
 namespace gph {
-
     Texture::Texture(int xSize, int ySize) : grid(xSize, ySize) {
 
     }
@@ -35,8 +35,15 @@ namespace gph {
         grid.setPixel(xPos, yPos, symbol, textColor, backColor);
     }
 
-    std::vector<char> Texture::serialized() {
-        return this->grid.serialized();
+    void Texture::setGrid(Grid grid) {
+        this->grid = grid;
     }
 
+    Grid::Pixel Texture::getPixel(int xPos, int yPos) {
+        return this->grid.getPixel(xPos, yPos);
+    }
+
+    GridBuffer Texture::newBuffer() {
+        return GridBuffer(this->grid.newBuffer());
+    }
 }
