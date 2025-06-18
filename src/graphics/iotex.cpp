@@ -71,11 +71,24 @@ namespace gph {
     }
     
     void TexTable::loadTable(const std::string& path) {
-        
+        std::ifstream file(path, std::ios::binary);
+        if (!file) return;
+
+        std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+        file.close();
+
+        // deserialize method will automatically update the map via loaded buffer
+        this->deserialize(buffer);
     }
 
     void TexTable::saveTable(const std::string& path) {
+        std::ofstream file(path, std::ios::binary);
+        if (!file) return;
 
+        // serializes current texture map, then writes it into the path
+        std::vector<char> buffer = this->serialize();
+        file.write(buffer.data(), buffer.size());
+        file.close();
     }
 
     Texture TexTable::getTexture(const std::string texName) {
