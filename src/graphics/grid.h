@@ -41,15 +41,17 @@ namespace gph {
     };
 
     class GridBuffer {
-    private:
+    public:
         std::vector<char> buffer;
 
-    public:
         // constructor
         GridBuffer(std::vector<char> buffer);
 
         // return unserialized grid form the buffer
         Grid unpack();
+        
+        // return unserialized grid form the buffer
+        size_t getSize();
     };
 }
 

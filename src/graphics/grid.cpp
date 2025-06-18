@@ -102,7 +102,12 @@ namespace gph {
 
         return grid;
     }
+
+    size_t GridBuffer::getSize() {
+        return this->buffer.size();
+    }
 }
+
 /*
 int main() {
     Grid myMatrix(5, 5);
