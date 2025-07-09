@@ -11,3 +11,7 @@
 
 # main build directory
 /build/
+
+# temporary data
+Temporary/
+temporary/
