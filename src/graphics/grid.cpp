@@ -33,8 +33,12 @@ namespace gph {
         }
     }
 
-    // get a pointer to a pixel (used if you need full control compared to setPixel)
+    // get an access to a pixel (used if you need full control compared to setPixel) or its second version with indirect access
     Grid::Pixel& Grid::getPixel(int xPos, int yPos) {
+        return this->matrix[xPos][yPos];
+    }
+
+    Grid::Pixel Grid::getPixel(int xPos, int yPos) const {
         return this->matrix[xPos][yPos];
     }
 

@@ -30,6 +30,7 @@ namespace gph {
         void setGridSize(int xSize, int ySize);
         void setPixel(int xPos, int yPos, char symbol = ' ', int8_t textColor = 0, int8_t backColor = 0);
         Pixel& getPixel(int xPos, int yPos);
+        Pixel getPixel(int xPos, int yPos) const;
 
         // get a serialized copy of a matrix
         GridBuffer newBuffer();
