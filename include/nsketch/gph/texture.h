@@ -11,10 +11,10 @@ namespace gph {
     // class Texture is used to draw blocks of pixels on a canvas
     // it is different from grid by typization, static size, setPixel handling and additional methods
     class Texture {
-        private:
+    private:
         Grid grid;
         
-        public:
+    public:
         // Constructor
         Texture(int xSize, int ySize);
         

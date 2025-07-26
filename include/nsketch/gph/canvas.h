@@ -20,7 +20,7 @@ namespace gph {
 
         // Adding pixels to the canvas
         void addPixel(int xPos, int yPos, char symbol, int textColor, int backColor);
-        void addTexture(int xPos, int yPos);
+        void addTexture(int xPos, int yPos, Texture newTex);
 
         // Displaying data
         void render();

@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include "gphUtil.h"
 #include "grid.h"
+#include "nsketch/gph/texture.h"
 #include "nsketch/gph/canvas.h"
 
 namespace gph {
@@ -31,8 +32,13 @@ namespace gph {
     }   
 
     // add a texture to the canvas
-    void Canvas::addTexture(int xPos, int yPos) {
-
+    void Canvas::addTexture(int xPos, int yPos, Texture newTex) {
+        for (int xShift = 0; xShift > newTex.getXSize(); xShift++) {
+            for (int yShift = 0; yShift > newTex.getYSize(); yShift++) {
+                this->canvas.getPixel(xPos+xShift, yPos+yShift);
+                this->canvas.getPixel(xPos+xShift, yPos+yShift);
+            }
+        }
     }
 
     // Render and display current canvas
