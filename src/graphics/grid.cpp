@@ -50,6 +50,10 @@ namespace gph {
         slctPixel.backColor = backColor;
     }
 
+    void Grid::addPixel(int xPos, int yPos, Pixel pix) {
+        this->matrix[xPos][yPos] = pix;
+    }
+
     GridBuffer Grid::newBuffer() {
         std::vector<char> binGrid;
 

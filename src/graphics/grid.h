@@ -29,6 +29,7 @@ namespace gph {
         Grid(int xSize = 0, int ySize = 0);
         void setGridSize(int xSize, int ySize);
         void setPixel(int xPos, int yPos, char symbol = ' ', int8_t textColor = 0, int8_t backColor = 0);
+        void addPixel(int xPos, int yPos, Pixel pix);
         Pixel& getPixel(int xPos, int yPos);
         Pixel getPixel(int xPos, int yPos) const;
 
