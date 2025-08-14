@@ -21,7 +21,9 @@ namespace gph {
     xSize(xSize), 
     ySize(ySize),
     matrix (xSize, std::vector<Pixel>(ySize)) {
-
+        if (xSize <= 0 || ySize <= 0) {
+            throw std::invalid_argument("Invalid grid size.");
+        }
     }
 
     // change grid size
@@ -35,22 +37,38 @@ namespace gph {
 
     // get an access to a pixel (used if you need full control compared to setPixel) or its second version with indirect access
     Grid::Pixel& Grid::getPixel(int xPos, int yPos) {
+        if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
+            throw std::out_of_range("Pixel coordinates out of range.");
+        }
+
         return this->matrix[xPos][yPos];
     }
 
-    Grid::Pixel Grid::getPixel(int xPos, int yPos) const {
+    const Grid::Pixel& Grid::getPixel(int xPos, int yPos) const {
+        if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
+            throw std::out_of_range("Pixel coordinates out of range.");
+        }
+        
         return this->matrix[xPos][yPos];
     }
-
+    
     // update pixel parameters (or add a pixel)
     void Grid::setPixel(int xPos, int yPos, char symbol, int8_t textColor, int8_t backColor) {
+        if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
+            throw std::out_of_range("Pixel coordinates out of range.");
+        }
+        
         Pixel& slctPixel = this->matrix[xPos][yPos];
         slctPixel.symbol = symbol;
         slctPixel.textColor = textColor;
         slctPixel.backColor = backColor;
     }
-
+    
     void Grid::addPixel(int xPos, int yPos, Pixel pix) {
+        if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
+            throw std::out_of_range("Pixel coordinates out of range.");
+        }
+
         this->matrix[xPos][yPos] = pix;
     }
 

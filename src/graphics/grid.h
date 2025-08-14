@@ -31,7 +31,7 @@ namespace gph {
         void setPixel(int xPos, int yPos, char symbol = ' ', int8_t textColor = 0, int8_t backColor = 0);
         void addPixel(int xPos, int yPos, Pixel pix);
         Pixel& getPixel(int xPos, int yPos);
-        Pixel getPixel(int xPos, int yPos) const;
+        const Pixel& getPixel(int xPos, int yPos) const;
 
         // get a serialized copy of a matrix
         GridBuffer newBuffer();
