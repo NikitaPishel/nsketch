@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "src/graphics/grid.h"
+#include "graphics/grid.h"
 
 using namespace gph;
 
