@@ -4,9 +4,22 @@ project(nsketch)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED OFF)
 
-# Main executable
+# Create a library of the core app 
+add_library(nsketch_lib STATIC
+    ./src/graphics/grid.cpp
+    ./src/graphics/gphUtil.cpp
+    ./src/sketch/sketch.cpp
+    ./src/tools/tools.cpp
+)
+
+# Set the public include directories for the library.
+target_include_directories(nsketch_lib PUBLIC
+    ./include
+)
+
+# The main executable links to the library.
 add_executable(nsketch ./src/main.cpp)
-target_include_directories(nsketch PRIVATE ./include)
+target_link_libraries(nsketch PRIVATE nsketch_lib)
 
 # Option to enable tests (OFF by default)
 option(BUILD_TESTS "Build unit tests" OFF)
