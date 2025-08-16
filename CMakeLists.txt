@@ -22,7 +22,7 @@ add_executable(nsketch ./src/main.cpp)
 target_link_libraries(nsketch PRIVATE nsketch_lib)
 
 # Option to enable tests (OFF by default)
-option(BUILD_TESTS "Build unit tests" OFF)
+option(BUILD_TESTS "Build unit tests" ON)
 
 if(BUILD_TESTS)
     include(FetchContent)
