@@ -17,22 +17,31 @@ namespace gph {
     }
 
     // set Grid instance init values
-    Grid::Grid  (int xSize, int ySize): 
-    xSize(xSize), 
-    ySize(ySize),
-    matrix (xSize, std::vector<Pixel>(ySize)) {
-        if (xSize <= 0 || ySize <= 0) {
-            throw std::invalid_argument("Invalid grid size.");
+    Grid::Grid(int xSize, int ySize) {
+        if (xSize < 1 || ySize < 1) {
+            throw std::invalid_argument("Invalid grid size: dimension is below 1");
         }
+        
+        else if (xSize > 65535 || ySize > 65535) {
+            throw std::invalid_argument("Invalid grid size: dimension is over 65535");
+        }
+
+        this->xSize = xSize;
+        this->ySize = ySize;
+        this->gridSize = xSize * ySize;
+
+        this->matrix = std::vector<Pixel>(this->gridSize);
     }
 
     // change grid size
     void Grid::setGridSize(int xSize, int ySize) {
+        /*
         this->matrix.resize(xSize);
 
         for (int i = 0; i < xSize; i++) {
             this->matrix[i].resize(ySize);
         }
+        */
     }
 
     // get an access to a pixel (used if you need full control compared to setPixel) or its second version with indirect access
@@ -41,7 +50,10 @@ namespace gph {
             throw std::out_of_range("Pixel coordinates out of range.");
         }
 
-        return this->matrix[xPos][yPos];
+        // calculate an index of a pixel in a vector matrix holder
+        uint32_t pixIndex = xPos + yPos*xSize;
+
+        return this->matrix[pixIndex];
     }
 
     const Grid::Pixel& Grid::getPixel(int xPos, int yPos) const {
@@ -49,7 +61,9 @@ namespace gph {
             throw std::out_of_range("Pixel coordinates out of range.");
         }
         
-        return this->matrix[xPos][yPos];
+        uint32_t pixIndex = xPos + yPos*xSize;
+
+        return this->matrix[pixIndex];
     }
     
     // update pixel parameters (or add a pixel)
@@ -58,7 +72,7 @@ namespace gph {
             throw std::out_of_range("Pixel coordinates out of range.");
         }
         
-        Pixel& slctPixel = this->matrix[xPos][yPos];
+        Pixel& slctPixel = this->getPixel(xPos, yPos);
         slctPixel.symbol = symbol;
         slctPixel.textColor = textColor;
         slctPixel.backColor = backColor;
@@ -69,7 +83,7 @@ namespace gph {
             throw std::out_of_range("Pixel coordinates out of range.");
         }
 
-        this->matrix[xPos][yPos] = pix;
+        this->getPixel(xPos, yPos) = pix;
     }
 
     GridBuffer Grid::newBuffer() {

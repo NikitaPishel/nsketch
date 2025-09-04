@@ -22,8 +22,8 @@ namespace gph {
         };
 
         // matrix dimensions to exclude constant vector size recall
-        int xSize;
-        int ySize;
+        uint16_t xSize;
+        uint16_t ySize;
 
         // Basic control methods
         Grid(int xSize = 0, int ySize = 0);
@@ -37,8 +37,12 @@ namespace gph {
         GridBuffer newBuffer();
         
     private:
-        // Pixel grid itself
-        std::vector<std::vector<Pixel>> matrix;
+        // total grid size. Used for internal functioning (indexing)
+        uint32_t gridSize;
+        
+        // Pixel grid itself; Even though it is an array it creates an effect of matrix
+        std::vector<Pixel> matrix;
+
 
     };
 
