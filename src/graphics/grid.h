@@ -37,10 +37,10 @@ namespace gph {
         GridBuffer newBuffer();
         
     private:
-        // total grid size. Used for internal functioning (indexing)
+        // total grid size. Used for internal functionality (indexing)
         uint32_t gridSize;
         
-        // Pixel grid itself; Even though it is an array it creates an effect of matrix
+        // Pixel grid itself; Vector that works as a projector of a linear indexation matrix
         std::vector<Pixel> matrix;
 
 

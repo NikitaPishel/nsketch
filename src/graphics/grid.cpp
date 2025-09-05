@@ -35,13 +35,56 @@ namespace gph {
 
     // change grid size
     void Grid::setGridSize(int xSize, int ySize) {
-        /*
-        this->matrix.resize(xSize);
+        // find new matrix size
+        uint32_t gridSize = xSize*ySize;
 
-        for (int i = 0; i < xSize; i++) {
-            this->matrix[i].resize(ySize);
+        using PixelRecord = std::pair<uint32_t, Pixel>;
+        uint32_t prjSize = std::min(this->gridSize, gridSize);
+
+        // temporary stores projected matrix part (same size as the smallest matrix)
+        std::vector<PixelRecord> prjMatrix(prjSize);
+
+        uint32_t oldIndex = 0;
+
+        // loop through old vector and rearrange pixel to keep the same coordinates
+        for (uint32_t i = 0; i < prjSize; i++) {
+
+            // calculate pixel x-position based on its old grid index
+            uint16_t xPos = oldIndex % this->xSize;
+            
+            // check if it is out of range
+            if (xPos >= xSize) {
+                // calculate new index that will be in range, and find new x-position
+                oldIndex = oldIndex - xPos + this->xSize;
+                xPos = oldIndex % this->xSize;
+            }
+            
+            // calculate pixel y-position based on its old grid index
+            uint16_t yPos = (oldIndex - xPos) / this->xSize;
+
+            // calculate new pixel index based on its position
+            uint32_t newIndex = xSize*yPos + xPos;
+
+            // store pixel in projection list
+            Pixel pix = this->matrix[oldIndex];
+            prjMatrix[newIndex] = {newIndex, pix};
+
+            // go to the next index
+            oldIndex++;
         }
-        */
+
+        this->xSize = xSize;
+        this->ySize = ySize;
+        this->gridSize = gridSize;
+        
+        this->matrix.resize(gridSize);
+
+        // project pixels to a new matrix
+        for (uint32_t i = 0; i < prjSize; i++) {
+            uint32_t newIndex = prjMatrix[i].first;
+            Pixel pix = prjMatrix[i].second;
+            this->matrix[newIndex] = pix;
+        };
     }
 
     // get an access to a pixel (used if you need full control compared to setPixel) or its second version with indirect access
