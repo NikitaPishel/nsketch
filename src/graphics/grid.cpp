@@ -68,6 +68,9 @@ namespace gph {
             // store pixel in projection list
             Pixel pix = this->matrix[oldIndex];
             prjMatrix[newIndex] = {newIndex, pix};
+            
+            // replace projected pixel from the matrix with blank pixel
+            this->matrix[oldIndex] = Pixel();
 
             // go to the next index
             oldIndex++;
