@@ -5,7 +5,7 @@ set -e  # Exit on any error
 BUILD_DIR="./build"
 SOURCE_DIR="."
 BUILD_TESTS="${TESTS:-ON}"
-AUTO_TESTS="${AUTO_TESTS:-OFF}"
+AUTO_TEST="${AUTO_TEST:-OFF}"
 
 # Create build directory if it doesn't exist
 mkdir -p "$BUILD_DIR"
@@ -15,7 +15,7 @@ cmake -B "$BUILD_DIR" -S "$SOURCE_DIR" -DBUILD_TESTS=$BUILD_TESTS
 cmake --build "$BUILD_DIR"
 
 # Run tests automatically if AUTO_TESTS is true
-if [ "$AUTO_TESTS" = "ON" ] && [ "$BUILD_TESTS" = "ON" ]; then
+if [ "$AUTO_TEST" = "ON" ] && [ "$BUILD_TESTS" = "ON" ]; then
     cd "$BUILD_DIR"
     ctest --output-on-failure
 fi
