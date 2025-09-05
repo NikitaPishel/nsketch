@@ -35,6 +35,14 @@ namespace gph {
 
     // change grid size
     void Grid::setGridSize(int xSize, int ySize) {
+        if (xSize < 1 || ySize < 1) {
+            throw std::invalid_argument("Invalid grid size: dimension is below 1");
+        }
+        
+        else if (xSize > 65535 || ySize > 65535) {
+            throw std::invalid_argument("Invalid grid size: dimension is over 65535");
+        }
+
         // find new matrix size
         uint32_t gridSize = xSize*ySize;
 
@@ -193,18 +201,3 @@ namespace gph {
         return this->buffer.size();
     }
 }
-
-/*
-int main() {
-    Grid myMatrix(5, 5);
-    
-    Grid::Pixel* pix1 = myMatrix.getPixel(0, 0);
-    Grid::Pixel* pix2 = myMatrix.getPixel(1, 0);
-    
-    pix1->symbol = '1';
-    pix2->symbol = '2';
-    
-    std::cout << myMatrix.matrix[0][0].symbol << myMatrix.matrix[1][0].symbol << std::endl;
-    return 0;
-}
-*/
