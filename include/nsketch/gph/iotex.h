@@ -25,8 +25,10 @@ namespace gph {
         void loadTable(const std::string& path);
         void saveTable(const std::string& path);
 
-        // Get a texture from textures map
+        // basic texture map operations
         Texture getTexture(std::string texName);
+        void setTexture(std::string texName, Texture texture);
+    void delTexture(std::string texName);
 
     };
 }

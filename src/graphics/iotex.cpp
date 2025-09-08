@@ -20,10 +20,10 @@ namespace gph {
             buffer.insert(buffer.end(), bytes, bytes + size);
         };
 
-        size_t mapSize = textures.size();
+        size_t mapSize = this->textures.size();
         append(&mapSize, sizeof(mapSize));
 
-        for (auto& [key, texture] : textures) {
+        for (auto& [key, texture] : this->textures) {
             size_t keyLen = key.size();
             append(&keyLen, sizeof(keyLen));
             append(key.data(), keyLen);
@@ -66,7 +66,7 @@ namespace gph {
             Texture texture(grid.xSize, grid.ySize);
             texture.setGrid(grid);
 
-            textures[key] = texture;
+            this->textures[key] = texture;
         }
     }
     
@@ -92,6 +92,15 @@ namespace gph {
     }
 
     Texture TexTable::getTexture(const std::string texName) {
-
+        return this->textures.at(texName);
     }
+
+    void TexTable::setTexture(const std::string texName, Texture texture) {
+        this->textures[texName] = texture;
+    }
+    
+    void TexTable::delTexture(std::string texName) {
+        this->textures.erase(texName);
+    }
+
 }
