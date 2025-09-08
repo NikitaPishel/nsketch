@@ -8,21 +8,26 @@
 
 namespace gph {
     // Canvas constructor
-    Canvas::Canvas(int xSize, int ySize): canvas(xSize, ySize) {
+    Canvas::Canvas(uint32_t xSize, uint32_t ySize): canvas(xSize, ySize) {
     }
 
     // get horizontal canvas size
-    int Canvas::getXSize() {
+    uint32_t Canvas::getXSize() {
         return this->canvas.xSize;
     }
     
     // get vertical canvas size
-    int Canvas::getYSize() {
+    uint32_t Canvas::getYSize() {
         return this->canvas.ySize;
     }
 
+    uint32_t Canvas::getCanvSize() {
+        uint32_t canvSize = this->canvas.xSize * this->canvas.ySize;
+        return canvSize;
+    }
+
     // set the canvas size
-    void Canvas::setSize(int xSize, int ySize) {
+    void Canvas::setSize(uint32_t xSize, uint32_t ySize) {
         this->canvas.setGridSize(xSize, ySize);
     }
 
@@ -33,7 +38,7 @@ namespace gph {
     }   
 
     // add a texture to the canvas
-    void Canvas::addTexture(int xPos, int yPos, Texture newTex) {
+    void Canvas::addTexture(uint32_t xPos, uint32_t yPos, Texture newTex) {
         Grid grid = newTex.grid;
 
         // iterate through indexes of a grid and copy pixels with a shift
@@ -53,13 +58,36 @@ namespace gph {
 
     // Render and display current canvas
     void Canvas::render() {
-        std::string renderedImage = "";
+        std::string renderedImage;
+        
+        // reserve space for the string
+        // *18 because renderedPix is at max 18 bytes long
+        // add y size for each new line ]n
+        // add 3 for \033[H at the start of a render (sets cursor to position (0, 0))
+        // add 3 for style reset "\033[0m", + 6 in total with \033[H
+        size_t renderSize = this->getCanvSize() * 18 + this->getYSize() + 6;
+        renderedImage.reserve(renderSize);
 
-        for (int i = 0; i < this->getXSize(); i++) {
-            const Grid::Pixel pix = this->canvas.getPixelByIndex(i);
+        // move cursor to the position (0, 0)
+        renderedImage = "\033[H";
+        
+        // iterate through pixels and find their values
+        for (int i = 0; i < this->getCanvSize(); i++) {
+            const Grid::Pixel& pix = this->canvas.getPixelByIndex(i);
             
-            std::string renderedPix = "\033[38;5;" + pix.textColor + "48;5;" + pix.backColor + "m" + pix.symbol;
+            // format pixel and add it to the rendered image
+            renderedImage += "\033[38;5;" + std::to_string(pix.textColor) + "48;5;" + std::to_string(pix.backColor) + "m" + pix.symbol;
+            
             std::pair<uint16_t, uint16_t> pixPos = this->canvas.getPixelPos(i);
+            
+            // if it is the last pixel in a row, go to a new line
+            if (pixPos.second == this->getXSize() - 1) {
+                renderedImage += "\n";
+            }
         }
+
+        // style reset
+        renderedImage += "\033[0m";
+        std::cout << renderedImage << std::endl;
     }
 }
