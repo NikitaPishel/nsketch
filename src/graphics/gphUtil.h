@@ -11,12 +11,12 @@ namespace gph {
     public:
         static const Colors& getInstance();
 
-        int getColorID(std::string color) const;
+        std::string getColorID(std::string color) const;
 
     private:
         Colors();
 
-        std::unordered_map<std::string, int8_t> colorMap;
+        std::unordered_map<std::string, std::string> colorMap;
 
         Colors(const Colors&) = delete;
         Colors& operator=(const Colors&) = delete;

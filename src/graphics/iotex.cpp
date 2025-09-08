@@ -63,10 +63,9 @@ namespace gph {
 
             GridBuffer texBuffer(texData);
             Grid grid = texBuffer.unpack();
-            Texture texture(grid.xSize, grid.ySize);
-            texture.setGrid(grid);
+            Texture texture(grid);
 
-            this->textures[key] = texture;
+            this->textures.insert({key, texture});
         }
     }
     
@@ -96,7 +95,7 @@ namespace gph {
     }
 
     void TexTable::setTexture(const std::string texName, Texture texture) {
-        this->textures[texName] = texture;
+        this->textures.insert({texName, texture});
     }
     
     void TexTable::delTexture(std::string texName) {
