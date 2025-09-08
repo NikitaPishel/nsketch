@@ -12,7 +12,7 @@ namespace gph {
     }
 
     // set Pixel instance init values
-    Grid::Pixel::Pixel(): symbol(' '), backColor(0), textColor(7) {
+    Grid::Pixel::Pixel(): symbol(' '), backColor("0"), textColor("7") {
 
     }
 
@@ -75,7 +75,7 @@ namespace gph {
 
             // store pixel in projection list
             Pixel pix = this->matrix[oldIndex];
-            prjMatrix[newIndex] = {newIndex, pix};
+            prjMatrix[i] = {newIndex, pix};
             
             // replace projected pixel from the matrix with blank pixel
             this->matrix[oldIndex] = Pixel();
@@ -138,7 +138,7 @@ namespace gph {
     }
     
     // update pixel parameters (or add a pixel)
-    void Grid::setPixel(int xPos, int yPos, char symbol, uint8_t textColor, uint8_t backColor) {
+    void Grid::setPixel(int xPos, int yPos, char symbol, std::string textColor, std::string backColor) {
         if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
             throw std::out_of_range("Pixel index out of range.");
         }
@@ -207,8 +207,8 @@ const std::pair<uint16_t, uint16_t> Grid::getPixelPos(uint32_t index) const {
         for (int y = 0; y < ySize; ++y) {
             for (int x = 0; x < xSize; ++x) {
                 char symbol;
-                uint8_t textColor;
-                uint8_t backColor;
+                std::string textColor;
+                std::string backColor;
 
                 read(&symbol, sizeof(symbol));
                 read(&textColor, sizeof(textColor));

@@ -39,15 +39,15 @@ TEST(GridTest, CheckAddPixel) {
     Grid grid(4, 3);
     Grid::Pixel pix;
     pix.symbol = '1';
-    pix.textColor = 2;
-    pix.backColor = 3;
+    pix.textColor = "2";
+    pix.backColor = "3";
 
     grid.addPixel(3, 2, pix);
     const Grid::Pixel retrieved = grid.getPixel(3, 2);
 
     EXPECT_EQ(retrieved.symbol, '1');
-    EXPECT_EQ(retrieved.textColor, 2);
-    EXPECT_EQ(retrieved.backColor, 3);
+    EXPECT_EQ(retrieved.textColor, "2");
+    EXPECT_EQ(retrieved.backColor, "3");
 }
 
 // Test accessing pixel out of bounds
@@ -76,13 +76,13 @@ TEST(GridTest, GridResizeIndexation) {
     int y = 1;
 
     Grid::Pixel pix;
-    pix.textColor = 8;
+    pix.symbol = 'b';
     grid.addPixel(x, y, pix);
     
     grid.setGridSize(5, 5);
     const Grid::Pixel newPix = grid.getPixel(x, y);
 
-    EXPECT_EQ(newPix.textColor, 8);
+    EXPECT_EQ(newPix.symbol, 'b');
 }
 
 }

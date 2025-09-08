@@ -76,7 +76,7 @@ namespace gph {
             const Grid::Pixel& pix = this->canvas.getPixelByIndex(i);
             
             // format pixel and add it to the rendered image
-            renderedImage += "\033[38;5;" + std::to_string(pix.textColor) + "48;5;" + std::to_string(pix.backColor) + "m" + pix.symbol;
+            renderedImage += "\033[38;5;" + pix.textColor + "48;5;" + pix.backColor + "m" + pix.symbol;
             
             std::pair<uint16_t, uint16_t> pixPos = this->canvas.getPixelPos(i);
             
