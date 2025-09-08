@@ -15,8 +15,8 @@ namespace gph {
         // nested struct that holds information about characters in the matrix
         struct Pixel {
             char symbol;
-            std::string textColor; // 16 colors of the basic linux terminal
-            std::string backColor; // same 16 colors
+            uint8_t textColor; // 16 colors of the basic linux terminal
+            uint8_t backColor; // same 16 colors
 
             // struct constructor (for standard member list)
             Pixel();
@@ -30,7 +30,7 @@ namespace gph {
         Grid(int xSize = 0, int ySize = 0);
         void setGridSize(int xSize, int ySize);
         
-        void setPixel(int xPos, int yPos, char symbol = ' ', std::string textColor = 0, std::string backColor = 0);
+        void setPixel(int xPos, int yPos, char symbol = ' ', uint8_t textColor = 0, uint8_t backColor = 0);
         void addPixel(int xPos, int yPos, Pixel pix);
         
         Pixel& getPixel(int xPos, int yPos);
