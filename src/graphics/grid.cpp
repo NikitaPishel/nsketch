@@ -101,7 +101,7 @@ namespace gph {
     // get an access to a pixel (used if you need full control compared to setPixel) or its second version with indirect access
     Grid::Pixel& Grid::getPixel(int xPos, int yPos) {
         if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
-            throw std::out_of_range("Pixel coordinates out of range.");
+            throw std::out_of_range("Pixel index out of range.");
         }
 
         // calculate an index of a pixel in a vector matrix holder
@@ -112,18 +112,35 @@ namespace gph {
 
     const Grid::Pixel& Grid::getPixel(int xPos, int yPos) const {
         if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
-            throw std::out_of_range("Pixel coordinates out of range.");
+            throw std::out_of_range("Pixel index out of range.");
         }
         
         uint32_t pixIndex = xPos + yPos*xSize;
 
         return this->matrix[pixIndex];
     }
+
+    // get an access to a pixel (used if you need full control compared to setPixel) or its second version with indirect access
+    Grid::Pixel& Grid::getPixelByIndex(int index) {
+        if (index >= this->gridSize) {
+            throw std::out_of_range("Pixel index out of range.");
+        }
+
+        return this->matrix[index];
+    }
+
+    const Grid::Pixel& Grid::getPixelByIndex(int index) const {
+        if (index >= this->gridSize) {
+            throw std::out_of_range("Pixel index out of range.");
+        }
+        
+        return this->matrix[index];
+    }
     
     // update pixel parameters (or add a pixel)
     void Grid::setPixel(int xPos, int yPos, char symbol, int8_t textColor, int8_t backColor) {
         if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
-            throw std::out_of_range("Pixel coordinates out of range.");
+            throw std::out_of_range("Pixel index out of range.");
         }
         
         Pixel& slctPixel = this->getPixel(xPos, yPos);
@@ -134,10 +151,17 @@ namespace gph {
     
     void Grid::addPixel(int xPos, int yPos, Pixel pix) {
         if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
-            throw std::out_of_range("Pixel coordinates out of range.");
+            throw std::out_of_range("Pixel index out of range.");
         }
 
         this->getPixel(xPos, yPos) = pix;
+    }
+
+const std::pair<uint16_t, uint16_t> Grid::getPixelPos(uint32_t index) const {
+        std::pair<uint16_t, uint16_t> pos;
+        pos.first = index % this->xSize;
+        pos.second = (index / pos.first) / this->xSize;
+        return pos;
     }
 
     GridBuffer Grid::newBuffer() const {

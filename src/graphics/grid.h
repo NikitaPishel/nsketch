@@ -26,24 +26,31 @@ namespace gph {
         uint16_t xSize;
         uint16_t ySize;
         
-        // Pixel grid itself; Vector that works as a projector of a linear indexed matrix
-        std::vector<Pixel> matrix;
-        
         // Basic control methods
         Grid(int xSize = 0, int ySize = 0);
         void setGridSize(int xSize, int ySize);
+        
         void setPixel(int xPos, int yPos, char symbol = ' ', int8_t textColor = 0, int8_t backColor = 0);
         void addPixel(int xPos, int yPos, Pixel pix);
+        
         Pixel& getPixel(int xPos, int yPos);
         const Pixel& getPixel(int xPos, int yPos) const;
+        
+        Pixel& getPixelByIndex(int index);
+        const Pixel& getPixelByIndex(int index) const;
+        
+        // get x and y position of a pixel with index x
+        const std::pair<uint16_t, uint16_t> getPixelPos(uint32_t index) const;
         
         // get a serialized copy of a matrix
         GridBuffer newBuffer() const;
         
-    private:
         // total grid size. Used for internal functionality (indexing)
         uint32_t gridSize;
-
+        
+        private:
+        // Pixel grid itself; Vector that works as a projector of a linear indexed matrix
+        std::vector<Pixel> matrix;
     };
 
     class GridBuffer {

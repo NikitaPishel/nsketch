@@ -5,8 +5,8 @@
 
 namespace gph {
     class Canvas {
-        private:
-            Grid canvas;
+    private:
+        Grid canvas;
 
     public:
         // Constructor
@@ -19,7 +19,8 @@ namespace gph {
         void updateSize();
 
         // Adding pixels to the canvas
-        void addPixel(int xPos, int yPos, char symbol, int textColor, int backColor);
+        void addPixel(int xPos, int yPos, Grid::Pixel pixel);
+        void setPixel(int xPos, int yPos, char symbol, int textColor, int backColor);
         void addTexture(int xPos, int yPos, Texture newTex);
 
         // Displaying data
