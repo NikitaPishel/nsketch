@@ -10,6 +10,7 @@ namespace gph {
 
     // matrix holder class with basic matrix control
     class Grid {
+        
     public:
         // nested struct that holds information about characters in the matrix
         struct Pixel {
@@ -20,11 +21,14 @@ namespace gph {
             // struct constructor (for standard member list)
             Pixel();
         };
-
+        
         // matrix dimensions to exclude constant vector size recall
         uint16_t xSize;
         uint16_t ySize;
-
+        
+        // Pixel grid itself; Vector that works as a projector of a linear indexed matrix
+        std::vector<Pixel> matrix;
+        
         // Basic control methods
         Grid(int xSize = 0, int ySize = 0);
         void setGridSize(int xSize, int ySize);
@@ -32,17 +36,13 @@ namespace gph {
         void addPixel(int xPos, int yPos, Pixel pix);
         Pixel& getPixel(int xPos, int yPos);
         const Pixel& getPixel(int xPos, int yPos) const;
-
+        
         // get a serialized copy of a matrix
-        GridBuffer newBuffer();
+        GridBuffer newBuffer() const;
         
     private:
         // total grid size. Used for internal functionality (indexing)
         uint32_t gridSize;
-        
-        // Pixel grid itself; Vector that works as a projector of a linear indexation matrix
-        std::vector<Pixel> matrix;
-
 
     };
 

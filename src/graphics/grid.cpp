@@ -140,7 +140,7 @@ namespace gph {
         this->getPixel(xPos, yPos) = pix;
     }
 
-    GridBuffer Grid::newBuffer() {
+    GridBuffer Grid::newBuffer() const {
         std::vector<char> binGrid;
 
         auto append = [&](const void* data, std::size_t size) {
