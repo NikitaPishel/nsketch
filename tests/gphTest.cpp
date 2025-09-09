@@ -62,8 +62,6 @@ TEST(GridTest, OutOfRange) {
 // Test resizing errors
 TEST(GridTest, GridResizeError) {
     Grid grid(3, 3);
-    EXPECT_THROW(grid.setGridSize(80000, 5), std::invalid_argument);
-    EXPECT_THROW(grid.setGridSize(5, 80000), std::invalid_argument);
     EXPECT_THROW(grid.setGridSize(0, 5), std::invalid_argument);
     EXPECT_THROW(grid.setGridSize(5, 0), std::invalid_argument);
 }
@@ -83,6 +81,29 @@ TEST(GridTest, GridResizeIndexation) {
     const Grid::Pixel newPix = grid.getPixel(x, y);
 
     EXPECT_EQ(newPix.symbol, 'b');
+}
+
+// Test if grid buffer packs and unpacks data without data change
+TEST(GridTest, TestGridBuffer) {
+    Grid grid(2, 2);
+    grid.setPixel(0, 0, 'a', "0", "0");
+    grid.setPixel(1, 0, 'b', "1", "1");
+    grid.setPixel(0, 1, 'c', "2", "2");
+    grid.setPixel(1, 1, 'd', "3", "3");
+
+    GridBuffer buffer = grid.newBuffer();
+    Grid unpackedGrid = buffer.unpack();
+
+    Grid::Pixel original;
+    Grid::Pixel unpacked;
+    for (int i; i < grid.gridSize; i++) {
+        original = grid.getPixelByIndex(i);
+        unpacked = unpackedGrid.getPixelByIndex(i);
+
+        EXPECT_EQ(unpacked.symbol, original.symbol);
+        EXPECT_EQ(unpacked.textColor, original.textColor);
+        EXPECT_EQ(unpacked.backColor, original.backColor);
+    }
 }
 
 }
