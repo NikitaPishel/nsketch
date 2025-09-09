@@ -23,8 +23,8 @@ namespace gph {
         };
         
         // matrix dimensions to exclude constant vector size recall
-        uint16_t xSize;
-        uint16_t ySize;
+        uint32_t xSize;
+        uint32_t ySize;
         
         // Basic control methods
         Grid(int xSize = 0, int ySize = 0);
@@ -40,7 +40,7 @@ namespace gph {
         const Pixel& getPixelByIndex(int index) const;
         
         // get x and y position of a pixel with index x
-        const std::pair<uint16_t, uint16_t> getPixelPos(uint32_t index) const;
+        const std::pair<uint32_t, uint32_t> getPixelPos(uint32_t index) const;
         
         // get a serialized copy of a matrix
         GridBuffer newBuffer() const;
@@ -64,7 +64,7 @@ namespace gph {
         Grid unpack();
         
         // return unserialized grid form the buffer
-        size_t getSize();
+        uint64_t getSize();
     };
 }
 

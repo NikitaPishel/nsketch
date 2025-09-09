@@ -45,7 +45,7 @@ namespace gph {
         for (int i = 0; i < grid.gridSize; i++) {
             const Grid::Pixel pix = grid.getPixelByIndex(i);
 
-            std::pair<uint16_t, uint16_t> pixPos = grid.getPixelPos(i);
+            std::pair<uint32_t, uint32_t> pixPos = grid.getPixelPos(i);
             
             int xShift = pixPos.first + xPos;
             int yShift = pixPos.second + yPos;
@@ -78,7 +78,7 @@ namespace gph {
             // format pixel and add it to the rendered image
             renderedImage += "\033[38;5;" + pix.textColor + "48;5;" + pix.backColor + "m" + pix.symbol;
             
-            std::pair<uint16_t, uint16_t> pixPos = this->canvas.getPixelPos(i);
+            std::pair<uint32_t, uint32_t> pixPos = this->canvas.getPixelPos(i);
             
             // if it is the last pixel in a row, go to a new line
             if (pixPos.second == this->getXSize() - 1) {

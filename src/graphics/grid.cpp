@@ -22,10 +22,6 @@ namespace gph {
             throw std::invalid_argument("Invalid grid size: dimension is below 1");
         }
         
-        else if (xSize > 65535 || ySize > 65535) {
-            throw std::invalid_argument("Invalid grid size: dimension is over 65535");
-        }
-
         this->xSize = xSize;
         this->ySize = ySize;
         this->gridSize = xSize * ySize;
@@ -39,10 +35,6 @@ namespace gph {
             throw std::invalid_argument("Invalid grid size: dimension is below 1");
         }
         
-        else if (xSize > 65535 || ySize > 65535) {
-            throw std::invalid_argument("Invalid grid size: dimension is over 65535");
-        }
-
         // find new matrix size
         uint32_t gridSize = xSize*ySize;
 
@@ -58,7 +50,7 @@ namespace gph {
         for (uint32_t i = 0; i < prjSize; i++) {
 
             // calculate pixel x-position based on its old grid index
-            uint16_t xPos = oldIndex % this->xSize;
+            uint32_t xPos = oldIndex % this->xSize;
             
             // check if it is out of range
             if (xPos >= xSize) {
@@ -68,7 +60,7 @@ namespace gph {
             }
             
             // calculate pixel y-position based on its old grid index
-            uint16_t yPos = (oldIndex - xPos) / this->xSize;
+            uint32_t yPos = (oldIndex - xPos) / this->xSize;
 
             // calculate new pixel index based on its position
             uint32_t newIndex = xSize*yPos + xPos;
@@ -157,8 +149,8 @@ namespace gph {
         this->getPixel(xPos, yPos) = pix;
     }
 
-const std::pair<uint16_t, uint16_t> Grid::getPixelPos(uint32_t index) const {
-        std::pair<uint16_t, uint16_t> pos;
+const std::pair<uint32_t, uint32_t> Grid::getPixelPos(uint32_t index) const {
+        std::pair<uint32_t, uint32_t> pos;
         pos.first = index % this->xSize;
         pos.second = (index / pos.first) / this->xSize;
         return pos;
@@ -179,8 +171,15 @@ const std::pair<uint16_t, uint16_t> Grid::getPixelPos(uint32_t index) const {
             for (int x = 0; x < this->xSize; ++x) {
                 const Grid::Pixel pix = this->getPixel(x, y);
                 append(&pix.symbol, sizeof(pix.symbol));
-                append(&pix.textColor, sizeof(pix.textColor));
-                append(&pix.backColor, sizeof(pix.backColor));
+                
+                // append the size of string as it is non-fixed size
+                uint8_t textLen = pix.textColor.size();
+                append(&textLen, sizeof(textLen));
+                append(pix.textColor.data(), textLen);
+
+                uint8_t backLen = pix.backColor.size();
+                append(&backLen, sizeof(backLen));
+                append(pix.backColor.data(), backLen);
             }
         }
         
@@ -198,7 +197,9 @@ const std::pair<uint16_t, uint16_t> Grid::getPixelPos(uint32_t index) const {
             offset += size;
         };
 
-        int xSize, ySize;
+        uint32_t xSize;
+        uint32_t ySize;
+
         read(&xSize, sizeof(xSize));
         read(&ySize, sizeof(ySize));
 
@@ -207,12 +208,17 @@ const std::pair<uint16_t, uint16_t> Grid::getPixelPos(uint32_t index) const {
         for (int y = 0; y < ySize; ++y) {
             for (int x = 0; x < xSize; ++x) {
                 char symbol;
-                std::string textColor;
-                std::string backColor;
-
                 read(&symbol, sizeof(symbol));
-                read(&textColor, sizeof(textColor));
-                read(&backColor, sizeof(backColor));
+
+                uint8_t textLen;
+                read(&textLen, sizeof(textLen));
+                std::string textColor(textLen, '\0');
+                read(textColor.data(), textLen);
+
+                uint8_t backLen;
+                read(&backLen, sizeof(backLen));
+                std::string backColor(backLen, '\0');
+                read(backColor.data(), backLen);
 
                 grid.setPixel(x, y, symbol, textColor, backColor);
             }
@@ -221,7 +227,7 @@ const std::pair<uint16_t, uint16_t> Grid::getPixelPos(uint32_t index) const {
         return grid;
     }
 
-    size_t GridBuffer::getSize() {
+    uint64_t GridBuffer::getSize() {
         return this->buffer.size();
     }
 }
