@@ -30,7 +30,7 @@ namespace gph {
         Grid(int xSize = 0, int ySize = 0);
         void setGridSize(int xSize, int ySize);
         
-        void setPixel(int xPos, int yPos, char symbol = ' ', std::string textColor = 0, std::string backColor = 0);
+        void setPixel(int xPos, int yPos, char symbol = ' ', std::string textColor = "0", std::string backColor = "0");
         void addPixel(int xPos, int yPos, Pixel pix);
         
         Pixel& getPixel(int xPos, int yPos);
@@ -48,7 +48,7 @@ namespace gph {
         // total grid size. Used for internal functionality (indexing)
         uint32_t gridSize;
         
-        private:
+    private:
         // Pixel grid itself; Vector that works as a projector of a linear indexed matrix
         std::vector<Pixel> matrix;
     };

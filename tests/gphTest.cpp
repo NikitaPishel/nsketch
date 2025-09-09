@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "graphics/grid.h"
+#include "nsketch/gph/texture.h"
 
 using namespace gph;
 
@@ -105,5 +106,13 @@ TEST(GridTest, TestGridBuffer) {
         EXPECT_EQ(unpacked.backColor, original.backColor);
     }
 }
+
+// test getSize wrapper
+/*
+TEST(TextureTest, TestGetSize) {
+    Grid grid();
+    Texture texture();
+}
+*/
 
 }

@@ -48,7 +48,7 @@ namespace gph {
     }
 
     // returns color id, if color not found return black and warn
-    std::string Colors::getColorID(std::string color) const {
+    std::string Colors::getColorId(std::string color) const {
         auto colorRecord = colorMap.find(color);
 
         if (colorRecord != this->colorMap.end()) {

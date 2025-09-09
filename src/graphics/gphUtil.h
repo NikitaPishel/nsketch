@@ -11,7 +11,7 @@ namespace gph {
     public:
         static const Colors& getInstance();
 
-        std::string getColorID(std::string color) const;
+        std::string getColorId(std::string color) const;
 
     private:
         Colors();

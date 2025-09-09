@@ -39,7 +39,7 @@ namespace gph {
 
     // add a texture to the canvas
     void Canvas::addTexture(uint32_t xPos, uint32_t yPos, Texture newTex) {
-        Grid grid = newTex.grid;
+        Grid grid = newTex.getGrid();
 
         // iterate through indexes of a grid and copy pixels with a shift
         for (int i = 0; i < grid.gridSize; i++) {
