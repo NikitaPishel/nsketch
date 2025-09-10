@@ -107,12 +107,70 @@ TEST(GridTest, TestGridBuffer) {
     }
 }
 
-// test getSize wrapper
-/*
+// test texture get wrappers
 TEST(TextureTest, TestGetSize) {
-    Grid grid();
-    Texture texture();
-}
-*/
+    Grid grid(2, 2);
+    Texture tex(grid);
 
+    EXPECT_EQ(grid.xSize, tex.getXSize());
+    EXPECT_EQ(grid.ySize, tex.getYSize());
+}
+
+// test if the build single pixel fill works
+TEST(TextureTest, TestBuildSetPixel) {
+    Texture tex = Texture::Builder(4, 4)
+        .setPixel(0, 0)
+        .setPixel(3, 2, 'a', "white", "black")
+        .build();
+
+    Grid grid = tex.getGrid();
+    
+    EXPECT_EQ(grid.getPixel(0, 0).symbol, ' ');
+    EXPECT_EQ(grid.getPixel(3, 2).symbol, 'a');
+}
+
+// test if the build texture fill works
+TEST(TextureTest, TestBuildFillTexture) {
+    Texture tex = Texture::Builder(4, 4)
+        .fillTexture('a')
+        .build();
+    
+    Grid grid = tex.getGrid();
+    
+    for (int i = 0; i < grid.gridSize; i++) {
+        EXPECT_EQ(grid.getPixelByIndex(i).symbol, 'a');
+    }
+}
+
+// test if the build row fill works
+TEST(TextureTest, TestBuildFillRow) {
+    Texture tex = Texture::Builder(4, 4)
+        .fillRow(2, 'a')
+        .build();
+    
+    Grid grid = tex.getGrid();
+    
+    Grid::Pixel pix;
+    for (int i = 0; i < grid.xSize; i++) {
+        pix = grid.getPixel(i, 2);
+
+        EXPECT_EQ(pix.symbol, 'a');
+    }
+}
+
+// test if the build colomn fill works
+TEST(TextureTest, TestBuildFillCol) {
+    Texture tex = Texture::Builder(4, 4)
+        .fillCol(1, 'a')
+        .build();
+    
+    Grid grid = tex.getGrid();
+    
+    Grid::Pixel pix;
+    for (int i = 0; i < grid.ySize; i++) {
+        pix = grid.getPixel(1, i);
+    
+        EXPECT_EQ(pix.symbol, 'a');
+    }
+}
 }

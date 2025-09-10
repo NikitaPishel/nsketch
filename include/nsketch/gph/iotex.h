@@ -5,7 +5,6 @@
 #include <fstream>
 #include <unordered_map>
 #include "nsketch/gph/texture.h"
-#include "grid.h"
 
 namespace gph {
 
