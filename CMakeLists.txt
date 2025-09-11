@@ -7,6 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED OFF)
 # Create a library of the core app 
 add_library(nsketch_lib STATIC
     ./src/graphics/grid.cpp
+    ./src/graphics/texture.cpp
+    ./src/graphics/canvas.cpp
+    ./src/graphics/iotex.cpp
     ./src/graphics/gphUtil.cpp
     ./src/sketch/sketch.cpp
     ./src/tools/tools.cpp
