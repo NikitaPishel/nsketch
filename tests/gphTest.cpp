@@ -107,11 +107,13 @@ TEST(GridTest, TestGridBuffer) {
     }
 }
 
-/*
+
 // test texture get wrappers
 TEST(TextureTest, TestGetSize) {
     Grid grid(2, 2);
-    Texture tex(grid);
+    Texture tex = Texture::Builder(2, 2)
+        .setGrid(grid)
+        .build();
 
     EXPECT_EQ(grid.xSize, tex.getXSize());
     EXPECT_EQ(grid.ySize, tex.getYSize());
@@ -174,5 +176,5 @@ TEST(TextureTest, TestBuildFillCol) {
         EXPECT_EQ(pix.symbol, 'a');
     }
 }
-*/
+
 }

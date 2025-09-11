@@ -14,12 +14,10 @@ namespace gph {
         Impl(Grid grid): grid(grid) {};
     };
 
-    // Builder constructor
-    Texture::Builder::Builder(uint32_t xSize,uint32_t ySize) {
-        Grid grid(xSize, ySize);
-        this->pImpl = new Impl(grid);
-    }
+    // Builder constructor; 
+    Texture::Builder::Builder(int xSize,int ySize): pImpl(new Impl(Grid(xSize, ySize))) {}
 
+    // Builder deconstructor
     Texture::Builder::~Builder() {
         delete this->pImpl;
     }
@@ -108,7 +106,8 @@ namespace gph {
         // pointer for chain method calls
         return *this;
     }
-    
+
+    // Build a Texture
     Texture Texture::Builder::build() {
         Impl* pImpl = this->pImpl;
         this->pImpl = nullptr;

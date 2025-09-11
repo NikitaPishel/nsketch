@@ -21,7 +21,7 @@ namespace gph {
             Impl* pImpl;
         
         public:
-            Builder(uint32_t xSize = 1, uint32_t ySize = 1);
+            Builder(int xSize = 1, int ySize = 1);
             ~Builder();
 
 
