@@ -7,39 +7,48 @@
 #include "nsketch/gph/canvas.h"
 
 namespace gph {
-    // Canvas constructor
-    Canvas::Canvas(uint32_t xSize, uint32_t ySize): canvas(xSize, ySize) {
-    }
+
+    class Canvas::Impl {
+    public:
+        Grid canvas;
+
+        Impl(Grid canvas) : canvas(canvas) {};
+    };
+
+    // Canvas constructor; Makes a unique_ptr of Impl with Grid sized (xSize, ySize)
+    Canvas::Canvas(int xSize, int ySize) : pImpl(std::make_unique<Impl>(Grid(xSize, ySize))) {}
+
+    // default destructor
+    Canvas::~Canvas() = default;
 
     // get horizontal canvas size
-    uint32_t Canvas::getXSize() {
-        return this->canvas.xSize;
+    uint32_t Canvas::getXSize() const {
+        return this->pImpl->canvas.xSize;
     }
     
     // get vertical canvas size
-    uint32_t Canvas::getYSize() {
-        return this->canvas.ySize;
+    uint32_t Canvas::getYSize() const {
+        return this->pImpl->canvas.ySize;
     }
 
-    uint32_t Canvas::getCanvSize() {
-        uint32_t canvSize = this->canvas.xSize * this->canvas.ySize;
-        return canvSize;
+    uint32_t Canvas::getCanvSize() const {
+        return this->pImpl->canvas.gridSize;
     }
 
     // set the canvas size
-    void Canvas::setSize(uint32_t xSize, uint32_t ySize) {
-        this->canvas.setGridSize(xSize, ySize);
+    void Canvas::setSize(int xSize, int ySize) {
+        this->pImpl->canvas.setGridSize(xSize, ySize);
     }
 
     // automatically set the canvas size to the terminal size
     void Canvas::updateSize() {
         winsize window = getWinSize();
-        this->setSize(window.ws_row, window.ws_col);
+        this->setSize(window.ws_col, window.ws_row);
     }   
 
     // add a texture to the canvas
-    void Canvas::addTexture(uint32_t xPos, uint32_t yPos, Texture newTex) {
-        Grid grid = newTex.getGrid();
+    void Canvas::addTexture(int xPos, int yPos, const Texture& newTex) {
+        const Grid& grid = newTex.getGrid();
 
         // iterate through indexes of a grid and copy pixels with a shift
         for (int i = 0; i < grid.gridSize; i++) {
@@ -47,11 +56,11 @@ namespace gph {
 
             std::pair<uint32_t, uint32_t> pixPos = grid.getPixelPos(i);
             
-            int xShift = pixPos.first + xPos;
-            int yShift = pixPos.second + yPos;
+            uint32_t xShift = pixPos.first + xPos;
+            uint32_t yShift = pixPos.second + yPos;
 
-            if (xShift < this->getXSize() || yShift < this->getYSize()) {
-                this->canvas.addPixel(xShift, yShift, pix);
+            if (xShift < this->getXSize() && yShift < this->getYSize()) {
+                this->pImpl->canvas.addPixel(xShift, yShift, pix);
             }
         }
     }
@@ -73,15 +82,15 @@ namespace gph {
         
         // iterate through pixels and find their values
         for (int i = 0; i < this->getCanvSize(); i++) {
-            const Grid::Pixel& pix = this->canvas.getPixelByIndex(i);
+            const Grid::Pixel& pix = this->pImpl->canvas.getPixelByIndex(i);
             
             // format pixel and add it to the rendered image
             renderedImage += "\033[38;5;" + pix.textColor + "48;5;" + pix.backColor + "m" + pix.symbol;
             
-            std::pair<uint32_t, uint32_t> pixPos = this->canvas.getPixelPos(i);
+            std::pair<uint32_t, uint32_t> pixPos = this->pImpl->canvas.getPixelPos(i);
             
             // if it is the last pixel in a row, go to a new line
-            if (pixPos.second == this->getXSize() - 1) {
+            if (pixPos.first == this->getXSize() - 1) {
                 renderedImage += "\n";
             }
         }
