@@ -5,19 +5,24 @@
 #include <vector>
 
 namespace gph {
+    class GridBuffer;
+    class Grid;
+    
     // class Texture is used to draw blocks of pixels on a canvas
     // it is different from as it is muted and isn't internal for gph
     class Texture {
     private:
-        const Grid grid;
-
-    public:
+        class Impl;
+        const Impl* pImpl;
+        
+        public:
         class Builder {
         private:
-            Grid grid;
+            Impl* pImpl;
         
         public:
             Builder(uint32_t xSize, uint32_t ySize);
+            ~Builder();
 
 
             // building methods return Builder& instead of void to make chain method calls
@@ -31,13 +36,13 @@ namespace gph {
             Builder& fillCol(int xPos, char symbol = ' ', const std::string& textColor = "white", const std::string& backColor = "black");
 
             // change size of a texture
-            Builder& chnageSize(int xSize, int ySize);
-
+            Builder& setSize(int xSize, int ySize);
             Texture build();
         };
 
         // Constructor
-        Texture(Grid grid);
+        Texture(Impl* pGrid);
+        ~Texture();
         
         // Get texture dimensions
         int getXSize() const;
@@ -48,6 +53,14 @@ namespace gph {
         
         // a TexBuffer factory
         GridBuffer newBuffer() const;
+
+        // copy/move constructor
+        Texture(const Texture& other);
+        Texture(Texture&& other) noexcept;
+
+        // copy/move assignment
+        Texture& operator=(const Texture& other);
+        Texture& operator=(Texture&& other) noexcept;
     };
 }
 

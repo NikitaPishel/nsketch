@@ -3,8 +3,8 @@
 #include <cstring>
 #include <stdexcept>
 #include "nsketch/gph/iotex.h"
+#include "nsketch/gph/texture.h"
 #include "grid.h"
-#include "texture.h"
 
 namespace gph {
     

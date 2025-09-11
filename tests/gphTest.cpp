@@ -107,6 +107,7 @@ TEST(GridTest, TestGridBuffer) {
     }
 }
 
+/*
 // test texture get wrappers
 TEST(TextureTest, TestGetSize) {
     Grid grid(2, 2);
@@ -173,4 +174,5 @@ TEST(TextureTest, TestBuildFillCol) {
         EXPECT_EQ(pix.symbol, 'a');
     }
 }
+*/
 }

@@ -7,9 +7,21 @@
 
 namespace gph {
 
+    class Texture::Impl {
+    public:
+        Grid grid;
+
+        Impl(Grid grid): grid(grid) {};
+    };
+
     // Builder constructor
-    Texture::Builder::Builder(uint32_t xSize,uint32_t ySize ) {
-        
+    Texture::Builder::Builder(uint32_t xSize,uint32_t ySize) {
+        Grid grid(xSize, ySize);
+        this->pImpl = new Impl(grid);
+    }
+
+    Texture::Builder::~Builder() {
+        delete this->pImpl;
     }
 
     // just uses gphUtil to use grid's setPixel
@@ -18,7 +30,7 @@ namespace gph {
         std::string textColorId = colors.getColorId(textColor);
         std::string backColorId = colors.getColorId(backColor);
 
-        this->grid.setPixel(xPos, yPos, symbol, textColorId, backColorId);
+        this->pImpl->grid.setPixel(xPos, yPos, symbol, textColorId, backColorId);
 
         // pointer for chain method calls
         return *this;
@@ -35,8 +47,8 @@ namespace gph {
         pix.textColor = textColorId;
         pix.backColor = backColorId;
         
-        for (uint32_t i = 0; i < this->grid.gridSize; i++) {
-            this->grid.getPixelByIndex(i) = pix;
+        for (uint32_t i = 0; i < this->pImpl->grid.gridSize; i++) {
+            this->pImpl->grid.getPixelByIndex(i) = pix;
         }
 
         // pointer for chain method calls
@@ -55,8 +67,8 @@ namespace gph {
         pix.textColor = textColorId;
         pix.backColor = backColorId;
         
-        for (uint32_t i = 0; i < this->grid.xSize; i++) {
-            this->grid.getPixel(i, yPos) = pix;
+        for (uint32_t i = 0; i < this->pImpl->grid.xSize; i++) {
+            this->pImpl->grid.getPixel(i, yPos) = pix;
         }
         
         // pointer for chain method calls
@@ -74,8 +86,8 @@ namespace gph {
         pix.textColor = textColorId;
         pix.backColor = backColorId;
         
-        for (uint32_t i = 0; i < this->grid.ySize; i++) {
-            this->grid.getPixel(xPos, i) = pix;
+        for (uint32_t i = 0; i < this->pImpl->grid.ySize; i++) {
+            this->pImpl->grid.getPixel(xPos, i) = pix;
         }
 
         // pointer for chain method calls
@@ -83,34 +95,70 @@ namespace gph {
     }
     
     // change the size of a grid
-    Texture::Builder& Texture::Builder::chnageSize(int xSize, int ySize) {
-        this->grid.setGridSize(xSize, ySize);
+    Texture::Builder& Texture::Builder::setSize(int xSize, int ySize) {
+        this->pImpl->grid.setGridSize(xSize, ySize);
         
         // pointer for chain method calls
         return *this;
     }
     
     Texture Texture::Builder::build() {
-        return Texture(this->grid);
+        Impl* pImpl = this->pImpl;
+        this->pImpl = nullptr;
+        
+        return Texture(pImpl);
     }
 
-    Texture::Texture(Grid grid) {
-        
+    Texture::Texture(Impl* pImpl): pImpl(pImpl) {}
+
+    Texture::~Texture() {
+        delete this->pImpl;
     }
     
     int Texture::getXSize() const{
-        return grid.xSize;
+        return this->pImpl->grid.xSize;
     }
     
     int Texture::getYSize() const{
-        return grid.ySize;
+        return this->pImpl->grid.ySize;
     }
     
     const Grid& Texture::getGrid() const {
-        return this->grid;
+        return this->pImpl->grid;
     }
     
     GridBuffer Texture::newBuffer() const {
-        return GridBuffer(this->grid.newBuffer());
+        return GridBuffer(this->pImpl->grid.newBuffer());
+    }
+
+    // copy constructor
+    Texture::Texture(const Texture& other) {
+        this->pImpl = new Impl(other.pImpl->grid);
+    }
+
+    // move constructor
+    Texture::Texture(Texture&& other) noexcept {
+        other.pImpl = nullptr;
+    }
+    
+    // copy assignment
+    Texture& Texture::operator=(const Texture& other) {
+        if (this != &other) {
+            delete this->pImpl;
+            this->pImpl = new Impl(other.pImpl->grid);
+        }
+
+        return *this;
+    }
+    
+    // move assignment
+    Texture& Texture::operator=(Texture&& other) noexcept {
+        if (this != &other) {
+            delete pImpl; // Free existing resource
+            pImpl = other.pImpl; // Steal the pointer
+            other.pImpl = nullptr; // Nullify the source
+        }
+
+        return *this;
     }
 }
