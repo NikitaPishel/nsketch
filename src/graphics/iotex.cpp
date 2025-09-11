@@ -63,7 +63,9 @@ namespace gph {
 
             GridBuffer texBuffer(texData);
             Grid grid = texBuffer.unpack();
-            Texture texture(grid);
+            Texture texture = Texture::Builder()
+                .setGrid(grid)
+                .build();
 
             this->textures.insert({key, texture});
         }

@@ -102,6 +102,13 @@ namespace gph {
         return *this;
     }
     
+    Texture::Builder& Texture::Builder::setGrid(Grid grid) {
+        this->pImpl->grid = grid;
+        
+        // pointer for chain method calls
+        return *this;
+    }
+    
     Texture Texture::Builder::build() {
         Impl* pImpl = this->pImpl;
         this->pImpl = nullptr;

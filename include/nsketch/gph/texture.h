@@ -21,7 +21,7 @@ namespace gph {
             Impl* pImpl;
         
         public:
-            Builder(uint32_t xSize, uint32_t ySize);
+            Builder(uint32_t xSize = 1, uint32_t ySize = 1);
             ~Builder();
 
 
@@ -37,6 +37,10 @@ namespace gph {
 
             // change size of a texture
             Builder& setSize(int xSize, int ySize);
+            
+            // set a specific grid to a texture
+            Builder& setGrid(Grid grid);
+
             Texture build();
         };
 
