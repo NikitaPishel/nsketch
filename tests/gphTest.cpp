@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "graphics/grid.h"
 #include "nsketch/gph/texture.h"
+#include "nsketch/gph/canvas.h"
 
 using namespace gph;
 
@@ -161,7 +162,7 @@ TEST(TextureTest, TestBuildFillRow) {
     }
 }
 
-// test if the build colomn fill works
+// test if the build column fill works
 TEST(TextureTest, TestBuildFillCol) {
     Texture tex = Texture::Builder(4, 4)
         .fillCol(1, 'a')
@@ -175,6 +176,35 @@ TEST(TextureTest, TestBuildFillCol) {
     
         EXPECT_EQ(pix.symbol, 'a');
     }
+}
+
+// test if size getters work fine
+TEST(CanvasTest, TestCanvSize) {
+    uint32_t xSize = 10;
+    uint32_t ySize = 20;
+    uint32_t canvSize = xSize * ySize;
+
+    Canvas canv(xSize, ySize);
+
+    EXPECT_EQ(xSize, canv.getXSize());
+    EXPECT_EQ(ySize, canv.getYSize());
+    EXPECT_EQ(canvSize, canv.getCanvSize());
+}
+
+// test if resize exception works
+TEST(CanvasTest, TestCanvResizeErr) {
+    EXPECT_THROW(Canvas(0, 1), std::invalid_argument);
+    EXPECT_THROW(Canvas(1, 0), std::invalid_argument);
+    
+    Canvas canv(5, 5);
+    
+    Texture tex = Texture::Builder()
+    .fillTexture(' ', "red")
+    .build();
+    
+    EXPECT_THROW(canv.addTexture(0, 1, tex), std::out_of_range);
+    EXPECT_THROW(canv.addTexture(1, 0, tex), std::out_of_range);
+    
 }
 
 }

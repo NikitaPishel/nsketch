@@ -12,7 +12,7 @@ namespace gph {
 
     public:
         // Constructor
-        Canvas(int xSize, int ySize);
+        Canvas(int xSize = 1, int ySize = 1);
         ~Canvas();
 
         // Canvas size

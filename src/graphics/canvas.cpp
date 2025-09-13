@@ -48,6 +48,10 @@ namespace gph {
 
     // add a texture to the canvas
     void Canvas::addTexture(int xPos, int yPos, const Texture& newTex) {
+        if (xPos < 1 || yPos < 1) {
+            throw std::out_of_range("Texture position out of range");
+        }
+
         const Grid& grid = newTex.getGrid();
 
         // iterate through indexes of a grid and copy pixels with a shift
