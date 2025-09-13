@@ -46,6 +46,14 @@ namespace gph {
         this->setSize(window.ws_col, window.ws_row);
     }   
 
+    void Canvas::setPixel(int xPos, int yPos, char symbol, std::string textColor, std::string backColor) {
+        const Colors& colors = Colors::getInstance();
+        std::string textColorId = colors.getColorId(textColor);
+        std::string backColorId = colors.getColorId(backColor);
+
+        this->pImpl->canvas.setPixel(xPos, yPos, symbol, textColorId, backColorId);
+    }
+
     // add a texture to the canvas
     void Canvas::addTexture(int xPos, int yPos, const Texture& newTex) {
         if (xPos < 1 || yPos < 1) {

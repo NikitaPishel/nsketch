@@ -195,7 +195,10 @@ TEST(CanvasTest, TestCanvSize) {
 TEST(CanvasTest, TestCanvResizeErr) {
     EXPECT_THROW(Canvas(0, 1), std::invalid_argument);
     EXPECT_THROW(Canvas(1, 0), std::invalid_argument);
-    
+}
+
+// test if texture out of range works
+TEST(CanvasTest, TestAddTexErr) {
     Canvas canv(5, 5);
     
     Texture tex = Texture::Builder()
@@ -204,7 +207,13 @@ TEST(CanvasTest, TestCanvResizeErr) {
     
     EXPECT_THROW(canv.addTexture(0, 1, tex), std::out_of_range);
     EXPECT_THROW(canv.addTexture(1, 0, tex), std::out_of_range);
-    
 }
 
+// test if setPixel out of range works
+TEST (CanvasTest, TestSetPixelErr) {
+    Canvas canv(5, 5);
+
+    EXPECT_THROW(canv.setPixel(1, -1, 'a', "red", "blue"), std::out_of_range);
+    EXPECT_THROW(canv.setPixel(-1, 1, 'a', "red", "blue"), std::out_of_range);
+}
 }

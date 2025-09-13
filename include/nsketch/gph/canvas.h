@@ -23,7 +23,7 @@ namespace gph {
         void updateSize();
 
         // Adding pixels to the canvas
-        void setPixel(int xPos, int yPos, char symbol, std::string textColor, std::string backColor);
+        void setPixel(int xPos = 1, int yPos = 1, char symbol = ' ', std::string textColor = "white", std::string backColor = "black");
         void addTexture(int xPos, int yPos, const Texture& newTex);
 
         // render and display data
