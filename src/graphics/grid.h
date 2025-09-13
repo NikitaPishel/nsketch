@@ -40,7 +40,7 @@ namespace gph {
         const Pixel& getPixelByIndex(int index) const;
         
         // get x and y position of a pixel with index x
-        const std::pair<uint32_t, uint32_t> getPixelPos(uint32_t index) const;
+        const std::pair<uint32_t, uint32_t> getPixelPos(int index) const;
         
         // get a serialized copy of a matrix
         GridBuffer newBuffer() const;

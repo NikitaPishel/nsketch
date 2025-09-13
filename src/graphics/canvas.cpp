@@ -74,15 +74,15 @@ namespace gph {
         if (xPos >= this->getXSize() || yPos >= this->getYSize()) {
             throw std::out_of_range("Texture position out of range (overflow)");
         }
-
+        
         const Grid& grid = newTex.getGrid();
 
         // iterate through indexes of a grid and copy pixels with a shift
         for (int i = 0; i < grid.gridSize; i++) {
             const Grid::Pixel pix = grid.getPixelByIndex(i);
-
-            std::pair<uint32_t, uint32_t> pixPos = grid.getPixelPos(i);
             
+            std::pair<uint32_t, uint32_t> pixPos = grid.getPixelPos(i);
+
             uint32_t xShift = pixPos.first + xPos;
             uint32_t yShift = pixPos.second + yPos;
 

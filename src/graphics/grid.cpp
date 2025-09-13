@@ -145,14 +145,19 @@ namespace gph {
         if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
             throw std::out_of_range("Pixel index out of range.");
         }
-
+        
         this->getPixel(xPos, yPos) = pix;
     }
+    
+    const std::pair<uint32_t, uint32_t> Grid::getPixelPos(int index) const {
+        if (index < 0 || index >= this->gridSize) {
+            throw std::out_of_range("Pixel index out of range.");
+        }
 
-const std::pair<uint32_t, uint32_t> Grid::getPixelPos(uint32_t index) const {
         std::pair<uint32_t, uint32_t> pos;
+
         pos.first = index % this->xSize;
-        pos.second = (index / pos.first) / this->xSize;
+        pos.second = (index - pos.first) / this->xSize;
         return pos;
     }
 
