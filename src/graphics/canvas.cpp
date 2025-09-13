@@ -43,7 +43,18 @@ namespace gph {
     // automatically set the canvas size to the terminal size
     void Canvas::updateSize() {
         winsize window = getWinSize();
-        this->setSize(window.ws_col, window.ws_row);
+        int xSize = window.ws_col;
+        int ySize = window.ws_row;
+
+        if (xSize < 1) {
+            xSize = 1;
+        }
+        
+        if (ySize < 1) {
+            ySize = 1;
+        }
+
+        this->setSize(xSize, ySize);
     }   
 
     void Canvas::setPixel(int xPos, int yPos, char symbol, std::string textColor, std::string backColor) {
@@ -57,7 +68,11 @@ namespace gph {
     // add a texture to the canvas
     void Canvas::addTexture(int xPos, int yPos, const Texture& newTex) {
         if (xPos < 0 || yPos < 0) {
-            throw std::out_of_range("Texture position out of range");
+            throw std::out_of_range("Texture position out of range (below 0)");
+        }
+
+        if (xPos >= this->getXSize() || yPos >= this->getYSize()) {
+            throw std::out_of_range("Texture position out of range (overflow)");
         }
 
         const Grid& grid = newTex.getGrid();
