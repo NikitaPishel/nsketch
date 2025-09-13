@@ -56,7 +56,7 @@ namespace gph {
 
     // add a texture to the canvas
     void Canvas::addTexture(int xPos, int yPos, const Texture& newTex) {
-        if (xPos < 1 || yPos < 1) {
+        if (xPos < 0 || yPos < 0) {
             throw std::out_of_range("Texture position out of range");
         }
 

@@ -205,8 +205,8 @@ TEST(CanvasTest, TestAddTexErr) {
     .fillTexture(' ', "red")
     .build();
     
-    EXPECT_THROW(canv.addTexture(0, 1, tex), std::out_of_range);
-    EXPECT_THROW(canv.addTexture(1, 0, tex), std::out_of_range);
+    EXPECT_THROW(canv.addTexture(-1, 1, tex), std::out_of_range);
+    EXPECT_THROW(canv.addTexture(1, -1, tex), std::out_of_range);
 }
 
 // test if setPixel out of range works
