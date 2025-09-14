@@ -1,7 +1,11 @@
 #include <gtest/gtest.h>
+#include <fstream>
+#include <filesystem>
+
 #include "graphics/grid.h"
 #include "nsketch/gph/texture.h"
 #include "nsketch/gph/canvas.h"
+#include "nsketch/gph/iotex.h"
 
 using namespace gph;
 
@@ -95,6 +99,10 @@ TEST(GridTest, TestGridBuffer) {
 
     GridBuffer buffer = grid.newBuffer();
     Grid unpackedGrid = buffer.unpack();
+    
+    EXPECT_EQ(unpackedGrid.xSize, grid.xSize);
+    EXPECT_EQ(unpackedGrid.ySize, grid.ySize);
+    EXPECT_EQ(unpackedGrid.gridSize, grid.gridSize);
 
     Grid::Pixel original;
     Grid::Pixel unpacked;
@@ -176,6 +184,37 @@ TEST(TextureTest, TestBuildFillCol) {
     
         EXPECT_EQ(pix.symbol, 'a');
     }
+}
+
+TEST(IotexTest, TestSaveLoad) {
+    std::string fPath = "./.testTexTable.gph";
+
+    TexTable tblorig;
+    
+    Texture texOrig = Texture::Builder(2, 2)
+    .fillTexture('a')
+    .setPixel(1, 1, 'b')
+    .build();
+    
+    tblorig.setTexture("test", texOrig);
+    tblorig.saveTable(fPath);
+    
+    TexTable tblLoaded;
+    tblLoaded.loadTable(fPath);
+    
+    Texture texLoaded = tblLoaded.getTexture("test");
+    
+    EXPECT_EQ(texOrig.getXSize(), texLoaded.getXSize());
+    EXPECT_EQ(texOrig.getYSize(), texLoaded.getYSize());
+    
+    Grid gridOrig = texOrig.getGrid();
+    Grid gridLoaded = texLoaded.getGrid();
+    
+    for (int i = 0; i < gridOrig.gridSize; i++) {
+        EXPECT_EQ(gridOrig.getPixelByIndex(i).symbol, gridLoaded.getPixelByIndex(i).symbol);
+        }
+
+    std::filesystem::remove(fPath);
 }
 
 // test if size getters work fine
