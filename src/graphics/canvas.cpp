@@ -18,10 +18,16 @@ namespace gph {
     // Canvas constructor; Makes a unique_ptr of Impl with Grid sized (xSize, ySize)
     Canvas::Canvas(int xSize, int ySize) : pImpl(std::make_unique<Impl>(Grid(xSize, ySize))) {
         system("clear");
+
+        // hide cursor
+        std::cout << "\033[?25l";
     }
 
     // default destructor
-    Canvas::~Canvas() = default;
+    Canvas::~Canvas() {
+        // when canvas is destroyed, show cursor again;
+        std::cout << "\033[?25h";
+    };
 
     // get horizontal canvas size
     uint32_t Canvas::getXSize() const {

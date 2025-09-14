@@ -27,7 +27,7 @@ int main() {
         }
     }
 
-    constexpr int numRenders = 50000;
+    constexpr int numRenders = 500;
     double totalTime = 0.0;
 
     for (int f = 0; f < numRenders; f++) {
