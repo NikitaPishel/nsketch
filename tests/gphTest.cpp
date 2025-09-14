@@ -186,15 +186,34 @@ TEST(TextureTest, TestBuildFillCol) {
     }
 }
 
+// test if texture table i/o works correctly with no errors
+TEST(IotexTest, TestTexStore) {
+    TexTable table;
+
+    Texture texOrig = Texture::Builder(2, 2)
+        .fillTexture('a')
+        .build();
+
+    EXPECT_NO_THROW(table.setTexture("test", texOrig));
+
+    Texture texLoaded = table.getTexture("test");
+    EXPECT_EQ(texOrig.getGrid().getPixelByIndex(0).symbol, texLoaded.getGrid().getPixelByIndex(0).symbol);
+    
+    EXPECT_NO_THROW(table.delTexture("test"));
+    
+    Texture texDel = table.getTexture("test");
+    EXPECT_EQ(texDel.getGrid().getPixelByIndex(0).symbol, ' ');
+}
+
 TEST(IotexTest, TestSaveLoad) {
     std::string fPath = "./.testTexTable.gph";
 
     TexTable tblorig;
     
     Texture texOrig = Texture::Builder(2, 2)
-    .fillTexture('a')
-    .setPixel(1, 1, 'b')
-    .build();
+        .fillTexture('a')
+        .setPixel(1, 1, 'b')
+        .build();
     
     tblorig.setTexture("test", texOrig);
     tblorig.saveTable(fPath);
@@ -277,9 +296,9 @@ TEST(CanvasTest, TestNormalWork) {
 
     canv.addTexture(1, 1, tex);
 
-    //EXPECT_NO_THROW(canv.addTexture(1, 1, tex));
-    //EXPECT_NO_THROW(canv.setPixel(4, 4, 'a', "red", "blue"));
-    //EXPECT_NO_THROW(canv.setSize(6, 6));
-    //EXPECT_NO_THROW(canv.updateSize());
+    EXPECT_NO_THROW(canv.addTexture(1, 1, tex));
+    EXPECT_NO_THROW(canv.setPixel(4, 4, 'a', "red", "blue"));
+    EXPECT_NO_THROW(canv.setSize(6, 6));
+    EXPECT_NO_THROW(canv.updateSize());
 }
 }
