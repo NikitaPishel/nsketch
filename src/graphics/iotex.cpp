@@ -2,14 +2,32 @@
 #include <cstdint>
 #include <cstring>
 #include <stdexcept>
+#include <memory>
 #include "nsketch/gph/iotex.h"
 #include "nsketch/gph/texture.h"
 #include "grid.h"
 
 namespace gph {
     
-    TexTable::TexTable(const std::string& path) {
-        this->loadTable(path);
+    // initialize TexTable
+    TexTable::TexTable() {}
+
+    Texture TexTable::getTexture(const std::string texName) {
+        auto it = this->textures.find(texName);
+
+        if (it != this->textures.end()) {
+            return *it->second; 
+        }
+
+        return Texture::Builder().build(); 
+    }
+
+    void TexTable::setTexture(const std::string texName, const Texture& texture) {
+        this->textures.insert({texName, std::make_unique<Texture>(std::move(texture))});
+    }
+    
+    void TexTable::delTexture(std::string texName) {
+        this->textures.erase(texName);
     }
 
     std::vector<char> TexTable::serialize() {
@@ -23,12 +41,12 @@ namespace gph {
         size_t mapSize = this->textures.size();
         append(&mapSize, sizeof(mapSize));
 
-        for (auto& [key, texture] : this->textures) {
+        for (auto& [key, texturePtr] : this->textures) {
             size_t keyLen = key.size();
             append(&keyLen, sizeof(keyLen));
             append(key.data(), keyLen);
 
-            GridBuffer texBuffer = texture.newBuffer();
+            GridBuffer texBuffer = texturePtr->newBuffer();
             size_t texSize = texBuffer.getSize();
             append(&texSize, sizeof(texSize));
             append(texBuffer.buffer.data(), texSize);
@@ -67,7 +85,7 @@ namespace gph {
                 .setGrid(grid)
                 .build();
 
-            this->textures.insert({key, texture});
+            this->setTexture(key, texture);
         }
     }
     
@@ -91,17 +109,4 @@ namespace gph {
         file.write(buffer.data(), buffer.size());
         file.close();
     }
-
-    Texture TexTable::getTexture(const std::string texName) {
-        return this->textures.at(texName);
-    }
-
-    void TexTable::setTexture(const std::string texName, Texture texture) {
-        this->textures.insert({texName, texture});
-    }
-    
-    void TexTable::delTexture(std::string texName) {
-        this->textures.erase(texName);
-    }
-
 }

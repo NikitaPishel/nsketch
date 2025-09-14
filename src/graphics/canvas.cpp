@@ -130,6 +130,5 @@ namespace gph {
         // output rendered image to the terminal
         std::cout << renderedImage;
         std::cout.flush();
-
     }
 }
