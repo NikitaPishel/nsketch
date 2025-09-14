@@ -16,7 +16,9 @@ namespace gph {
     };
 
     // Canvas constructor; Makes a unique_ptr of Impl with Grid sized (xSize, ySize)
-    Canvas::Canvas(int xSize, int ySize) : pImpl(std::make_unique<Impl>(Grid(xSize, ySize))) {}
+    Canvas::Canvas(int xSize, int ySize) : pImpl(std::make_unique<Impl>(Grid(xSize, ySize))) {
+        system("clear");
+    }
 
     // default destructor
     Canvas::~Canvas() = default;
@@ -46,15 +48,9 @@ namespace gph {
         int xSize = window.ws_col;
         int ySize = window.ws_row;
 
-        if (xSize < 1) {
-            xSize = 1;
+        if (xSize != this->getXSize() && ySize != this->getYSize()){
+            this->setSize(xSize, ySize);
         }
-        
-        if (ySize < 1) {
-            ySize = 1;
-        }
-
-        this->setSize(xSize, ySize);
     }   
 
     void Canvas::setPixel(int xPos, int yPos, char symbol, std::string textColor, std::string backColor) {
@@ -106,7 +102,7 @@ namespace gph {
 
         // move cursor to the position (0, 0)
         renderedImage = "\033[H";
-        
+
         // iterate through pixels and find their values
         for (int i = 0; i < this->getCanvSize(); i++) {
             const Grid::Pixel& pix = this->pImpl->canvas.getPixelByIndex(i);
@@ -116,14 +112,18 @@ namespace gph {
             
             std::pair<uint32_t, uint32_t> pixPos = this->pImpl->canvas.getPixelPos(i);
             
-            // if it is the last pixel in a row, go to a new line
-            if (pixPos.first == this->getXSize() - 1) {
+            // if it is the last pixel of a row (except for the last row), go to a new line
+            if (pixPos.first == this->getXSize() - 1 && pixPos.second != this->getYSize() - 1) {
                 renderedImage += "\n";
             }
         }
 
         // style reset
         renderedImage += "\033[0m";
-        std::cout << renderedImage << std::endl;
+        
+        // output rendered image to the terminal
+        std::cout << renderedImage;
+        std::cout.flush();
+
     }
 }
