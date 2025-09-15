@@ -11,7 +11,7 @@ int main() {
     canv.updateSize();
 
     Texture texWhite = Texture::Builder(2, 1)
-        .fillTexture(' ', "white", "white")
+        .fillTexture(' ', "white", "red")
         .build();
 
     Texture texBlack = Texture::Builder(2, 1)
@@ -43,7 +43,7 @@ int main() {
     double avgFrameTime = totalTime / numRenders;
     double avgFPS = 1.0 / avgFrameTime;
 
-    std::cout << "Average FPS over " << numRenders << " renders: " << avgFPS << "\n";
+    std::cout << "\nAverage FPS over " << numRenders << " renders: " << avgFPS << " FPS\n";
 
     return 0;
 }

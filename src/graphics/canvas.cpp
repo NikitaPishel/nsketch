@@ -99,11 +99,11 @@ namespace gph {
         std::string renderedImage;
         
         // reserve space for the string
-        // *18 because renderedPix is at max 18 bytes long
+        // *19 because renderedPix is at max 19 bytes long
         // add y size for each new line ]n
         // add 3 for \033[H at the start of a render (sets cursor to position (0, 0))
         // add 3 for style reset "\033[0m", + 6 in total with \033[H
-        size_t renderSize = this->getCanvSize() * 18 + this->getYSize() + 6;
+        size_t renderSize = this->getCanvSize() * 19 + this->getYSize() + 6;
         renderedImage.reserve(renderSize);
 
         // move cursor to the position (0, 0)
@@ -116,7 +116,7 @@ namespace gph {
             // format pixel and add it to the rendered image
             renderedImage.append("\033[38;5;");
             renderedImage.append(pix.textColor);
-            renderedImage.append("48;5;");
+            renderedImage.append(";48;5;");
             renderedImage.append(pix.backColor);
             renderedImage.append("m");
             renderedImage.push_back(pix.symbol);

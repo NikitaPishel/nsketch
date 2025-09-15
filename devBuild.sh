@@ -5,7 +5,7 @@ set -e  # Exit on any error
 BUILD_DIR="./build"
 SOURCE_DIR="."
 BUILD_TESTS="${TESTS:-ON}"
-AUTO_TEST="${AUTO_TEST:-OFF}"
+AUTO_TEST="${AUTO_TEST:-ON}"
 
 # Create build directory if it doesn't exist
 mkdir -p "$BUILD_DIR"
