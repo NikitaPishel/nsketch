@@ -107,25 +107,30 @@ namespace gph {
         renderedImage.reserve(renderSize);
 
         // move cursor to the position (0, 0)
-        renderedImage = "\033[H";
+        renderedImage.append("\033[H");
 
         // iterate through pixels and find their values
         for (int i = 0; i < this->getCanvSize(); i++) {
             const Grid::Pixel& pix = this->pImpl->canvas.getPixelByIndex(i);
             
             // format pixel and add it to the rendered image
-            renderedImage += "\033[38;5;" + pix.textColor + "48;5;" + pix.backColor + "m" + pix.symbol;
+            renderedImage.append("\033[38;5;");
+            renderedImage.append(pix.textColor);
+            renderedImage.append("48;5;");
+            renderedImage.append(pix.backColor);
+            renderedImage.append("m");
+            renderedImage.push_back(pix.symbol);
             
             std::pair<uint32_t, uint32_t> pixPos = this->pImpl->canvas.getPixelPos(i);
             
             // if it is the last pixel of a row (except for the last row), go to a new line
             if (pixPos.first == this->getXSize() - 1 && pixPos.second != this->getYSize() - 1) {
-                renderedImage += "\n";
+                renderedImage.append("\n");
             }
         }
 
         // style reset
-        renderedImage += "\033[0m";
+        renderedImage.append("\033[0m");
         
         // output rendered image to the terminal
         std::cout << renderedImage;
