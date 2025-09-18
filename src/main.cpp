@@ -1,7 +1,7 @@
 #include <iostream>
 #include <chrono>
-#include "nsketch/gph/canvas.h"
-#include "nsketch/gph/texture.h"
+#include <ngph/canvas.h>
+#include <ngph/texture.h>
 
 using namespace std;
 using namespace gph;

@@ -6,11 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED OFF)
 
 # Create a library of the core app 
 add_library(nsketch_lib STATIC
-    ./src/graphics/grid.cpp
-    ./src/graphics/texture.cpp
-    ./src/graphics/canvas.cpp
-    ./src/graphics/iotex.cpp
-    ./src/graphics/gphUtil.cpp
     ./src/sketch/sketch.cpp
     ./src/tools/tools.cpp
 )
@@ -24,11 +19,26 @@ target_include_directories(nsketch_lib PUBLIC
 add_executable(nsketch ./src/main.cpp)
 target_link_libraries(nsketch PRIVATE nsketch_lib)
 
+# Add texture builder folder
+add_subdirectory(texEditor)
+
+include(FetchContent)
+
+# Fetch ngph library
+FetchContent_Declare(
+    ngph
+    GIT_REPOSITORY https://github.com/NikitaPishel/nano-gph
+    GIT_TAG master
+)
+
+FetchContent_MakeAvailable(ngph)
+
+target_link_libraries(nsketch PRIVATE ngph)
+
 # Option to enable tests (OFF by default)
 option(BUILD_TESTS "Build unit tests" ON)
 
 if(BUILD_TESTS)
-    include(FetchContent)
     enable_testing()
 
     # Download and unpack gtest
