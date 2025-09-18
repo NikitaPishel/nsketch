@@ -2,6 +2,7 @@
 #include <chrono>
 #include <ngph/canvas.h>
 #include <ngph/texture.h>
+#include <ngph/iotex.h>
 
 using namespace std;
 using namespace gph;
@@ -10,40 +11,21 @@ int main() {
     Canvas canv(32, 12);
     canv.updateSize();
 
-    Texture texWhite = Texture::Builder(2, 1)
-        .fillTexture(' ', "white", "red")
-        .build();
+    const uint32_t& xSize = canv.getXSize();
+    const uint32_t& ySize = canv.getYSize();
 
-    Texture texBlack = Texture::Builder(2, 1)
-        .fillTexture(' ', "white", "black")
-        .build();
+    TexTable uiPack;
+    uiPack.loadTable("./data/textures/uiTexPack.gph");
 
-    // build chessboard pattern
-    for (int j = 0; j < canv.getYSize(); j++) {
-        for (int i = 0; i < canv.getXSize() / 2; i++) {
-            bool isWhite = ((i + j) % 2 == 0);
-            const auto& tex = isWhite ? texWhite : texBlack;
-            canv.addTexture(i * 2, j, tex);
-        }
-    }
+    canv.fillWithTexture(uiPack.getTexture("workspaceBackground"));
+    
+    canv.iterateTexture(0, ySize-1, xSize, 1, uiPack.getTexture("menuDown"));
+    canv.addTexture(xSize-10, ySize-1, uiPack.getTexture("menuDownLabel"));
+    
+    canv.iterateTexture(0, 0, 15, ySize+1, uiPack.getTexture("menuLeftFill"));
+    canv.iterateTexture(15, 0, 1, ySize/2+1, uiPack.getTexture("menuLeftBorder"));
 
-    constexpr int numRenders = 500;
-    double totalTime = 0.0;
-
-    for (int f = 0; f < numRenders; f++) {
-        auto start = chrono::high_resolution_clock::now();
-
-        canv.render();
-
-        auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double> elapsed = end - start;
-        totalTime += elapsed.count();
-    }
-
-    double avgFrameTime = totalTime / numRenders;
-    double avgFPS = 1.0 / avgFrameTime;
-
-    std::cout << "\nAverage FPS over " << numRenders << " renders: " << avgFPS << " FPS\n";
-
+    canv.render();
+    
     return 0;
 }
