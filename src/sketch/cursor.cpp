@@ -12,29 +12,31 @@ namespace nsk {
         this->xPos = xPos;
         this->yPos = yPos;
 
-        int xShift = xPos - this->xSlct;
-        int yShift = yPos - this->ySlct;
+        if (zoneSlct) {
+            int xShift = xPos - this->xSlct;
+            int yShift = yPos - this->ySlct;
 
-        // xSlct changes to be a positive number, xSlctSize adds adds an abslolute to descrive the same area size
-        if (xShift < 0) {
-            this->xSlctSize += std::abs(xShift);
-            this->xSlct = xPos;
-        }
-        
-        // If xShift isn't negative keep xSlct the same and shift xSlctSize to match
-        else {
-            this->xSlctSize += xShift;
-        }
-        
-        // Same for y; ySlct changes to be a positive number, ySlctSize adds an abslolute to descrive the same area size
-        if (yShift < 0) {
-            this->ySlctSize += std::abs(yShift);
-            this->ySlct = yPos;
-        }
+            // xSlct changes to be a positive number, xSlctSize adds adds an abslolute to descrive the same area size
+            if (xShift < 0) {
+                this->xSlctSize += std::abs(xShift);
+                this->xSlct = xPos;
+            }
+            
+            // If xShift isn't negative keep xSlct the same and shift xSlctSize to match
+            else {
+                this->xSlctSize += xShift;
+            }
+            
+            // Same for y; ySlct changes to be a positive number, ySlctSize adds an abslolute to descrive the same area size
+            if (yShift < 0) {
+                this->ySlctSize += std::abs(yShift);
+                this->ySlct = yPos;
+            }
 
-        // If yShift isn't negative keep ySlct the same and shift ySlctSize to match
-        else {
-            this->ySlctSize += yShift;
+            // If yShift isn't negative keep ySlct the same and shift ySlctSize to match
+            else {
+                this->ySlctSize += yShift;
+            }
         }
 
     }
