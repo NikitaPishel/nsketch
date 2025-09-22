@@ -12,11 +12,12 @@ namespace nsk {
         this->xPos = xPos;
         this->yPos = yPos;
 
-        int xShift = this->xPos - this->xSlct;
+        int xShift = xPos - this->xSlct;
+        int yShift = yPos - this->ySlct;
 
-        // xSlct changes to be a positive number, xSlctSize adds a reverse to descrive the same area
+        // xSlct changes to be a positive number, xSlctSize adds adds an abslolute to descrive the same area size
         if (xShift < 0) {
-            this->xSlctSize += xShift * -1;
+            this->xSlctSize += std::abs(xShift);
             this->xSlct = xPos;
         }
         
@@ -25,11 +26,9 @@ namespace nsk {
             this->xSlctSize += xShift;
         }
         
-        int yShift = this->xPos - this->xSlct;
-        
-        // Same for y; ySlct changes to be a positive number, ySlctSize adds a reverse to descrive the same area
+        // Same for y; ySlct changes to be a positive number, ySlctSize adds an abslolute to descrive the same area size
         if (yShift < 0) {
-            this->ySlctSize += yShift * -1;
+            this->ySlctSize += std::abs(yShift);
             this->ySlct = yPos;
         }
 
