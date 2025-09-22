@@ -12,6 +12,7 @@ namespace nsk {
         this->xPos = xPos;
         this->yPos = yPos;
 
+        // If selecting a zone, find new zone position and size
         if (zoneSlct) {
             int xShift = xPos - this->xSlct;
             int yShift = yPos - this->ySlct;
