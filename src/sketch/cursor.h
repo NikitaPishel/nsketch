@@ -16,25 +16,27 @@ namespace nsk {
         uint16_t ySlct;
         uint16_t xSlctSize;
         uint16_t ySlctSize;
-        
+
     public:
         // Cursor methods
         void moveCursor(int xPos, int yPos);
 
-        uint16_t getCursorX();
-        uint16_t getCursorY();
+        const uint16_t getCursorX() const;
+        const uint16_t getCursorY() const;
 
         // Zone select methods
         // When on zone select will be automatically calculated
         void setZoneSlct(bool state);
 
+        const bool getSlctState() const;
+
         // origin pos of selection
-        uint16_t getSlctX();
-        uint16_t getSlctY();
+        const uint16_t getSlctX() const;
+        const uint16_t getSlctY() const;
 
         // size of selected zone
-        uint16_t getSlctW();
-        uint16_t getSlctH();
+        const uint16_t getSlctW() const;
+        const uint16_t getSlctH() const;
     };
 }
 
