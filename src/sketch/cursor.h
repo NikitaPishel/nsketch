@@ -7,17 +7,19 @@ namespace nsk {
     class Cursor {
     private:
         // Position of a cursor on a sketch
-        uint16_t xPos;
-        uint16_t yPos;
+        uint16_t xPos = 0;
+        uint16_t yPos = 0;
         
         // Zone control (size, pos and state)
-        bool zoneSlct;
-        uint16_t xSlct;
-        uint16_t ySlct;
-        uint16_t xSlctSize;
-        uint16_t ySlctSize;
+        bool zoneSlct = false;
+        uint16_t xSlct = 0;
+        uint16_t ySlct = 0;
+        uint16_t xSlctSize = 0;
+        uint16_t ySlctSize = 0;
 
     public:
+        Cursor();
+
         // Cursor methods
         void moveCursor(int xPos, int yPos);
 

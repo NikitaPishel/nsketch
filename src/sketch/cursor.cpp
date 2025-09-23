@@ -4,6 +4,8 @@
 #include "cursor.h"
 
 namespace nsk {
+    Cursor::Cursor() {}
+
     void Cursor::moveCursor(int xPos, int yPos) {
         if (xPos < 0 || yPos < 0) {
             throw std::out_of_range("Cursor position out of range");
