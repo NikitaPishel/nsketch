@@ -1,3 +1,6 @@
+#ifndef CKETCH_MAIN_H
+#define CKETCH_MAIN_H
+
 #include <string>
 #include <cstdint>
 #include <vector>
@@ -36,3 +39,5 @@ namespace nsk {
         void draw();
     };
 }
+
+#endif
