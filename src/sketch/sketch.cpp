@@ -40,11 +40,22 @@ namespace nsk {
 
     // Fill up the selected zone (if slctZone is on)
     void Sketch::fillZone() {
-
+        for (uint16_t xShift = 0; xShift < this->cursor->getSlctW(); xShift++) {
+            for (uint16_t yShift = 0; yShift < this->cursor->getSlctH(); yShift++) {
+                uint16_t xPos = xShift + this->cursor->getSlctX();
+                uint16_t yPos = yShift + this->cursor->getSlctY();
+                
+                this->mImpl->matrix.addPixel(xShift, yShift, "black");
+            }
+        }
     }
 
     // Draw 1 pixel on cursor
     void Sketch::draw() {
-
+        this->mImpl->matrix.addPixel(
+            this->cursor->getCursorX(),
+            this->cursor->getCursorY(),
+            "black"
+        );
     }
 }
