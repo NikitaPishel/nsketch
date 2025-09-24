@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <vector>
 #include <memory>
+#include "cursor.h"
 
 namespace nsk {
     class Sketch {
@@ -15,9 +16,10 @@ namespace nsk {
         uint16_t sketchSize;
 
     public:
-        // Create a cursor of a sketch, pImpl
-        class CursorImpl;
-        std::unique_ptr<CursorImpl> cImpl;
+        // Create a cursor pointer that sketch uses
+        Cursor* cursor;
+
+        void linkCursor(Cursor& cursor);
     
         // Constructor
         Sketch(int xSize = 1, int ySize = 1);

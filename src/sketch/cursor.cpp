@@ -1,7 +1,7 @@
 #include <stdexcept>
 #include <cstdint>
 #include <cmath>
-#include "cursor.h"
+#include "nsketch/cursor.h"
 
 namespace nsk {
     Cursor::Cursor() {}

@@ -4,7 +4,7 @@
 #include <memory>
 #include "nsketch/sketch.h"
 #include "matrix.h"
-#include "cursor.h"
+#include "nsketch/cursor.h"
 
 namespace nsk {
     // Define internal implementation of matrix
@@ -14,20 +14,14 @@ namespace nsk {
             
             MatrixImpl(int xSize, int ySize) : matrix(xSize, ySize) {};
     };
-    
-    // Define internal implementation of cursor
-    class Sketch::CursorImpl {
-        public:
-            Cursor cursor;
-
-            CursorImpl() : cursor() {};
-    };
 
     // Constructor
     Sketch::Sketch(int xSize, int ySize) :
-        mImpl(std::make_unique<MatrixImpl>(xSize, ySize)),
-        cImpl(std::make_unique<CursorImpl>())
-        {}
+        mImpl(std::make_unique<MatrixImpl>(xSize, ySize)) {}
+
+    void Sketch::linkCursor(Cursor& cursor) {
+        this->cursor = &cursor;
+    }
 
     // Get x size of a drawing
     int Sketch::getXSize() const {
