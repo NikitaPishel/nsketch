@@ -12,11 +12,11 @@ namespace nsk {
         Interface* iPtr;
 
     protected:
-        Sketch& getSketch();
-        Cursor& getCursor();
+        Sketch& sketch;
+        Cursor& cursor;
 
     public:
-        Tool(Interface* interface);
+        Tool(Interface& interface);
         virtual ~Tool() = default;
 
         virtual void apply() = 0;        
