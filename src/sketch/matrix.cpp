@@ -1,5 +1,5 @@
 #include <vector>
-#include <iostream>
+#include <stdexcept>
 #include <cstdint>
 #include <cstring>
 #include "matrix.h"
