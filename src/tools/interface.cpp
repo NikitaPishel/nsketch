@@ -3,12 +3,12 @@
 #include "nsketch/tools.h"
 #include "nsketch/interface.h"
 
-namespace skt {
+namespace nsk {
     Interface::Interface() {
 
     }
 
-    void Interface::setTool(std::string name, Tool tool) {
+    void Interface::setTool(std::string name, Tool* tool) {
 
     }
 

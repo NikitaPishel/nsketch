@@ -3,20 +3,27 @@
 
 #include <string>
 #include <unordered_map>
+#include "nsketch/sketch.h"
+#include "nsketch/cursor.h"
 #include "nsketch/tools.h"
 
-namespace skt {
+namespace nsk {
     class Interface {
     private:
         // map of tools
         std::unordered_map<std::string, Tool> tools;
 
+
+        // pointers to the environment
+        Cursor* cPtr;
+        Sketch* sPtr;
+
     public:
         // Constructor
         Interface();
-    
+
         // map control interface
-        void setTool(std::string name, Tool tool);
+        void setTool(std::string name, Tool* tool);
         void getTool(std::string name);
         void delTool(std::string name);
     };
