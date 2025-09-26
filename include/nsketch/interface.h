@@ -32,8 +32,9 @@ namespace nsk {
         Cursor& getCursor() const;
 
         // map control interface
+        Tool& getTool(std::string name);
         void setTool(std::string name, Tool* tool);
-        void getTool(std::string name);
+        void setTool(std::string name, std::unique_ptr<Tool> tool);
         void delTool(std::string name);
     };
 }
