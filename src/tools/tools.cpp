@@ -4,8 +4,13 @@
 #include "nsketch/cursor.h"
 
 namespace nsk {
-    Tool::Tool(Interface& interface) :
-    iPtr(&interface), 
-    sketch(this->iPtr->getSketch()),
-    cursor(this->iPtr->getCursor()) {}
+    Tool::Tool(Interface& interface) : iPtr(&interface) {}
+    
+    Sketch& Tool::getSketch() {
+        return this->iPtr->getSketch();
+    }
+    
+    Cursor& Tool::getCursor() {
+        return this->iPtr->getCursor();
+    }
 }

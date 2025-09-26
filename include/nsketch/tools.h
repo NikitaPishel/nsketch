@@ -12,8 +12,8 @@ namespace nsk {
         Interface* iPtr;
 
     protected:
-        Sketch& sketch;
-        Cursor& cursor;
+        Sketch& getSketch();
+        Cursor& getCursor();
 
     public:
         Tool(Interface& interface);
