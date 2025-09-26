@@ -79,7 +79,7 @@ namespace nsk {
         }
     }
 
-    // get an access to a pixel (used if you need full control compared to setPixel) or its second version with indirect access
+    // get a reference to the pixel via its coordinates
     std::string& Matrix::getPixel(int xPos, int yPos) {
         if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
             throw std::out_of_range("Pixel index out of range.");
@@ -91,6 +91,7 @@ namespace nsk {
         return this->matrix[pixIndex];
     }
 
+    // get a const reference to the pixel via its coordinates
     const std::string& Matrix::getPixel(int xPos, int yPos) const {
         if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
             throw std::out_of_range("Pixel index out of range.");
@@ -101,15 +102,16 @@ namespace nsk {
         return this->matrix[pixIndex];
     }
 
-    // get an access to a pixel (used if you need full control compared to setPixel) or its second version with indirect access
+    // get a reference to the pixel via relative index
     std::string& Matrix::getPixelByIndex(int index) {
         if (index >= this->matrixSize) {
             throw std::out_of_range("Pixel index out of range.");
         }
-
+        
         return this->matrix[index];
     }
-
+    
+    // get a const reference to the pixel via relative index
     const std::string& Matrix::getPixelByIndex(int index) const {
         if (index >= this->matrixSize) {
             throw std::out_of_range("Pixel index out of range.");
@@ -119,12 +121,22 @@ namespace nsk {
     }
     
     // update pixel parameters (or add a pixel)
-    void Matrix::setPixel(int xPos, int yPos, char symbol, std::string textColor, std::string backColor) {
+    void Matrix::setPixel(int xPos, int yPos, std::string color) {
         if (xPos < 0 || xPos >= xSize || yPos < 0 || yPos >= ySize) {
             throw std::out_of_range("Pixel index out of range.");
         }
+
+        uint16_t index = yPos * this->xSize + xPos;
+
+        this->matrix[index] = color;
+    }
+
+    void Matrix::setPixelByIndex(int index, std::string color) {
+        if (index < 0 || index >= this->matrixSize) {
+            throw std::out_of_range("Pixel index out of range.");
+        }
         
-        std::string& slctElem = this->getPixel(xPos, yPos);
+        this->matrix[index] = color;
     }
 
     const std::pair<uint32_t, uint32_t> Matrix::getPixelPos(int index) const {

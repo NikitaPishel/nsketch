@@ -17,8 +17,8 @@ namespace nsk {
         Matrix(int xSize = 0, int ySize = 0);
         void setMatrixSize(int xSize, int ySize);
         
-        void setPixel(int xPos, int yPos, char symbol = ' ', std::string textColor = "0", std::string backColor = "0");
-        void addPixel(int xPos, int yPos, std::string color);
+        void setPixel(int xPos, int yPos, std::string color);
+        void setPixelByIndex(int index, std::string color);
         
         std::string& getPixel(int xPos, int yPos);
         const std::string& getPixel(int xPos, int yPos) const;
