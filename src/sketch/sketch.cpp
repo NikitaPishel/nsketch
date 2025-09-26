@@ -71,8 +71,16 @@ namespace nsk {
 
     // Will be used to display a sketch later
     Texture Sketch::texturize() {
-        for (uint16_t i; i < this->mImpl->matrix.matrixSize; i++) {
+        const uint16_t& xSize = this->mImpl->matrix.xSize;
+        const uint16_t& ySize = this->mImpl->matrix.ySize;
 
+        Texture::Builder newTex(xSize, ySize);
+
+        for (uint16_t i = 0; i < this->mImpl->matrix.matrixSize; i++) {
+            std::string pixColor = this->mImpl->matrix.getPixelByIndex(i);
+            newTex.setPixelByIndex(i, ' ', "7", pixColor);
         }
+
+        return newTex.build();
     }
 }

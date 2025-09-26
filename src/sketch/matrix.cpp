@@ -15,7 +15,7 @@ namespace nsk {
         this->ySize = ySize;
         this->matrixSize = xSize * ySize;
 
-        this->matrix = std::vector<std::string>(this->matrixSize);
+        this->matrix = std::vector<std::string>(this->matrixSize, "0");
     }
 
     // change matrix size
