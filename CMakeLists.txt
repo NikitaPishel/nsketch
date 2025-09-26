@@ -36,6 +36,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(ngph)
 
+target_link_libraries(nsketch_lib PRIVATE ngph)
 target_link_libraries(nsketch PRIVATE ngph)
 
 # Option to enable tests (OFF by default)
