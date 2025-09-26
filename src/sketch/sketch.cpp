@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <vector>
 #include <memory>
+#include <ngph/texture.h>
 #include "nsketch/sketch.h"
 #include "matrix.h"
 #include "nsketch/cursor.h"
@@ -19,10 +20,6 @@ namespace nsk {
     Sketch::Sketch(int xSize, int ySize) :
         mImpl(std::make_unique<MatrixImpl>(xSize, ySize)) {}
 
-    void Sketch::linkCursor(Cursor& cursor) {
-        this->cursor = &cursor;
-    }
-
     // Get x size of a drawing
     int Sketch::getXSize() const {
         return this->mImpl->matrix.xSize;
@@ -38,24 +35,30 @@ namespace nsk {
         this->mImpl->matrix.setMatrixSize(xSize, ySize);
     }
 
+    // Add a single pixel to a matrix by coordinates
+    void Sketch::addPixel(int xPos, int yPos, std::string color) {
+        this->mImpl->matrix.setPixel(xPos, yPos, color);
+    };
+    
+    // Add a single pixel to a matrix by relative index
+    void Sketch::addPixelByIndex(int index, std::string color) {
+        this->mImpl->matrix.setPixelByIndex(index, color);
+    };
+
     // Fill up the selected zone (if slctZone is on)
-    void Sketch::fillZone() {
-        for (uint16_t xShift = 0; xShift < this->cursor->getSlctW(); xShift++) {
-            for (uint16_t yShift = 0; yShift < this->cursor->getSlctH(); yShift++) {
-                uint16_t xPos = xShift + this->cursor->getSlctX();
-                uint16_t yPos = yShift + this->cursor->getSlctY();
+    void Sketch::fillZone(int xPos, int yPos, int xSize, int ySize, std::string color) {
+        for (uint16_t xShift = 0; xShift < xSize; xShift++) {
+            for (uint16_t yShift = 0; yShift < ySize; yShift++) {
+                uint16_t pixXPos = xPos + xShift;
+                uint16_t pixYPos = yPos + yShift;
                 
-                this->mImpl->matrix.addPixel(xShift, yShift, "black");
+                this->mImpl->matrix.setPixel(pixXPos, pixYPos, "black");
             }
         }
     }
 
-    // Draw 1 pixel on cursor
-    void Sketch::draw() {
-        this->mImpl->matrix.addPixel(
-            this->cursor->getCursorX(),
-            this->cursor->getCursorY(),
-            "black"
-        );
+    // Will be used to display a sketch later
+    gph::Texture Sketch::texturize() {
+        
     }
 }

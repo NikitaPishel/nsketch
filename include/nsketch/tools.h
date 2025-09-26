@@ -16,10 +16,10 @@ namespace nsk {
         Cursor& getCursor();
 
     public:
-        Tool(Interface& interface);
+        explicit Tool(Interface& interface);
         virtual ~Tool() = default;
 
-        virtual void apply() = 0;        
+        virtual void apply() = 0; 
     };
 }
 

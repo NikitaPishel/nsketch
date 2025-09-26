@@ -5,7 +5,9 @@
 #include <cstdint>
 #include <vector>
 #include <memory>
-#include "cursor.h"
+
+#include <ngph/texture.h>
+
 
 namespace nsk {
     class Sketch {
@@ -19,11 +21,6 @@ namespace nsk {
         uint16_t sketchSize;
 
     public:
-        // Create a cursor pointer that sketch uses
-        Cursor* cursor;
-
-        void linkCursor(Cursor& cursor);
-    
         // Constructor
         Sketch(int xSize = 1, int ySize = 1);
 
@@ -35,8 +32,12 @@ namespace nsk {
         void setSketchSize(int xSize, int ySize);
         
         // Draw methods
-        void fillZone();
-        void draw();
+        void addPixel(int xPos, int yPos, std::string color);
+        void addPixelByIndex(int index, std::string color);
+        void fillZone(int xPos, int yPos, int xSize, int ySize, std::string color);
+
+        // Return a texture representation of a sketch
+        gph::Texture texturize();
     };
 }
 
