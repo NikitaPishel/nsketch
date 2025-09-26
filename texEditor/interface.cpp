@@ -44,7 +44,7 @@ int main() {
     // left menu border
     Texture menuLeftBorder = Texture::Builder(1, 2)
         .setPixel(0, 0, ' ', "white", "green")
-        .setPixel(0, 1, ' ', "white", "b_black")
+        .setPixel(0, 1, ' ', "white", "grey")
         .build();
 
     uiTexPack.setTexture("menuLeftBorder", menuLeftBorder);
