@@ -1,6 +1,6 @@
 #include "nsketch/bTools/pencil.h"
-#include "interface.h"
-#include "tools.h"
+#include "nsketch/interface.h"
+#include "nsketch/tools.h"
 
 namespace nsk {
     Pencil::Pencil(Interface& interface) : Tool(interface) {}
@@ -9,6 +9,10 @@ namespace nsk {
         Sketch& sketch = this->getSketch();
         Cursor& cursor = this->getCursor();
 
-        sketch.addPixel(cursor.getCursorX(), cursor.getCursorY(), "white");
+        sketch.addPixel(
+            cursor.getCursorX(),
+            cursor.getCursorY(),
+            "white"
+        );
     }
 }
