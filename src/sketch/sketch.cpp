@@ -78,7 +78,7 @@ namespace nsk {
 
         for (uint16_t i = 0; i < this->mImpl->matrix.matrixSize; i++) {
             std::string pixColor = this->mImpl->matrix.getPixelByIndex(i);
-            newTex.setPixelByIndex(i, ' ', "7", pixColor);
+            newTex.setPixelByGridIndex(i, ' ', "7", pixColor);
         }
 
         return newTex.build();
