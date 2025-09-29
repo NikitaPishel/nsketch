@@ -1,8 +1,8 @@
 #ifndef TOOL_BASE_PENSIL
 #define TOOL_BASE_PENSIL
 
-#include "interface.h"
-#include "tools.h"
+#include "nsketch/interface.h"
+#include "nsketch/tools.h"
 
 namespace nsk {
     class Pencil : public Tool {

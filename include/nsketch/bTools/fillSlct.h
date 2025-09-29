@@ -1,8 +1,8 @@
 #ifndef TOOL_BASE_FILL_SLCT
 #define TOOL_BASE_FILL_SLCT
 
-#include "interface.h"
-#include "tools.h"
+#include "nsketch/interface.h"
+#include "nsketch/tools.h"
 
 namespace nsk {
     class FillSlct : public Tool {
