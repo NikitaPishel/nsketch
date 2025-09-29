@@ -7,6 +7,7 @@
 #include "nsketch/sketch.h"
 #include "nsketch/cursor.h"
 #include "nsketch/tools.h"
+#include "nsketch/palette.h"
 
 namespace nsk {
     class Interface {
@@ -18,6 +19,7 @@ namespace nsk {
         // pointers to the environment
         Sketch* sPtr;
         Cursor* cPtr;
+        Palette* pPtr;
 
     public:
         // Constructor
@@ -26,10 +28,12 @@ namespace nsk {
         // sketch and cursor linking methods
         void linkSketch(Sketch& sketch);
         void linkCursor(Cursor& cursor);
+        void linkPalette(Palette& palette);
         
         // sketch and cursor getter methods
         Sketch& getSketch() const;
         Cursor& getCursor() const;
+        Palette& getPalette() const;
 
         // map control interface
         Tool& getTool(std::string name);

@@ -13,4 +13,8 @@ namespace nsk {
     Cursor& Tool::getCursor() {
         return this->iPtr->getCursor();
     }
+
+    Palette& Tool::getPalette() {
+        return this->iPtr->getPalette();
+    }
 }

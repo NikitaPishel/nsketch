@@ -8,6 +8,7 @@ namespace nsk {
     void FillSlct::apply() {
         Sketch& sketch = this->getSketch();
         Cursor& cursor = this->getCursor();
+        Palette& colors = this->getPalette();
 
         if (cursor.getSlctState()) {
             sketch.fillZone(
@@ -15,7 +16,7 @@ namespace nsk {
                 cursor.getSlctY(),
                 cursor.getSlctW(),
                 cursor.getSlctH(),
-                "white"
+                colors.getPrimColor()
             );
         }
 
@@ -23,7 +24,7 @@ namespace nsk {
             sketch.addPixel(
                 cursor.getCursorX(),
                 cursor.getCursorY(),
-                "white"
+                colors.getPrimColor()
             );
         }
     }

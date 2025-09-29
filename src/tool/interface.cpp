@@ -23,6 +23,10 @@ namespace nsk {
     void Interface::linkCursor(Cursor& cursor) {
         this->cPtr = &cursor;
     }
+
+    void Interface::linkPalette(Palette& palette) {
+        this->pPtr = &palette;
+    }
     
     Cursor& Interface::getCursor() const {
         if (!cPtr) {
@@ -38,6 +42,14 @@ namespace nsk {
         }
 
         return *this->sPtr;
+    }
+
+    Palette& Interface::getPalette() const {
+        if (!sPtr) {
+            throw std::runtime_error("Sketch not linked");
+        }
+
+        return *this->pPtr;
     }
 
     void Interface::setTool(std::string name, Tool* tool) {
