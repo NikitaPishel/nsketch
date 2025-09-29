@@ -2,28 +2,13 @@ cmake_minimum_required(VERSION 3.14)
 project(nsketch)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Create a library of the core app 
-add_library(nsketch_lib STATIC
-    ./src/sketch/sketch.cpp
-    ./src/sketch/cursor.cpp
-    ./src/sketch/matrix.cpp
-    ./src/sketch/texturize.cpp
-    ./src/tools/tools.cpp
-)
+# Add source directory
+add_subdirectory(${CMAKE_SOURCE_DIR}/src)
 
-# Set the public include directories for the library.
-target_include_directories(nsketch_lib PUBLIC
-    ./include
-)
-
-# The main executable links to the library.
-add_executable(nsketch ./src/main.cpp)
-target_link_libraries(nsketch PRIVATE nsketch_lib)
-
-# Add texture builder folder
-add_subdirectory(texEditor)
+# Add texture builder directory
+add_subdirectory(${CMAKE_SOURCE_DIR}/texEditor)
 
 include(FetchContent)
 
@@ -55,6 +40,6 @@ if(BUILD_TESTS)
     set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
     FetchContent_MakeAvailable(googletest)
 
-    # Add test subdirectory (tests folder must contain its own CMakeLists.txt)
-    add_subdirectory(tests)
+    # Add test subdirectory (tests directory must contain its own CMakeLists.txt)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/tests)
 endif()
