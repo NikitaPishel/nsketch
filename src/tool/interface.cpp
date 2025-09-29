@@ -23,10 +23,6 @@ namespace nsk {
     void Interface::linkCursor(Cursor& cursor) {
         this->cPtr = &cursor;
     }
-
-    Sketch& Interface::getSketch() const {
-        return *this->sPtr;
-    }
     
     Cursor& Interface::getCursor() const {
         if (!cPtr) {
@@ -42,10 +38,6 @@ namespace nsk {
         }
 
         return *this->sPtr;
-    }
-    
-    Cursor& Interface::getCursor() const {
-        return *this->cPtr;
     }
 
     void Interface::setTool(std::string name, Tool* tool) {
