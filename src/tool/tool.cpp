@@ -1,4 +1,4 @@
-#include "nsketch/tools.h"
+#include "nsketch/tool.h"
 #include "nsketch/interface.h"
 #include "nsketch/sketch.h"
 #include "nsketch/cursor.h"

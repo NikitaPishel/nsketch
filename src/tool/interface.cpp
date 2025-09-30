@@ -1,7 +1,7 @@
 #include <string>
 #include <unordered_map>
 #include <stdexcept>
-#include "nsketch/tools.h"
+#include "nsketch/tool.h"
 #include "nsketch/interface.h"
 
 namespace nsk {

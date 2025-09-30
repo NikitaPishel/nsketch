@@ -1,6 +1,6 @@
 #include "nsketch/bTools/fillSlct.h"
 #include "nsketch/interface.h"
-#include "nsketch/tools.h"
+#include "nsketch/tool.h"
 
 namespace nsk {
     FillSlct::FillSlct(Interface& interface) : Tool(interface) {}

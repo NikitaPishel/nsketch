@@ -2,7 +2,7 @@
 #define TOOL_BASE_FILL_SLCT
 
 #include "nsketch/interface.h"
-#include "nsketch/tools.h"
+#include "nsketch/tool.h"
 
 namespace nsk {
     class FillSlct : public Tool {

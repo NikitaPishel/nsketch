@@ -1,6 +1,6 @@
 #include "nsketch/bTools/pencil.h"
 #include "nsketch/interface.h"
-#include "nsketch/tools.h"
+#include "nsketch/tool.h"
 #include "nsketch/palette.h"
 
 namespace nsk {

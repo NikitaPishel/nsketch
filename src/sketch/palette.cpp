@@ -30,6 +30,7 @@ namespace nsk {
     void Palette::setColor(int i, std::string color) {
         this->colors[i] = color;
     }
+    
     void Palette::delColor(int i) {
         this->colors.pop_back();
     }

@@ -6,7 +6,7 @@
 #include <memory>
 #include "nsketch/sketch.h"
 #include "nsketch/cursor.h"
-#include "nsketch/tools.h"
+#include "nsketch/tool.h"
 #include "nsketch/palette.h"
 
 namespace nsk {
