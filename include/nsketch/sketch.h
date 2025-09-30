@@ -8,13 +8,13 @@
 
 #include <ngph/texture.h>
 
+using namespace gph;
 
 namespace nsk {
     class Sketch {
     private:
         // Matrix of pixels, pImpl
-        class MatrixImpl; 
-        std::unique_ptr<MatrixImpl> mImpl;
+        Texture::Builder matrix;
 
         uint16_t xSize;
         uint16_t ySize;
@@ -36,8 +36,8 @@ namespace nsk {
         void addPixelByIndex(int index, std::string color);
         void fillZone(int xPos, int yPos, int xSize, int ySize, std::string color);
 
-        // Return a texture representation of a sketch
-        gph::Texture texturize();
+        // return built version of a sketch
+        Texture texturize();
     };
 }
 
