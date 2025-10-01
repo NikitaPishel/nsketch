@@ -31,7 +31,7 @@ namespace nsk {
         return this->iPtr->getPalette();
     }
 
-    void Tool::setInterface(Interface& interface) {
-        this->iPtr = &interface;
+    void Tool::setInterface(Interface* iPtr) {
+        this->iPtr = iPtr;
     }
 }

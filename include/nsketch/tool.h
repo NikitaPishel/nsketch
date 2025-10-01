@@ -24,7 +24,7 @@ namespace nsk {
         
         virtual void apply() = 0; 
 
-        void setInterface(Interface& interface);
+        void setInterface(Interface* iPtr);
     };
 }
 

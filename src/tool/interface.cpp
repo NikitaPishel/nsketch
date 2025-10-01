@@ -8,7 +8,7 @@ namespace nsk {
     // Empty tool child for creating empty tools in an interface
     class EmptyTool : public Tool {
     public:
-        EmptyTool(Interface& iface) : Tool(iface) {}
+        EmptyTool() : Tool() {}
         void apply() override {} // does nothing
     };
 
@@ -57,6 +57,7 @@ namespace nsk {
     }
 
     void Interface::setTool(std::string name, std::unique_ptr<Tool> tool) {
+        tool->setInterface(this);
         this->tools[name] = std::move(tool);
     }
 
