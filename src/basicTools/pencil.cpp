@@ -4,7 +4,7 @@
 #include "nsketch/palette.h"
 
 namespace nsk {
-    Pencil::Pencil(Interface& interface) : Tool(interface) {}
+    Pencil::Pencil() : Tool() {}
 
     void Pencil::apply() {
         Sketch& sketch = this->getSketch();

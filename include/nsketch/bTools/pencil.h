@@ -7,7 +7,7 @@
 namespace nsk {
     class Pencil : public Tool {
     public:
-        explicit Pencil(Interface& Interface);
+        explicit Pencil();
 
         void apply() override;
     };

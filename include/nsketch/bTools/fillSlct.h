@@ -7,7 +7,7 @@
 namespace nsk {
     class FillSlct : public Tool {
     public:
-        explicit FillSlct(Interface& Interface);
+        explicit FillSlct();
 
         void apply() override;
     };

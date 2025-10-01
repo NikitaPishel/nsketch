@@ -4,6 +4,7 @@
 #include "nsketch/sketch.h"
 #include "nsketch/cursor.h"
 #include "nsketch/palette.h"
+#include "nsketch/interface.h"
 
 namespace nsk {
     class Interface;
@@ -16,12 +17,14 @@ namespace nsk {
         Sketch& getSketch();
         Cursor& getCursor();
         Palette& getPalette();
-
+        
     public:
-        explicit Tool(Interface& interface);
+        explicit Tool();
         virtual ~Tool() = default;
-
+        
         virtual void apply() = 0; 
+
+        void setInterface(Interface& interface);
     };
 }
 

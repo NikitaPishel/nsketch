@@ -3,7 +3,7 @@
 #include "nsketch/tool.h"
 
 namespace nsk {
-    FillSlct::FillSlct(Interface& interface) : Tool(interface) {}
+    FillSlct::FillSlct() : Tool() {}
 
     void FillSlct::apply() {
         Sketch& sketch = this->getSketch();
