@@ -16,10 +16,10 @@ namespace nsk {
         static ToolStore& getInstance();
 
         // Tools i/o
-        Tool& getTool(std::string name);
-        void setTool(std::string name, Tool* tool);
-        void setTool(std::string name, std::unique_ptr<Tool> tool);
-        void delTool(std::string name);
+        std::unique_ptr<Tool> createTool(const std::string& name);
+        void setTool(const std::string& name, Tool* tool);
+        void setTool(const std::string& name, std::unique_ptr<Tool> tool);
+        void delTool(const std::string& name);
     };
 }
 #endif

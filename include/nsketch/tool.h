@@ -1,10 +1,10 @@
 #ifndef TOOLS_MAIN_H
 #define TOOLS_MAIN_H
 
+#include <memory>
 #include "nsketch/sketch.h"
 #include "nsketch/cursor.h"
 #include "nsketch/palette.h"
-#include "nsketch/interface.h"
 
 namespace nsk {
     class Interface;
@@ -22,7 +22,9 @@ namespace nsk {
         explicit Tool();
         virtual ~Tool() = default;
         
+        // virtual methods
         virtual void apply() = 0; 
+        virtual std::unique_ptr<Tool> clone() const = 0; 
 
         void setInterface(Interface* iPtr);
     };

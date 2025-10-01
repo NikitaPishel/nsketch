@@ -1,3 +1,4 @@
+#include <memory>
 #include "nsketch/bTools/pencil.h"
 #include "nsketch/interface.h"
 #include "nsketch/tool.h"
@@ -16,5 +17,9 @@ namespace nsk {
             cursor.getCursorY(),
             colors.getPrimColor()
         );
+    }
+
+    std::unique_ptr<Tool> Pencil::clone() const {
+        return std::make_unique<Pencil>(*this);
     }
 }

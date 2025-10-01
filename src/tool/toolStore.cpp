@@ -11,25 +11,25 @@ namespace nsk {
     }
 
     // Tools store i/o
-    void ToolStore::setTool(std::string name, Tool* tool) {
+    void ToolStore::setTool(const std::string& name, Tool* tool) {
         this->tools[name] = std::unique_ptr<Tool>(tool);
     }
 
-    void ToolStore::setTool(std::string name, std::unique_ptr<Tool> tool) {
+    void ToolStore::setTool(const std::string& name, std::unique_ptr<Tool> tool) {
         this->tools[name] = std::move(tool);
     }
 
-    Tool& ToolStore::getTool(std::string name) {
-        auto it = this->tools.find(name);
-
-        if (it != this->tools.end()) {
-            return *it->second;
-        }
-        
-        throw std::runtime_error("Tool not found: " + name);
+    void ToolStore::delTool(const std::string& name) {
+        this->tools.erase(name);
     }
 
-    void ToolStore::delTool(std::string name) {
-        this->tools.erase(name);
+    std::unique_ptr<Tool> ToolStore::createTool(const std::string& name) {
+        auto it = this->tools.find(name);
+
+        if (it == this->tools.end()) {
+            throw std::runtime_error("Tool not found: " + name);
+        }
+
+        return it->second->clone();
     }
 }

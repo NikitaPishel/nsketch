@@ -28,4 +28,8 @@ namespace nsk {
             );
         }
     }
+
+    std::unique_ptr<Tool> FillSlct::clone() const {
+        return std::make_unique<FillSlct>(*this);
+    }
 }
