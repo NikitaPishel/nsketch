@@ -3,6 +3,7 @@
 #include "nsketch/interface.h"
 #include "nsketch/tool.h"
 #include "nsketch/palette.h"
+#include "nsketch/toolReg.h"
 
 namespace nsk {
     Pencil::Pencil() : Tool() {}
@@ -22,4 +23,6 @@ namespace nsk {
     std::unique_ptr<Tool> Pencil::clone() const {
         return std::make_unique<Pencil>(*this);
     }
+
+    static ToolReg pencilReg("basePencil", std::make_unique<Pencil>());
 }

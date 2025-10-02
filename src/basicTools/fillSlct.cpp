@@ -1,6 +1,10 @@
+#include <memory>
+#include <string>
 #include "nsketch/bTools/fillSlct.h"
 #include "nsketch/interface.h"
 #include "nsketch/tool.h"
+#include "nsketch/palette.h"
+#include "nsketch/toolReg.h"
 
 namespace nsk {
     FillSlct::FillSlct() : Tool() {}
@@ -32,4 +36,7 @@ namespace nsk {
     std::unique_ptr<Tool> FillSlct::clone() const {
         return std::make_unique<FillSlct>(*this);
     }
+
+
+    static ToolReg fillSlct("baseFillSlct", std::make_unique<FillSlct>());
 }
