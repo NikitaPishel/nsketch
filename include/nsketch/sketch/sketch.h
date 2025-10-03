@@ -34,7 +34,7 @@ namespace nsk {
         // Draw methods
         void addPixel(int xPos, int yPos, std::string color);
         void addPixelByIndex(int index, std::string color);
-        void fillZone(int xPos, int yPos, int xSize, int ySize, std::string color);
+        void fill(int xPos, int yPos, int xSize, int ySize, std::string color);
 
         // return built version of a sketch
         Texture texturize();

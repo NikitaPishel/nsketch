@@ -45,8 +45,8 @@ namespace nsk {
         this->matrix.setPixelByGridIndex(index, ' ', "white", colorId);
     };
 
-    // Fill up the selected zone (if slctZone is on)
-    void Sketch::fillZone(int xPos, int yPos, int xSize, int ySize, std::string color) {
+    // Fill up the area provided (don't confuse with cursor's zone)
+    void Sketch::fill(int xPos, int yPos, int xSize, int ySize, std::string color) {
         const Colors& gphColors = Colors::getInstance();
         std::string colorId = gphColors.getColorId(color);
 

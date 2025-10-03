@@ -15,7 +15,7 @@ namespace nsk {
         Palette& colors = this->getPalette();
 
         if (cursor.getSlctState()) {
-            sketch.fillZone(
+            sketch.fill(
                 cursor.getSlctX(),
                 cursor.getSlctY(),
                 cursor.getSlctW(),
