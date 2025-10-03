@@ -21,10 +21,10 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(ngph)
 
-target_link_libraries(nsketch_lib PRIVATE ngph)
+target_link_libraries(nsketch_lib PUBLIC ngph)
 target_link_libraries(nsketch PRIVATE ngph)
 
-# Option to enable tests (OFF by default)
+# Option to enable tests (ON by default)
 option(BUILD_TESTS "Build unit tests" ON)
 
 if(BUILD_TESTS)

@@ -10,8 +10,7 @@ add_library(nsketch_lib STATIC
     ${SRC_FILES}
 )
 
-# Set the public include directories for the library.
-target_include_directories(nsketch_lib PUBLIC
+target_include_directories(nsketch_lib PRIVATE
     ${CMAKE_SOURCE_DIR}/include
 )
 
