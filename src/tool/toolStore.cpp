@@ -1,6 +1,6 @@
 #include <unordered_map>
-#include "nsketch/toolStore.h"
-#include "nsketch/tool.h"
+#include "nsketch/tool/toolStore.h"
+#include "nsketch/tool/tool.h"
 #include <stdexcept>
 
 namespace nsk {

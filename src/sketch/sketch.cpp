@@ -4,8 +4,8 @@
 #include <memory>
 #include <ngph/texture.h>
 #include <ngph/colors.h>
-#include "nsketch/sketch.h"
-#include "nsketch/cursor.h"
+#include "nsketch/sketch/sketch.h"
+#include "nsketch/sketch/cursor.h"
 
 using namespace gph;
 

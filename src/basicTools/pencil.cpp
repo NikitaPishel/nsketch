@@ -1,9 +1,9 @@
 #include <memory>
 #include "nsketch/bTools/pencil.h"
-#include "nsketch/interface.h"
-#include "nsketch/tool.h"
-#include "nsketch/palette.h"
-#include "nsketch/toolReg.h"
+#include "nsketch/tool/interface.h"
+#include "nsketch/tool/tool.h"
+#include "nsketch/tool/toolReg.h"
+#include "nsketch/sketch/palette.h"
 
 namespace nsk {
     Pencil::Pencil() : Tool() {}

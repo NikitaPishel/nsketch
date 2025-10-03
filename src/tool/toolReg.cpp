@@ -1,8 +1,8 @@
 #include <string>
 #include <memory>
-#include "nsketch/toolReg.h"
-#include "nsketch/toolStore.h"
-#include "nsketch/tool.h"
+#include "nsketch/tool/toolReg.h"
+#include "nsketch/tool/toolStore.h"
+#include "nsketch/tool/tool.h"
 
 namespace nsk {
     ToolReg::ToolReg(const std::string& name, std::unique_ptr<Tool> tool) {

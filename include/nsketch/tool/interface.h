@@ -4,10 +4,10 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
-#include "nsketch/sketch.h"
-#include "nsketch/cursor.h"
-#include "nsketch/tool.h"
-#include "nsketch/palette.h"
+#include "nsketch/sketch/sketch.h"
+#include "nsketch/sketch/cursor.h"
+#include "nsketch/sketch/palette.h"
+#include "nsketch/tool/tool.h"
 
 namespace nsk {
     class Interface {

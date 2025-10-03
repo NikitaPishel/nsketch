@@ -3,7 +3,7 @@
 
 #include <unordered_map>
 #include <memory>
-#include "nsketch/tool.h"
+#include "nsketch/tool/tool.h"
 
 namespace nsk {
     class ToolStore {

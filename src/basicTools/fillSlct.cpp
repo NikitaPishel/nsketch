@@ -1,10 +1,10 @@
 #include <memory>
 #include <string>
 #include "nsketch/bTools/fillSlct.h"
-#include "nsketch/interface.h"
-#include "nsketch/tool.h"
-#include "nsketch/palette.h"
-#include "nsketch/toolReg.h"
+#include "nsketch/tool/interface.h"
+#include "nsketch/tool/tool.h"
+#include "nsketch/tool/toolReg.h"
+#include "nsketch/sketch/palette.h"
 
 namespace nsk {
     FillSlct::FillSlct() : Tool() {}

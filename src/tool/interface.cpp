@@ -1,8 +1,8 @@
 #include <string>
 #include <unordered_map>
 #include <stdexcept>
-#include "nsketch/tool.h"
-#include "nsketch/interface.h"
+#include "nsketch/tool/tool.h"
+#include "nsketch/tool/interface.h"
 
 namespace nsk {
     // Empty tool child for creating empty tools in an interface

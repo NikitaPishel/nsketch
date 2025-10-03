@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-#include "nsketch/palette.h"
+#include "nsketch/sketch/palette.h"
 
 namespace nsk {
     Palette::Palette(std::string primColor, std::string backColor) :

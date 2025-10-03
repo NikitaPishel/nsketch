@@ -2,9 +2,9 @@
 #define TOOLS_MAIN_H
 
 #include <memory>
-#include "nsketch/sketch.h"
-#include "nsketch/cursor.h"
-#include "nsketch/palette.h"
+#include "nsketch/sketch/sketch.h"
+#include "nsketch/sketch/cursor.h"
+#include "nsketch/sketch/palette.h"
 
 namespace nsk {
     class Interface;

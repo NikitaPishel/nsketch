@@ -1,8 +1,8 @@
 #include <stdexcept>
-#include "nsketch/tool.h"
-#include "nsketch/interface.h"
-#include "nsketch/sketch.h"
-#include "nsketch/cursor.h"
+#include "nsketch/tool/tool.h"
+#include "nsketch/tool/interface.h"
+#include "nsketch/sketch/sketch.h"
+#include "nsketch/sketch/cursor.h"
 
 namespace nsk {
     Tool::Tool() : iPtr(nullptr) {}
