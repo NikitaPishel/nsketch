@@ -47,16 +47,6 @@ namespace nsk {
 
     // Fill up the area provided (don't confuse with cursor's zone)
     void Sketch::fill(int xPos, int yPos, int xSize, int ySize, std::string color) {
-        const Colors& gphColors = Colors::getInstance();
-        std::string colorId = gphColors.getColorId(color);
-
-        for (uint16_t xShift = 0; xShift < xSize; xShift++) {
-            for (uint16_t yShift = 0; yShift < ySize; yShift++) {
-                uint16_t pixXPos = xPos + xShift;
-                uint16_t pixYPos = yPos + yShift;
-                
-                this->matrix.setPixelById(pixXPos, pixYPos, ' ', "white", colorId);
-            }
-        }
+        this->matrix.addBox(xPos, yPos, xSize, ySize, ' ', "white", color);
     }
 }
