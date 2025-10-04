@@ -14,7 +14,7 @@ namespace nsk {
         std::string backColor;
 
     public:
-        Palette(std::string primColor, std::string backColor);
+        Palette(std::string primColor = "white", std::string backColor = "black");
         
         // Base colors i/o
         void setPrimColor(std::string color);

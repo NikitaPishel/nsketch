@@ -53,6 +53,7 @@ namespace nsk {
     }
 
     void Interface::setTool(std::string name, Tool* tool) {
+        tool->setInterface(this);
         this->tools[name] = std::unique_ptr<Tool>(tool);
     }
 
