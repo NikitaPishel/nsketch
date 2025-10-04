@@ -3,14 +3,12 @@
 #include <stdexcept>
 #include "nsketch/tool/tool.h"
 #include "nsketch/tool/interface.h"
+#include "nsketch/tool/toolStore.h"
 
 namespace nsk {
-    // Empty tool child for creating empty tools in an interface
-    class EmptyTool : public Tool {
-    public:
-        EmptyTool() : Tool() {}
-        void apply() override {} // does nothing
-    };
+    std::unique_ptr<Tool> EmptyTool::clone() const {
+        return std::make_unique<EmptyTool>(*this);
+    }
 
     Interface::Interface() {
 
@@ -52,17 +50,17 @@ namespace nsk {
         return *this->pPtr;
     }
 
-    void Interface::setTool(std::string name, Tool* tool) {
+    void Interface::addTool(const std::string& name, Tool* tool) {
         tool->setInterface(this);
         this->tools[name] = std::unique_ptr<Tool>(tool);
     }
 
-    void Interface::setTool(std::string name, std::unique_ptr<Tool> tool) {
+    void Interface::addTool(const std::string& name, std::unique_ptr<Tool> tool) {
         tool->setInterface(this);
         this->tools[name] = std::move(tool);
     }
 
-    Tool& Interface::getTool(std::string name) {
+    Tool& Interface::getTool(const std::string& name) {
         auto it = this->tools.find(name);
 
         if (it != this->tools.end()) {
@@ -72,7 +70,17 @@ namespace nsk {
         throw std::runtime_error("Tool not found: " + name);
     }
 
-    void Interface::delTool(std::string name) {
+    void Interface::delTool(const std::string& name) {
         this->tools.erase(name);
+    }
+
+    void Interface::addToolFromStore(const std::string& name) {
+        ToolStore& store = ToolStore::getInstance();
+        std::unique_ptr tool = store.createTool(name);
+        this->addTool(name, std::move(tool));
+    }
+
+    void Interface::useTool(const std::string& name) {
+        this->getTool(name).apply();
     }
 }

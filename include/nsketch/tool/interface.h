@@ -10,6 +10,14 @@
 #include "nsketch/tool/tool.h"
 
 namespace nsk {
+    // Empty tool child for creating empty tools in an interface
+    class EmptyTool : public Tool {
+    public:
+        EmptyTool() : Tool() {}
+        void apply() {}
+         std::unique_ptr<Tool> clone() const override;
+    };
+
     class Interface {
     private:
         // map of tools
@@ -36,10 +44,13 @@ namespace nsk {
         Palette& getPalette() const;
 
         // map control interface
-        Tool& getTool(std::string name);
-        void setTool(std::string name, Tool* tool);
-        void setTool(std::string name, std::unique_ptr<Tool> tool);
-        void delTool(std::string name);
+        Tool& getTool(const std::string& name);
+        void addTool(const std::string& name, Tool* tool);
+        void addTool(const std::string& name, std::unique_ptr<Tool> tool);
+        void delTool(const std::string& name);
+        void addToolFromStore(const std::string& name);
+
+        void useTool(const std::string& name);
     };
 }
 
