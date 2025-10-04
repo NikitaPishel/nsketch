@@ -1,17 +1,19 @@
 #include <gtest/gtest.h>
 #include <memory>
-#include <tool/tool.h>
-#include <tool/toolStore.h>
-#include <tool/toolReg.h>
-#include <tool/interface.h>
-#include <bTools/pencil.h>
+#include "nsketch/tool/tool.h"
+#include "nsketch/tool/toolStore.h"
+#include "nsketch/tool/toolReg.h"
+#include "nsketch/tool/interface.h"
+#include "nsketch/bTools/pencil.h"
 
 using namespace nsk;
 
+static ToolReg pencilReg("basePencil", std::make_unique<Pencil>());
+
 // test if tool store works
 TEST(toolTest, getToolFromStore) {
-    ToolStore store = ToolStore::getInstance();
-    EXPECT_NO_THROW(std::unique_ptr<Tool> myPencil = store.createTool("basePencil"));
+    ToolStore& store = ToolStore::getInstance();
+    //EXPECT_NO_THROW(std::unique_ptr<Tool> myPencil = store.createTool("basePencil"));
 }
 
 TEST(toolTest, addToolToInterface) {
@@ -31,7 +33,7 @@ TEST(toolTest, addToolToInterface) {
 }
 
 TEST(toolTest, useToolFromInterface) {
-    ToolStore store = ToolStore::getInstance();
+    ToolStore& store = ToolStore::getInstance();
     std::unique_ptr<Tool> myPencil = store.createTool("basePencil");
     
     Sketch sketch;
@@ -45,7 +47,6 @@ TEST(toolTest, useToolFromInterface) {
     interface.linkPalette(palette);
 
     EXPECT_NO_THROW(interface.setTool("pencil", std::move(myPencil)));
-
 }
 
 TEST(toolTest, caseOne) {

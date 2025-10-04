@@ -37,6 +37,5 @@ namespace nsk {
         return std::make_unique<FillSlct>(*this);
     }
 
-
     static ToolReg fillSlct("baseFillSlct", std::make_unique<FillSlct>());
 }
