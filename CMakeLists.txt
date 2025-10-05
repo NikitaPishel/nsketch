@@ -25,9 +25,9 @@ target_link_libraries(nsketch_lib PUBLIC ngph)
 target_link_libraries(nsketch PRIVATE ngph)
 
 # Option to enable tests (ON by default)
-option(BUILD_TESTS "Build unit tests" ON)
+set(NSK_BUILD_TESTS ON CACHE BOOL "Build unit tests" FORCE)
 
-if(BUILD_TESTS)
+if(NSK_BUILD_TESTS)
     enable_testing()
 
     # Download and unpack gtest
