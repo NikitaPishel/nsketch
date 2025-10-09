@@ -4,6 +4,7 @@
 #include "nsketch/tool/tool.h"
 #include "nsketch/tool/interface.h"
 #include "nsketch/tool/toolStore.h"
+#include "nsketch/iokey.h"
 
 namespace nsk {
     std::unique_ptr<Tool> EmptyTool::clone() const {
@@ -80,7 +81,13 @@ namespace nsk {
         this->addTool(bind, std::move(tool));
     }
 
-    void Interface::useTool(const char& bind) {
+    void Interface::runTool(const char& bind) {
         this->getTool(bind).run();
+    }
+
+    void Interface::autoRunTool() {
+        IoKey& ioKey = IoKey::getInstance();
+
+        this->runTool(ioKey.getChar());
     }
 }

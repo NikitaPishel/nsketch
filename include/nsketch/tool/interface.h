@@ -50,7 +50,10 @@ namespace nsk {
         void delTool(const char& bind);
         void addToolFromStore(const char& bind, std::string name);
 
-        void useTool(const char& bind);
+        void runTool(const char& bind);
+
+        // Automatically detects keypresses and runs tools on press
+        void autoRunTool();
     };
 }
 
