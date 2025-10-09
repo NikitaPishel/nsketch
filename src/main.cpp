@@ -3,6 +3,7 @@
 #include <ngph/canvas.h>
 #include <ngph/texture.h>
 #include <ngph/iotex.h>
+#include "nsketch/iokey.h"
 
 using namespace std;
 using namespace gph;
