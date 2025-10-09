@@ -21,7 +21,7 @@ namespace nsk {
     class Interface {
     private:
         // map of tools
-        std::unordered_map<std::string, std::unique_ptr<Tool>> tools;
+        std::unordered_map<char, std::unique_ptr<Tool>> tools;
 
 
         // pointers to the environment
@@ -44,13 +44,13 @@ namespace nsk {
         Palette& getPalette() const;
 
         // map control interface
-        Tool& getTool(const std::string& name);
-        void addTool(const std::string& name, Tool* tool);
-        void addTool(const std::string& name, std::unique_ptr<Tool> tool);
-        void delTool(const std::string& name);
-        void addToolFromStore(const std::string& name);
+        Tool& getTool(const char& bind);
+        void addTool(const char& bind, Tool* tool);
+        void addTool(const char& bind, std::unique_ptr<Tool> tool);
+        void delTool(const char& bind);
+        void addToolFromStore(const char& bind, std::string name);
 
-        void useTool(const std::string& name);
+        void useTool(const char& bind);
     };
 }
 

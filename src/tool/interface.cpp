@@ -50,37 +50,37 @@ namespace nsk {
         return *this->pPtr;
     }
 
-    void Interface::addTool(const std::string& name, Tool* tool) {
+    void Interface::addTool(const char& bind, Tool* tool) {
         tool->setInterface(this);
-        this->tools[name] = std::unique_ptr<Tool>(tool);
+        this->tools[bind] = std::unique_ptr<Tool>(tool);
     }
 
-    void Interface::addTool(const std::string& name, std::unique_ptr<Tool> tool) {
+    void Interface::addTool(const char& bind, std::unique_ptr<Tool> tool) {
         tool->setInterface(this);
-        this->tools[name] = std::move(tool);
+        this->tools[bind] = std::move(tool);
     }
 
-    Tool& Interface::getTool(const std::string& name) {
-        auto it = this->tools.find(name);
+    Tool& Interface::getTool(const char& bind) {
+        auto it = this->tools.find(bind);
 
         if (it != this->tools.end()) {
             return *it->second;
         }
         
-        throw std::runtime_error("Tool not found: " + name);
+        throw std::runtime_error("Tool not found: " + bind);
     }
 
-    void Interface::delTool(const std::string& name) {
-        this->tools.erase(name);
+    void Interface::delTool(const char& bind) {
+        this->tools.erase(bind);
     }
 
-    void Interface::addToolFromStore(const std::string& name) {
+    void Interface::addToolFromStore(const char& bind, std::string name) {
         ToolStore& store = ToolStore::getInstance();
         std::unique_ptr tool = store.createTool(name);
-        this->addTool(name, std::move(tool));
+        this->addTool(bind, std::move(tool));
     }
 
-    void Interface::useTool(const std::string& name) {
-        this->getTool(name).run();
+    void Interface::useTool(const char& bind) {
+        this->getTool(bind).run();
     }
 }

@@ -46,7 +46,7 @@ TEST(toolTest, useToolFromInterface) {
     interface.linkCursor(cursor);
     interface.linkPalette(palette);
 
-    EXPECT_NO_THROW(interface.addTool("pencil", std::move(myPencil)));
+    EXPECT_NO_THROW(interface.addTool('b', std::move(myPencil)));
 }
 
 TEST(toolTest, testInterfaceIo) {
@@ -54,9 +54,9 @@ TEST(toolTest, testInterfaceIo) {
 
     EmptyTool tool;
     
-    EXPECT_NO_THROW(interface.addTool("empty", std::make_unique<EmptyTool>(tool)));
-    EXPECT_NO_THROW(interface.getTool("empty"));
-    EXPECT_NO_THROW(interface.delTool("empty"));
-    EXPECT_THROW(interface.getTool("empty"), std::runtime_error);
-    EXPECT_NO_THROW(interface.addToolFromStore("basePencil"));
+    EXPECT_NO_THROW(interface.addTool('e', std::make_unique<EmptyTool>(tool)));
+    EXPECT_NO_THROW(interface.getTool('e'));
+    EXPECT_NO_THROW(interface.delTool('e'));
+    EXPECT_THROW(interface.getTool('e'), std::runtime_error);
+    EXPECT_NO_THROW(interface.addToolFromStore('b', "basePencil"));
 }
