@@ -9,7 +9,7 @@
 namespace nsk {
     FillSlct::FillSlct() : Tool() {}
 
-    void FillSlct::apply() {
+    void FillSlct::run() {
         Sketch& sketch = this->getSketch();
         Cursor& cursor = this->getCursor();
         Palette& colors = this->getPalette();

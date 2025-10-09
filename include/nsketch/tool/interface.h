@@ -14,7 +14,7 @@ namespace nsk {
     class EmptyTool : public Tool {
     public:
         EmptyTool() : Tool() {}
-        void apply() {}
+        void run() override {}
          std::unique_ptr<Tool> clone() const override;
     };
 

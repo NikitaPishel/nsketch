@@ -8,7 +8,7 @@
 namespace nsk {
     Pencil::Pencil() : Tool() {}
 
-    void Pencil::apply() {
+    void Pencil::run() {
         Sketch& sketch = this->getSketch();
         Cursor& cursor = this->getCursor();
         Palette& colors = this->getPalette();

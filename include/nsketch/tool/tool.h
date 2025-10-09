@@ -23,7 +23,7 @@ namespace nsk {
         virtual ~Tool() = default;
         
         // virtual methods
-        virtual void apply() = 0; 
+        virtual void run() = 0; 
         virtual std::unique_ptr<Tool> clone() const = 0; 
 
         void setInterface(Interface* iPtr);

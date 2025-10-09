@@ -81,6 +81,6 @@ namespace nsk {
     }
 
     void Interface::useTool(const std::string& name) {
-        this->getTool(name).apply();
+        this->getTool(name).run();
     }
 }

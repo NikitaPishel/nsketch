@@ -10,7 +10,7 @@ namespace nsk {
     public:
         explicit FillSlct();
 
-        void apply() override;
+        void run() override;
         std::unique_ptr<Tool> clone() const override;
     };
 }
