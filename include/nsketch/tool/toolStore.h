@@ -10,10 +10,18 @@ namespace nsk {
     private:
         // global map of tools
         std::unordered_map<std::string, std::unique_ptr<Tool>> tools;
-    
+
+        ToolStore();
+        ~ToolStore();
+        
     public:
         // Singleton instance method
         static ToolStore& getInstance();
+
+        ToolStore(const ToolStore&) = delete;
+        ToolStore& operator=(const ToolStore&) = delete;
+        ToolStore(ToolStore&&) = delete;
+        ToolStore& operator=(ToolStore&&) = delete;
 
         // Tools i/o
         std::unique_ptr<Tool> createTool(const std::string& name);

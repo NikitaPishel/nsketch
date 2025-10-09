@@ -4,6 +4,9 @@
 #include <stdexcept>
 
 namespace nsk {
+    ToolStore::ToolStore() {}
+    ToolStore::~ToolStore() {}
+
     // Singleton getter
     ToolStore& ToolStore::getInstance() {
         static ToolStore store;
