@@ -8,11 +8,12 @@ namespace nsk {
     private:
         // internal implementation
         class Impl;
-
         std::unique_ptr<Impl> pImpl;
 
         IoKey();
         ~IoKey();
+        
+        bool keyPressed();
         
     public:
         // delete copy/move operators
