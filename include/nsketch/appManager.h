@@ -13,7 +13,6 @@ namespace nsk {
         std::unique_ptr<Impl> pImpl;
 
         Interface interface;
-        UiTex uiTex;
         
         public:
         AppManager();
@@ -21,6 +20,7 @@ namespace nsk {
         
         std::vector<std::unique_ptr<Tab>> tabs;
         Interface& getInterface();
+        UiTex uiTex;
 
         void runApp();
     };

@@ -49,4 +49,8 @@ namespace nsk {
     void Sketch::fill(int xPos, int yPos, int xSize, int ySize, std::string color) {
         this->matrix.addBox(xPos, yPos, xSize, ySize, ' ', "white", color);
     }
+    
+    Texture Sketch::texturize() {
+        return this->matrix.build();
+    }
 }

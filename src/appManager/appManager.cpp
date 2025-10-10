@@ -27,30 +27,32 @@ namespace nsk {
 
     AppManager::AppManager () :
         pImpl(std::make_unique<Impl>()),
-        uiTex(this),
         tabs(1)
-    {
+    {   
+        uiTex.linkApp(this);
         this->interface.linkSketch(this->tabs[0]->sketch);
         this->interface.linkCursor(this->tabs[0]->cursor);
         this->interface.linkPalette(this->tabs[0]->colors);
     }
-
-
+    
     AppManager::~AppManager() = default;
+
+    Interface& AppManager::getInterface() {
+        return this->interface;
+    }
     
     void AppManager::runApp() {
         this->pImpl->binds.setBind('q', "appStop");
-        this->interface.linkUiTex(this->uiTex);
+        //this->interface.linkUiTex(this->uiTex);
         
         while (this->pImpl->status) {
             this->pImpl->checkStatus();
             this->interface.autoRunTool();
+
+            //this->uiTex.displayChanges();
             
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     }
 
-    Interface& AppManager::getInterface() {
-        return this->interface;
-    }
 }
