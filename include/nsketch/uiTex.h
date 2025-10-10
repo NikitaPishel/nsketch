@@ -20,7 +20,9 @@ namespace nsk {
         Texture::Builder tabTemplate;
 
     public:
-        void updateUi();
+        void updateSketch();
+        void updateCursor();
+        void updatePalette();
     };
 }
 
