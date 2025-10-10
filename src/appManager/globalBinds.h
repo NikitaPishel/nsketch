@@ -13,11 +13,13 @@ namespace nsk {
         GlobalBinds(const std::string& path = "./data/conf/keysGlobal.json");
         ~GlobalBinds();
 
-        std::string getBind(char bind);
+        const std::string* getBind(char bind);
         void setBind(char bind, std::string name);
         void delBind(char bind);
-
+        
         void loadBinds(const std::string& path);
+
+        const std::string* autoGetBind();
     };
 }
 

@@ -16,9 +16,10 @@ namespace nsk {
         Texture::Builder barLeft;
         Texture::Builder barTop;
         Texture::Builder barBottom;
+        Texture::Builder cursorPosLabel;
+        Texture::Builder tabTemplate;
 
     public:
-        
         void updateUi();
     };
 }
