@@ -1,5 +1,5 @@
 #ifndef APP_MANAGER_MAIN_H
-#define APP_MANAGER_H
+#define APP_MANAGER_MAIN_H
 
 #include <memory>
 
@@ -11,6 +11,7 @@ namespace nsk {
 
     public:
         AppManager();
+        ~AppManager();
 
         void runApp();
     };
