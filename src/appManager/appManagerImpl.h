@@ -7,7 +7,7 @@
 #include "nsketch/tool/toolStore.h"
 #include "nsketch/tool/interface.h"
 #include "nsketch/iokey.h"
-#include "uiTex.h"
+#include "nsketch/uiTex.h"
 #include "globalBinds.h"
 
 namespace nsk {
@@ -33,6 +33,7 @@ namespace nsk {
         UiTex uiTex;
         Interface interface;
         GlobalBinds binds;
+        Canvas canvas;
 
         void checkStatus();
     };

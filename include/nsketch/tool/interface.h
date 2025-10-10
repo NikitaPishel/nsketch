@@ -10,6 +10,9 @@
 #include "nsketch/tool/tool.h"
 
 namespace nsk {
+    // forward declare app
+    class UiTex;
+    
     // Empty tool child for creating empty tools in an interface
     class EmptyTool : public Tool {
     public:
@@ -29,6 +32,9 @@ namespace nsk {
         Cursor* cPtr;
         Palette* pPtr;
 
+        // pointer to app
+        UiTex* texPtr;
+
     public:
         // Constructor
         Interface();
@@ -37,6 +43,7 @@ namespace nsk {
         void linkSketch(Sketch& sketch);
         void linkCursor(Cursor& cursor);
         void linkPalette(Palette& palette);
+        void linkUiTex(UiTex& uiTex);
         
         // sketch and cursor getter methods
         Sketch& getSketch() const;

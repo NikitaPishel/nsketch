@@ -4,6 +4,7 @@
 #include "nsketch/tool/tool.h"
 #include "nsketch/tool/toolReg.h"
 #include "nsketch/sketch/palette.h"
+#include "nsketch/appManager.h"
 
 namespace nsk {
     Pencil::Pencil() : Tool() {}
@@ -12,12 +13,15 @@ namespace nsk {
         Sketch& sketch = this->getSketch();
         Cursor& cursor = this->getCursor();
         Palette& colors = this->getPalette();
-
+        UiTex& ui = this->getUiTex();
+        
         sketch.addPixel(
             cursor.getCursorX(),
             cursor.getCursorY(),
             colors.getPrimColor()
         );
+
+        ui.updateSketch();
     }
 
     std::unique_ptr<Tool> Pencil::clone() const {

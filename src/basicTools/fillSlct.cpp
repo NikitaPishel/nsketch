@@ -13,6 +13,7 @@ namespace nsk {
         Sketch& sketch = this->getSketch();
         Cursor& cursor = this->getCursor();
         Palette& colors = this->getPalette();
+        UiTex& ui = this->getUiTex();
 
         if (cursor.getSlctState()) {
             sketch.fill(
@@ -31,6 +32,8 @@ namespace nsk {
                 colors.getPrimColor()
             );
         }
+
+        ui.updateSketch();
     }
 
     std::unique_ptr<Tool> FillSlct::clone() const {

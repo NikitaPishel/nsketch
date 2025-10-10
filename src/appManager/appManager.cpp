@@ -7,7 +7,7 @@
 #include "nsketch/tool/toolStore.h"
 #include "nsketch/tool/interface.h"
 #include "nsketch/iokey.h"
-#include "uiTex.h"
+#include "nsketch/uiTex.h"
 #include "globalBinds.h"
 
 using namespace gph;
@@ -36,6 +36,7 @@ namespace nsk {
     
     void AppManager::runApp() {
         this->pImpl->binds.setBind('q', "appStop");
+        this->pImpl->interface.linkUiTex(this->pImpl->uiTex);
         
         while (this->pImpl->status) {
             this->pImpl->checkStatus();

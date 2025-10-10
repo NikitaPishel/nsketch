@@ -11,9 +11,7 @@ namespace nsk {
         return std::make_unique<EmptyTool>(*this);
     }
 
-    Interface::Interface() {
-
-    }
+    Interface::Interface() {}
 
     void Interface::linkSketch(Sketch& sketch) {
         this->sPtr = &sketch;
@@ -25,6 +23,10 @@ namespace nsk {
 
     void Interface::linkPalette(Palette& palette) {
         this->pPtr = &palette;
+    }
+
+    void Interface::linkUiTex(UiTex& uiTex) {
+        this->texPtr = &uiTex;
     }
     
     Cursor& Interface::getCursor() const {
@@ -52,12 +54,22 @@ namespace nsk {
     }
 
     void Interface::addTool(const char& bind, Tool* tool) {
+        if (!texPtr) {
+            throw std::runtime_error("UiTex not linked");
+        }
+        
         tool->setInterface(this);
+        tool->setUiTex(this->texPtr);
         this->tools[bind] = std::unique_ptr<Tool>(tool);
     }
-
+    
     void Interface::addTool(const char& bind, std::unique_ptr<Tool> tool) {
+        if (!texPtr) {
+            throw std::runtime_error("UiTex not linked");
+        }
+        
         tool->setInterface(this);
+        tool->setUiTex(this->texPtr);
         this->tools[bind] = std::move(tool);
     }
 
