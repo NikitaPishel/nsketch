@@ -68,7 +68,17 @@ namespace nsk {
             return *it->second;
         }
         
-        throw std::runtime_error("Tool not found: " + bind);
+        throw std::runtime_error("Tool not found: " + std::string(1, bind));
+    }
+
+    Tool* Interface::getToolPtr(const char& bind) {
+        auto it = this->tools.find(bind);
+
+        if (it == this->tools.end()) {
+            return nullptr;
+        }
+        
+        return it->second.get();
     }
 
     void Interface::delTool(const char& bind) {
@@ -82,12 +92,22 @@ namespace nsk {
     }
 
     void Interface::runTool(const char& bind) {
-        this->getTool(bind).run();
+        Tool* toolPtr = this->getToolPtr(bind);
+
+        if (!toolPtr) {
+            throw std::runtime_error("Unable to run non-existing tool: " + std::string(1, bind));
+        }
+
+        toolPtr->run();
     }
 
     void Interface::autoRunTool() {
         IoKey& ioKey = IoKey::getInstance();
 
-        this->runTool(ioKey.getChar());
+        Tool* toolPtr = this->getToolPtr(ioKey.getChar());
+
+        if (toolPtr) {
+            toolPtr->run();
+        }
     }
 }

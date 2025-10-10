@@ -45,6 +45,7 @@ namespace nsk {
 
         // map control interface
         Tool& getTool(const char& bind);
+        Tool* getToolPtr(const char& bind);
         void addTool(const char& bind, Tool* tool);
         void addTool(const char& bind, std::unique_ptr<Tool> tool);
         void delTool(const char& bind);
