@@ -19,9 +19,7 @@ namespace nsk {
 
     public:
         
-        void updateSize();
-        void updatePallette();
-        void updatePallette();
+        void updateUi();
     };
 }
 
