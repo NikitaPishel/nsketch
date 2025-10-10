@@ -2,6 +2,7 @@
 #define APP_MANAGER_IMPL_H
 
 #include <string>
+#include <vector>
 #include "nsketch/appManager.h"
 #include "nsketch/tool/toolStore.h"
 #include "nsketch/tool/interface.h"
@@ -28,6 +29,7 @@ namespace nsk {
 
         bool status;
 
+        std::vector<Tab> tabs;
         UiTex uiTex;
         Interface interface;
         GlobalBinds binds;
