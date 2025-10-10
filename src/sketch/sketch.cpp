@@ -51,6 +51,6 @@ namespace nsk {
     }
     
     Texture Sketch::texturize() {
-        return this->matrix.build();
+        return this->matrix.create();
     }
 }

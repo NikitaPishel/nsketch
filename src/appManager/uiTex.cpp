@@ -55,9 +55,9 @@ namespace nsk {
     void UiTex::updateSketch() {
         this->modified = true;
 
-        Interface& inteface = this->appPtr->getInterface();
+        Interface& interface = this->appPtr->getInterface();
         
-        canvas.addTexture(3, 2, inteface.getSketch().texturize());
+        canvas.addTexture(3, 2, interface.getSketch().texturize());
     };
     
     void UiTex::updateCursor() {
