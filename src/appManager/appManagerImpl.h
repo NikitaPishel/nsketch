@@ -29,11 +29,7 @@ namespace nsk {
 
         bool status;
 
-        std::vector<Tab> tabs;
-        UiTex uiTex;
-        Interface interface;
         GlobalBinds binds;
-        Canvas canvas;
 
         void checkStatus();
     };

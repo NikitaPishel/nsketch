@@ -2,16 +2,25 @@
 #define APP_MANAGER_MAIN_H
 
 #include <memory>
+#include "nsketch/tool/interface.h"
 
 namespace nsk {
+    class Tab;
+
     class AppManager {
     private:
         class Impl;
         std::unique_ptr<Impl> pImpl;
 
-    public:
+        Interface interface;
+        UiTex uiTex;
+        
+        public:
         AppManager();
         ~AppManager();
+        
+        std::vector<std::unique_ptr<Tab>> tabs;
+        Interface& getInterface();
 
         void runApp();
     };

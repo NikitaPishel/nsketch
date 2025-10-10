@@ -14,13 +14,7 @@ using namespace gph;
 
 namespace nsk {
     AppManager::Impl::Impl() :
-        status(true),
-        tabs(std::vector<Tab>(1))
-    {
-        interface.linkSketch(this->tabs[0].sketch);
-        interface.linkCursor(this->tabs[0].cursor);
-        interface.linkPalette(this->tabs[0].colors);
-    }
+        status(true) {}
     
     void AppManager::Impl::checkStatus() {
         const std::string* currentKey = this->binds.autoGetBind();
@@ -31,18 +25,32 @@ namespace nsk {
         }
     }
 
-    AppManager::AppManager () : pImpl(std::make_unique<Impl>()) {}
+    AppManager::AppManager () :
+        pImpl(std::make_unique<Impl>()),
+        uiTex(this),
+        tabs(1)
+    {
+        this->interface.linkSketch(this->tabs[0]->sketch);
+        this->interface.linkCursor(this->tabs[0]->cursor);
+        this->interface.linkPalette(this->tabs[0]->colors);
+    }
+
+
     AppManager::~AppManager() = default;
     
     void AppManager::runApp() {
         this->pImpl->binds.setBind('q', "appStop");
-        this->pImpl->interface.linkUiTex(this->pImpl->uiTex);
+        this->interface.linkUiTex(this->uiTex);
         
         while (this->pImpl->status) {
             this->pImpl->checkStatus();
-            this->pImpl->interface.autoRunTool();
+            this->interface.autoRunTool();
             
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
+    }
+
+    Interface& AppManager::getInterface() {
+        return this->interface;
     }
 }
