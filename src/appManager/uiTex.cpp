@@ -72,12 +72,14 @@ namespace nsk {
 
     void UiTex::displayChanges() {
         if (modified) {
-            //int tabsNum = this->appPtr->tabs.size();
-            //this->canvas.iterateTexture(0, 1, 1, canvas.getXSize(), this->barTop.build());
-            //this->canvas.iterateTexture(0, 0, tabsNum, 1, this->tabTemplate.build());
+            int tabsNum = this->appPtr->tabs.size();
+            this->canvas.iterateTexture(0, 1, 1, canvas.getXSize(), this->barTop.create());
+            this->canvas.iterateTexture(0, 0, tabsNum, 1, this->tabTemplate.create());
 
-            //int barLeftHeight = this->canvas.getYSize() - 3;
-            //this->canvas.iterateTexture(0, 2, 1, barLeftHeight, this->barLeft.build());
+            int barLeftHeight = this->canvas.getYSize() - 3;
+            this->canvas.iterateTexture(0, 2, 1, barLeftHeight, this->barLeft.create());
+
+            this->canvas.render();
         }
     }
 }

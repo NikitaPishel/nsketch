@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include <unordered_map>
 #include <stdexcept>
@@ -15,6 +16,7 @@ namespace nsk {
 
     void Interface::linkSketch(Sketch& sketch) {
         this->sPtr = &sketch;
+        std::cout << "Linked sketch at: " << this->sPtr << std::endl;
     }
 
     void Interface::linkCursor(Cursor& cursor) {
