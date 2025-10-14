@@ -1,3 +1,4 @@
+#include <sys/ioctl.h>
 #include <iostream>
 #include <memory>
 #include <thread>
@@ -48,6 +49,8 @@ namespace nsk {
         
         while (this->pImpl->status) {
             this->pImpl->checkStatus();
+
+            this->uiTex.autoScale();
             this->interface.autoRunTool();
 
             this->uiTex.displayChanges();

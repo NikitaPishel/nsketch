@@ -1,3 +1,4 @@
+#include <iostream>
 #include "nsketch/uiTex.h"
 #include "nsketch/appManager.h"
 
@@ -32,6 +33,9 @@ namespace nsk {
 
         if (resized) {
             updateCanvResize();
+
+            std::cout << "\033[J\033[H" << std::flush;
+            this->canvas.render();
         }
     }
     
@@ -40,16 +44,23 @@ namespace nsk {
 
         const int& width = this->canvas.getXSize();
         const int& height = this->canvas.getYSize();
-
+        
         int tabTempSize = width / 5;
-
+        
         if (tabTempSize < 7) {
             tabTempSize = 7;
         }
-
+        
         this->tabTemplate.setSize(tabTempSize, 1);
+        tabTemplate.fillTexture(' ');
         tabTemplate.setPixel(0, 0, '|');
         tabTemplate.setPixel(tabTempSize-1, 0, '|');
+
+        Texture black = Texture::Builder(1, 1).fillTexture(' ', "white", "black").build();
+
+        updateSketch();
+        updateCursor();
+        updatePalette();
     }
     
     void UiTex::updateSketch() {
@@ -73,7 +84,7 @@ namespace nsk {
     void UiTex::displayChanges() {
         if (modified) {
             int tabsNum = this->appPtr->tabs.size();
-            this->canvas.iterateTexture(0, 1, 1, canvas.getXSize(), this->barTop.create());
+            this->canvas.iterateTexture(0, 0, canvas.getXSize(), 1, this->barTop.create());
             this->canvas.iterateTexture(0, 0, tabsNum, 1, this->tabTemplate.create());
 
             int barLeftHeight = this->canvas.getYSize() - 3;
