@@ -68,6 +68,14 @@ int main() {
     Texture menuLeftInner = Texture::Builder(1, 1)
         .setPixel(0, 0, ' ', "black", "white")
         .build();
+
+    Texture cursorLeft = Texture::Builder(2, 1)
+        .setPixel(0, 0, '>', "black", "bYellow")
+        .build();
+
+    Texture cursorRight = Texture::Builder(2, 1)
+        .setPixel(0, 0, '<', "black", "bYellow")
+        .build();
     
     uiTexPack.setTexture("workspace.background", workspBack);
     uiTexPack.setTexture("menuTop.inner", menuTopInner);
@@ -79,6 +87,8 @@ int main() {
     uiTexPack.setTexture("menuDown.label", menuDownLabel);
     uiTexPack.setTexture("menuLeft.border", menuLeftBorder);
     uiTexPack.setTexture("menuLeft.inner", menuLeftInner);
+    uiTexPack.setTexture("cursor.left", cursorLeft);
+    uiTexPack.setTexture("cursor.right", cursorRight);
 
     uiTexPack.saveTable(path);
     
