@@ -14,6 +14,8 @@ namespace nsk {
         this->appPtr = appPtr;
 
         this->canvas.updateSize();
+        this->updateCanvResize();
+        
         this->updateSketch();
         this->updatePalette();
         this->updateCursor();
@@ -24,14 +26,10 @@ namespace nsk {
 
         if (resized) {
             updateCanvResize();
-
-            std::cout << "\033[J\033[H" << std::flush;
-            this->canvas.render();
         }
     }
     
     void UiCanv::updateCanvResize() {
-
         const int& width = this->canvas.getXSize();
         const int& height = this->canvas.getYSize();
         
@@ -50,10 +48,7 @@ namespace nsk {
     }
     
     void UiCanv::updateSketch() {
-
         Interface& interface = this->appPtr->getInterface();
-        
-        canvas.addTexture(3, 2, interface.getSketch().texturize());
     };
     
     void UiCanv::updateCursor() {
@@ -65,25 +60,44 @@ namespace nsk {
     };
 
     void UiCanv::displayChanges() {
+        bool modified = false;
         Interface& interface = this->appPtr->getInterface();
-        
+
+        if (uiTexPtr->modSketch) {
+            this->canvas.iterateTexture(3, 2, canvas.getXSize()-3, canvas.getYSize()-4, uiTexPtr->workspBackground);
+            canvas.addTexture(3, 2, interface.getSketch().texturize());
+        }
+
         if (uiTexPtr->modMenuTop) {
+            modified = true;
+
             int tabsNum = this->appPtr->tabs.size();
             this->canvas.iterateTexture(0, 0, canvas.getXSize(), 1, uiTexPtr->menuTopInner);
-            this->canvas.iterateTexture(0, 0, canvas.getXSize(), 1, uiTexPtr->menuTopBorder);
+            this->canvas.iterateTexture(0, 1, canvas.getXSize(), 1, uiTexPtr->menuTopBorder);
             
             this->canvas.iterateTexture(0, 0, tabsNum, 1, uiTexPtr->menuTopTab.create());
         }
 
         if (uiTexPtr->modMenuLeft) {
-            this->canvas.iterateTexture(0, 0, 1, canvas.getYSize()-4, uiTexPtr->menuLeftInner);
-            this->canvas.iterateTexture(0, 0, 1, canvas.getYSize()-4, uiTexPtr->menuLeftBorder);
+            modified = true;
+            
+            this->canvas.iterateTexture(0, 2, 2, canvas.getYSize()-4, uiTexPtr->menuLeftInner);
+            this->canvas.iterateTexture(2, 2, 1, canvas.getYSize()-4, uiTexPtr->menuLeftBorder);
         }
 
         if (uiTexPtr->modMenuBot) {
+            modified = true;
+            
             this->canvas.iterateTexture(0, canvas.getYSize()-2, canvas.getXSize(), 1, this->uiTexPtr->menuDownBorder);
             this->canvas.iterateTexture(0, canvas.getYSize()-1, canvas.getXSize(), 1, this->uiTexPtr->menuDownInner);
+
+            int labelPos = canvas.getXSize() - uiTexPtr->menuDownLabel.getXSize();
+            
+            this->canvas.iterateTexture(labelPos-3, canvas.getYSize()-1, 1, 1, this->uiTexPtr->menuDownLabel);
         }
 
+        if (modified) {
+            this->canvas.render();
+        }
     }
 }

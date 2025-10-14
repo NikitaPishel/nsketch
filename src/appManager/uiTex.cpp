@@ -5,7 +5,7 @@ namespace nsk {
         modSketch(true),
         modMenuTop(true),
         modMenuLeft(true),
-        modMenuBot(true) 
+        modMenuBot(true)
     {
         this->texPack.loadTable(path);
 
@@ -17,7 +17,13 @@ namespace nsk {
         this->menuDownInner = this->texPack.getTextureRef("menuDown.inner");
         this->menuDownBorder = this->texPack.getTextureRef("menuDown.Border");
         this->menuDownLabel = this->texPack.getTextureRef("menuDown.label");
-        this->menuLeftInner = this->texPack.getTextureRef("menuLeft.border");
-        this->menuLeftBorder = this->texPack.getTextureRef("menuLeft.inner");
+        this->menuLeftInner = this->texPack.getTextureRef("menuLeft.inner");
+        this->menuLeftBorder = this->texPack.getTextureRef("menuLeft.border");
+
+        this->menuTopTab
+            .setSize(7, 1)
+            .fillWithTexture(this->menuTopTabInner)
+            .addTexture(0, 0, this->menuTopTabBorder)
+            .addTexture(6, 0, this->menuTopTabBorder);
     }
 }

@@ -9,4 +9,6 @@ int main() {
     AppManager app;
 
     app.runApp();
+
+    system("clear");
 }
