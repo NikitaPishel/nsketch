@@ -35,7 +35,7 @@ int main() {
     
     // top menu border
     Texture menuTopTabBorder = Texture::Builder(1, 1)
-        .setPixel(0, 0, '-', "black", "white")
+        .setPixel(0, 0, '|', "black", "white")
         .build();
     
     // single pixel down menu
