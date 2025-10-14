@@ -19,6 +19,9 @@ namespace nsk {
         this->menuDownLabel = this->texPack.getTextureRef("menuDown.label");
         this->menuLeftInner = this->texPack.getTextureRef("menuLeft.inner");
         this->menuLeftBorder = this->texPack.getTextureRef("menuLeft.border");
+        
+        this->cursorLeft = this->texPack.getTextureRef("cursor.left");
+        this->cursorRight = this->texPack.getTextureRef("cursor.right");
 
         this->menuTopTab
             .setSize(7, 1)

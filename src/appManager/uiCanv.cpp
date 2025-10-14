@@ -1,6 +1,7 @@
 #include <iostream>
 #include "nsketch/uiCanv.h"
 #include "nsketch/appManager.h"
+#include "nsketch/sketch/cursor.h"
 #include "uiTex.h"
 
 namespace nsk {
@@ -62,10 +63,25 @@ namespace nsk {
     void UiCanv::displayChanges() {
         bool modified = false;
         Interface& interface = this->appPtr->getInterface();
+        Cursor& cursor = interface.getCursor();
 
         if (uiTexPtr->modSketch) {
+            int canvXShift = 3;
+            int canvYShift = 2;
+            
             this->canvas.iterateTexture(3, 2, canvas.getXSize()-3, canvas.getYSize()-4, uiTexPtr->workspBackground);
-            canvas.addTexture(3, 2, interface.getSketch().texturize());
+            canvas.addTexture(canvXShift, canvYShift, interface.getSketch().texturize());
+
+            int cursorLeftXPos = cursor.getCursorX()*2 - 1 + canvXShift;
+            int cursorRightXPos = cursor.getCursorX()*2 + 2 + canvXShift;
+
+            if (cursorLeftXPos >= 0) {
+                this->canvas.addTexture(cursorLeftXPos, cursor.getCursorY() + canvYShift, uiTexPtr->cursorLeft);
+            }
+
+            if (cursorRightXPos < interface.getSketch().getXSize()) {
+                this->canvas.addTexture(cursorRightXPos, cursor.getCursorY() + canvYShift, uiTexPtr->cursorRight);
+            }
         }
 
         if (uiTexPtr->modMenuTop) {

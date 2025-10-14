@@ -25,6 +25,9 @@ namespace nsk {
         Texture menuLeftInner;
         Texture menuLeftBorder;
 
+        Texture cursorLeft;
+        Texture cursorRight;
+
         Texture::Builder menuTopTab;
 
         bool modSketch;
