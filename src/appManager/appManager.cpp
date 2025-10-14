@@ -7,6 +7,7 @@
 #include "appManagerImpl.h"
 #include "nsketch/tool/toolStore.h"
 #include "nsketch/tool/interface.h"
+#include "nsketch/bTools.h"
 #include "nsketch/iokey.h"
 #include "nsketch/uiCanv.h"
 #include "globalBinds.h"
@@ -46,6 +47,15 @@ namespace nsk {
         this->pImpl->binds.setBind('q', "appStop");
         this->interface.linkUiCanv(this->uiCanv);
         uiCanv.linkApp(this);
+
+        // ====== DELETE THIS PART WHEN BIND FILE IS READY ======
+
+        this->interface.addToolFromStore('j', "baseMvCursorUp");
+        this->interface.addToolFromStore('k', "baseMvCursorDown");
+        this->interface.addToolFromStore('h', "baseMvCursorLeft");
+        this->interface.addToolFromStore('l', "baseMvCursorRight");
+
+        // ============
         
         while (this->pImpl->status) {
             this->pImpl->checkStatus();
