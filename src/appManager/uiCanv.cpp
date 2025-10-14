@@ -1,9 +1,9 @@
 #include <iostream>
-#include "nsketch/uiTex.h"
+#include "nsketch/uiCanv.h"
 #include "nsketch/appManager.h"
 
 namespace nsk {
-    UiTex::UiTex() :
+    UiCanv::UiCanv() :
         modified(true),
         appPtr(nullptr)
     {
@@ -19,7 +19,7 @@ namespace nsk {
             .setPixel(0, 1, '-');
     }
 
-    void UiTex::linkApp(AppManager* appPtr) {
+    void UiCanv::linkApp(AppManager* appPtr) {
         this->appPtr = appPtr;
 
         this->canvas.updateSize();
@@ -28,7 +28,7 @@ namespace nsk {
         this->updateCursor();
     }
     
-    void UiTex::autoScale() {
+    void UiCanv::autoScale() {
         bool resized = this->canvas.updateSize();
 
         if (resized) {
@@ -39,7 +39,7 @@ namespace nsk {
         }
     }
     
-    void UiTex::updateCanvResize() {
+    void UiCanv::updateCanvResize() {
         this->modified = true;
 
         const int& width = this->canvas.getXSize();
@@ -63,7 +63,7 @@ namespace nsk {
         updatePalette();
     }
     
-    void UiTex::updateSketch() {
+    void UiCanv::updateSketch() {
         this->modified = true;
 
         Interface& interface = this->appPtr->getInterface();
@@ -71,17 +71,17 @@ namespace nsk {
         canvas.addTexture(3, 2, interface.getSketch().texturize());
     };
     
-    void UiTex::updateCursor() {
+    void UiCanv::updateCursor() {
         this->modified = true;
         
     };
     
-    void UiTex::updatePalette() {
+    void UiCanv::updatePalette() {
         this->modified = true;
         
     };
 
-    void UiTex::displayChanges() {
+    void UiCanv::displayChanges() {
         if (modified) {
             int tabsNum = this->appPtr->tabs.size();
             this->canvas.iterateTexture(0, 0, canvas.getXSize(), 1, this->barTop.create());

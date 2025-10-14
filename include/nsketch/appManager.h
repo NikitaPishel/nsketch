@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "nsketch/tool/interface.h"
+#include "uiCanv.h"
 
 namespace nsk {
     class Tab;
@@ -20,7 +21,7 @@ namespace nsk {
         
         std::vector<std::unique_ptr<Tab>> tabs;
         Interface& getInterface();
-        UiTex uiTex;
+        UiCanv uiCanv;
 
         void runApp();
     };

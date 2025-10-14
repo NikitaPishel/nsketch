@@ -5,7 +5,7 @@
 #include "nsketch/sketch/cursor.h"
 
 namespace nsk {
-    Tool::Tool() : iPtr(nullptr), texPtr(nullptr) {}
+    Tool::Tool() : iPtr(nullptr), uiPtr(nullptr) {}
     
     Sketch& Tool::getSketch() {
         if (this->iPtr == nullptr) {
@@ -31,19 +31,19 @@ namespace nsk {
         return this->iPtr->getPalette();
     }
 
-    UiTex& Tool::getUiTex() {
-        if (this->texPtr == nullptr) {
-            throw std::runtime_error("UI texture pointer is null. Did you forget to set it?");
+    UiCanv& Tool::getUiCanv() {
+        if (this->uiPtr == nullptr) {
+            throw std::runtime_error("UI canvas pointer is null. Did you forget to set it?");
         }
 
-        return *this->texPtr;
+        return *this->uiPtr;
     }
 
     void Tool::setInterface(Interface* iPtr) {
         this->iPtr = iPtr;
     }
 
-    void Tool::setUiTex(UiTex* texPtr) {
-        this->texPtr = texPtr;
+    void Tool::setUiCanv(UiCanv* uiPtr) {
+        this->uiPtr = uiPtr;
     }
 }

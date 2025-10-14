@@ -9,7 +9,7 @@ using namespace gph;
 namespace nsk {
     class AppManager;
     
-    class UiTex {
+    class UiCanv {
     private:
         AppManager* appPtr;
         Canvas canvas;
@@ -28,7 +28,7 @@ namespace nsk {
         void updateCanvResize();
 
     public:
-        UiTex();
+        UiCanv();
         void linkApp(AppManager* appPtr);
     
         void autoScale();

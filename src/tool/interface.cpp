@@ -27,8 +27,8 @@ namespace nsk {
         this->pPtr = &palette;
     }
 
-    void Interface::linkUiTex(UiTex& uiTex) {
-        this->texPtr = &uiTex;
+    void Interface::linkUiCanv(UiCanv& uiCanv) {
+        this->uiPtr = &uiCanv;
     }
     
     Cursor& Interface::getCursor() const {
@@ -56,22 +56,22 @@ namespace nsk {
     }
 
     void Interface::addTool(const char& bind, Tool* tool) {
-        if (!texPtr) {
-            throw std::runtime_error("UiTex not linked");
+        if (!uiPtr) {
+            throw std::runtime_error("UI canvas not linked");
         }
         
         tool->setInterface(this);
-        tool->setUiTex(this->texPtr);
+        tool->setUiCanv(this->uiPtr);
         this->tools[bind] = std::unique_ptr<Tool>(tool);
     }
     
     void Interface::addTool(const char& bind, std::unique_ptr<Tool> tool) {
-        if (!texPtr) {
-            throw std::runtime_error("UiTex not linked");
+        if (!uiPtr) {
+            throw std::runtime_error("UI canvas not linked");
         }
         
         tool->setInterface(this);
-        tool->setUiTex(this->texPtr);
+        tool->setUiCanv(this->uiPtr);
         this->tools[bind] = std::move(tool);
     }
 

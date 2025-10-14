@@ -8,7 +8,7 @@
 #include "nsketch/tool/toolStore.h"
 #include "nsketch/tool/interface.h"
 #include "nsketch/iokey.h"
-#include "nsketch/uiTex.h"
+#include "nsketch/uiCanv.h"
 #include "globalBinds.h"
 
 using namespace gph;
@@ -44,16 +44,16 @@ namespace nsk {
     
     void AppManager::runApp() {
         this->pImpl->binds.setBind('q', "appStop");
-        this->interface.linkUiTex(this->uiTex);
-        uiTex.linkApp(this);
+        this->interface.linkUiCanv(this->uiCanv);
+        uiCanv.linkApp(this);
         
         while (this->pImpl->status) {
             this->pImpl->checkStatus();
 
-            this->uiTex.autoScale();
+            this->uiCanv.autoScale();
             this->interface.autoRunTool();
 
-            this->uiTex.displayChanges();
+            this->uiCanv.displayChanges();
             
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }

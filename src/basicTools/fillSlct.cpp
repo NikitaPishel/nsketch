@@ -13,7 +13,7 @@ namespace nsk {
         Sketch& sketch = this->getSketch();
         Cursor& cursor = this->getCursor();
         Palette& colors = this->getPalette();
-        UiTex& ui = this->getUiTex();
+        UiCanv& ui = this->getUiCanv();
 
         if (cursor.getSlctState()) {
             sketch.fill(

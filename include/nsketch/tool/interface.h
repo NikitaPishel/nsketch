@@ -33,7 +33,7 @@ namespace nsk {
         Palette* pPtr;
 
         // pointer to app
-        UiTex* texPtr;
+        UiCanv* uiPtr;
 
     public:
         // Constructor
@@ -43,7 +43,7 @@ namespace nsk {
         void linkSketch(Sketch& sketch);
         void linkCursor(Cursor& cursor);
         void linkPalette(Palette& palette);
-        void linkUiTex(UiTex& uiTex);
+        void linkUiCanv(UiCanv& uiCanv);
         
         // sketch and cursor getter methods
         Sketch& getSketch() const;

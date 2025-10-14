@@ -5,7 +5,7 @@
 #include "nsketch/sketch/sketch.h"
 #include "nsketch/sketch/cursor.h"
 #include "nsketch/sketch/palette.h"
-#include "nsketch/uiTex.h"
+#include "nsketch/uiCanv.h"
 
 namespace nsk {
     class Interface;
@@ -13,13 +13,13 @@ namespace nsk {
     class Tool {
     private:
         Interface* iPtr;
-        UiTex* texPtr;
+        UiCanv* uiPtr;
 
     protected:
         Sketch& getSketch();
         Cursor& getCursor();
         Palette& getPalette();
-        UiTex& getUiTex();
+        UiCanv& getUiCanv();
         
     public:
         explicit Tool();
@@ -30,7 +30,7 @@ namespace nsk {
         virtual std::unique_ptr<Tool> clone() const = 0; 
 
         void setInterface(Interface* iPtr);
-        void setUiTex(UiTex* texPtr);
+        void setUiCanv(UiCanv* uiPtr);
     };
 }
 
