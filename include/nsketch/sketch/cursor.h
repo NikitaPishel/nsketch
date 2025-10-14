@@ -22,6 +22,7 @@ namespace nsk {
 
         // Cursor methods
         void moveCursor(int xPos, int yPos);
+        void shiftCursor(int xShift, int yShift);
 
         const uint16_t getCursorX() const;
         const uint16_t getCursorY() const;

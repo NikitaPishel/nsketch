@@ -41,7 +41,21 @@ namespace nsk {
                 this->ySlctSize += yShift;
             }
         }
+    }
 
+    void Cursor::shiftCursor(int xShift, int yShift) {
+        int newXPos = this->xPos + xShift;
+        int newYPos = this->yPos + yShift;
+
+        if (newXPos < 0) {
+            newXPos = 0;
+        }
+
+        if (newYPos < 0) {
+            newYPos = 0;
+        }
+
+        this->moveCursor(newXPos, newYPos);
     }
 
     const uint16_t Cursor::getCursorX() const {
