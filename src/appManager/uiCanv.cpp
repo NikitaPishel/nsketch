@@ -1,24 +1,15 @@
 #include <iostream>
 #include "nsketch/uiCanv.h"
 #include "nsketch/appManager.h"
+#include "uiTex.h"
 
 namespace nsk {
     UiCanv::UiCanv() :
-        modified(true),
-        appPtr(nullptr)
-    {
-        // delete this part when switching to tex table
-        this->barLeft
-            .setSize(3, 1)
-            .fillTexture(' ')
-            .setPixel(2, 0, '|');
+        uiTexPtr(std::make_unique<UiTex>("./data/textures/tex-base-dark.gph")),
+        appPtr(nullptr) {}
 
-        this->barTop
-            .setSize(1, 2)
-            .setPixel(0, 0, ' ')
-            .setPixel(0, 1, '-');
-    }
-
+    UiCanv::~UiCanv() {}
+    
     void UiCanv::linkApp(AppManager* appPtr) {
         this->appPtr = appPtr;
 
@@ -40,31 +31,25 @@ namespace nsk {
     }
     
     void UiCanv::updateCanvResize() {
-        this->modified = true;
 
         const int& width = this->canvas.getXSize();
         const int& height = this->canvas.getYSize();
         
-        int tabTempSize = width / 5;
+        int newTabSize = width / 5;
         
-        if (tabTempSize < 7) {
-            tabTempSize = 7;
+        if (newTabSize < 7) {
+            newTabSize = 7;
         }
         
-        this->tabTemplate.setSize(tabTempSize, 1);
-        tabTemplate.fillTexture(' ');
-        tabTemplate.setPixel(0, 0, '|');
-        tabTemplate.setPixel(tabTempSize-1, 0, '|');
-
-        Texture black = Texture::Builder(1, 1).fillTexture(' ', "white", "black").build();
-
-        updateSketch();
-        updateCursor();
-        updatePalette();
+        if (newTabSize != uiTexPtr->menuTopTab.getXSize())
+        uiTexPtr->menuTopTab
+            .setSize(newTabSize, 1)
+            .fillWithTexture(uiTexPtr->menuTopTabInner)
+            .addTexture(0, 0, uiTexPtr->menuTopTabBorder)
+            .addTexture(newTabSize-1, 0, uiTexPtr->menuTopTabBorder);
     }
     
     void UiCanv::updateSketch() {
-        this->modified = true;
 
         Interface& interface = this->appPtr->getInterface();
         
@@ -72,25 +57,33 @@ namespace nsk {
     };
     
     void UiCanv::updateCursor() {
-        this->modified = true;
         
     };
     
     void UiCanv::updatePalette() {
-        this->modified = true;
         
     };
 
     void UiCanv::displayChanges() {
-        if (modified) {
+        Interface& interface = this->appPtr->getInterface();
+        
+        if (uiTexPtr->modMenuTop) {
             int tabsNum = this->appPtr->tabs.size();
-            this->canvas.iterateTexture(0, 0, canvas.getXSize(), 1, this->barTop.create());
-            this->canvas.iterateTexture(0, 0, tabsNum, 1, this->tabTemplate.create());
-
-            int barLeftHeight = this->canvas.getYSize() - 3;
-            this->canvas.iterateTexture(0, 2, 1, barLeftHeight, this->barLeft.create());
-
-            this->canvas.render();
+            this->canvas.iterateTexture(0, 0, canvas.getXSize(), 1, uiTexPtr->menuTopInner);
+            this->canvas.iterateTexture(0, 0, canvas.getXSize(), 1, uiTexPtr->menuTopBorder);
+            
+            this->canvas.iterateTexture(0, 0, tabsNum, 1, uiTexPtr->menuTopTab.create());
         }
+
+        if (uiTexPtr->modMenuLeft) {
+            this->canvas.iterateTexture(0, 0, 1, canvas.getYSize()-4, uiTexPtr->menuLeftInner);
+            this->canvas.iterateTexture(0, 0, 1, canvas.getYSize()-4, uiTexPtr->menuLeftBorder);
+        }
+
+        if (uiTexPtr->modMenuBot) {
+            this->canvas.iterateTexture(0, canvas.getYSize()-2, canvas.getXSize(), 1, this->uiTexPtr->menuDownBorder);
+            this->canvas.iterateTexture(0, canvas.getYSize()-1, canvas.getXSize(), 1, this->uiTexPtr->menuDownInner);
+        }
+
     }
 }

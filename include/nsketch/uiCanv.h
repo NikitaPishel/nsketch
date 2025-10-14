@@ -1,27 +1,22 @@
 #ifndef UI_TEXTURIZER_H
 #define UI_TEXTURIZER_H
 
+#include <memory>
 #include <ngph/canvas.h>
 #include <ngph/texture.h>
 
 using namespace gph;
 
 namespace nsk {
+    class UiTex;
     class AppManager;
     
     class UiCanv {
     private:
         AppManager* appPtr;
         Canvas canvas;
-        bool modified;
 
-        // later replace with a tex table
-        Texture::Builder barLeft;
-        Texture::Builder barTop;
-        Texture::Builder barBottom;
-        Texture::Builder barBottomText;
-        Texture::Builder cursorPosLabel;
-        Texture::Builder tabTemplate;
+        std::unique_ptr<UiTex> uiTexPtr;
 
         void drawBarLeft();
         void drawBarTop();
@@ -29,6 +24,7 @@ namespace nsk {
 
     public:
         UiCanv();
+        ~UiCanv();
         void linkApp(AppManager* appPtr);
     
         void autoScale();

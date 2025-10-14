@@ -3,7 +3,7 @@
 
 #include <memory>
 #include "nsketch/tool/interface.h"
-#include "uiCanv.h"
+#include "nsketch/uiCanv.h"
 
 namespace nsk {
     class Tab;
