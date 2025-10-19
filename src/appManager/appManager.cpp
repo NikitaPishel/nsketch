@@ -57,6 +57,8 @@ namespace nsk {
         this->interface.addToolFromStore('h', "baseMvCursorLeft");
         this->interface.addToolFromStore('l', "baseMvCursorRight");
         this->interface.addToolFromStore(' ', "basePencil");
+        this->interface.addToolFromStore('e', "baseFillSlct");
+        this->interface.addToolFromStore('e', "baseEarase");
 
         // ============
         

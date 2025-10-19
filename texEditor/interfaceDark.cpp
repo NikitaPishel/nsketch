@@ -70,11 +70,11 @@ int main() {
         .setPixel(0, 0, ' ', "white", "black")
         .build();
 
-    Texture cursorLeft = Texture::Builder(2, 1)
+    Texture cursorLeft = Texture::Builder(1, 1)
         .setPixel(0, 0, '>', "black", "bYellow")
         .build();
 
-    Texture cursorRight = Texture::Builder(2, 1)
+    Texture cursorRight = Texture::Builder(1, 1)
         .setPixel(0, 0, '<', "black", "bYellow")
         .build();
     
