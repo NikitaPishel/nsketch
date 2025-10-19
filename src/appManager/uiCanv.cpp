@@ -89,12 +89,16 @@ namespace nsk {
             int cursorLeftXPos = cursor.getCursorX()*2 - 1 + canvXShift;
             int cursorRightXPos = cursor.getCursorX()*2 + 2 + canvXShift;
 
-            if (cursorLeftXPos >= 0) {
-                this->canvas.addTexture(cursorLeftXPos, cursor.getCursorY() + canvYShift, uiTexPtr->cursorLeft);
-            }
+            int cursorYPos = cursor.getCursorY() + canvYShift;
 
-            if (cursorRightXPos < interface.getSketch().getXSize()) {
-                this->canvas.addTexture(cursorRightXPos, cursor.getCursorY() + canvYShift, uiTexPtr->cursorRight);
+            if (cursorYPos < this->canvas.getYSize()) {
+                if (cursorLeftXPos >= 0 && cursorLeftXPos < this->canvas.getXSize()) {
+                    this->canvas.addTexture(cursorLeftXPos, cursorYPos, uiTexPtr->cursorLeft);
+                }
+
+                if (cursor.getCursorX() < interface.getSketch().getXSize() && cursorRightXPos < this->canvas.getXSize()) {
+                    this->canvas.addTexture(cursorRightXPos, cursorYPos, uiTexPtr->cursorRight);
+                }
             }
         }
 
