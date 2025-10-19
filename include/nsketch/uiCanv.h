@@ -14,15 +14,15 @@ namespace nsk {
     class UiCanv {
     private:
         AppManager* appPtr;
-        Canvas canvas;
-
+        
         std::unique_ptr<UiTex> uiTexPtr;
 
         void drawBarLeft();
         void drawBarTop();
         void updateCanvResize();
-
+        
     public:
+        Canvas canvas;
         UiCanv();
         ~UiCanv();
         void linkApp(AppManager* appPtr);
