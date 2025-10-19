@@ -44,6 +44,8 @@ namespace nsk {
     }
     
     void AppManager::runApp() {
+        IoKey& iokey = IoKey::getInstance();
+
         this->pImpl->binds.setBind('q', "appStop");
         this->interface.linkUiCanv(this->uiCanv);
         uiCanv.linkApp(this);
@@ -65,6 +67,7 @@ namespace nsk {
 
             this->uiCanv.displayChanges();
             
+            iokey.resetCapture();
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     }

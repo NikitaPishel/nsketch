@@ -10,6 +10,12 @@ namespace nsk {
         class Impl;
         std::unique_ptr<Impl> pImpl;
 
+        // flag that checks if character has been captured
+        bool captured;
+
+        // stores character
+        int buffer;
+
         IoKey();
         ~IoKey();
         
@@ -26,6 +32,8 @@ namespace nsk {
 
         int getCharInt();
         char getChar();
+
+        void resetCapture();
 
     };
 }

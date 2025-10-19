@@ -48,14 +48,27 @@ namespace nsk {
     }
 
     int IoKey::getCharInt() {
-        if (keyPressed()) {
-            return std::getchar();
+        if (!this->captured) {
+            if (keyPressed()) {
+                this->buffer = std::getchar();
+            }
+
+            else {
+                this->buffer = 0;
+            }
+
+            this->captured = true;
         }
 
-        return '\0';
+        return this->buffer;
+
     }
 
     char IoKey::getChar() {
     return static_cast<char>(getCharInt());
+    }
+
+    void IoKey::resetCapture() {
+        this->captured = false;
     }
 }
