@@ -16,7 +16,7 @@ int main() {
 
     // workspace background
     Texture workspBack = Texture::Builder(1, 1)
-        .setPixel(0, 0, ' ', "white", "black")
+        .setPixel(0, 0, '.', "white", "black")
         .build();
 
     // single pixel top menu
