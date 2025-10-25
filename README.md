@@ -4,9 +4,9 @@
 
 > [Installation](#installation)
 
-> [Manual](#user-manual)
+> [User Manual](#user-manual)
 
-> [Contribution](#contribution-)
+> [Contribution](#contribution)
 
 > [License](/LICENSE.md)
 
@@ -16,9 +16,14 @@
 Nsketch (Nano-Sketch) is a minimalistic linux CLI sketching app. No bloated interface or unrequired tools - just draw what you want!
 
 ### Features
-- Minimalistsic
+- Minimalistic
 - Blazing Fast
-- Easy to install
+- Easy to Install
+
+### Upcoming
+- Modding Without Recompilation
+- Saving Files
+- Multiple Color Support
 
 ![Screenshot 1](./readmeFiles/screenshot-1.png?width=360)
 
@@ -63,7 +68,7 @@ Nsketch (Nano-Sketch) is a minimalistic linux CLI sketching app. No bloated inte
     cd nsketch
     ```
 
-3.  **Run the Installer and Launch:**
+3.  **Run the Installation Script:**
     ```bash
     chmod +x ./install.sh
     ./install.sh
@@ -86,17 +91,17 @@ nsketch
 ### **2. Controls**
 Application uses vim-like controls
 
-- **q** - exit
+- **q** - Exit
 
-- **w** - draw
-- **e** - erase
+- **w** - Draw
+- **e** - Erase
 
-- **h** - left
-- **j** - down
-- **k** - up
-- **l** - right
+- **h** - Left
+- **j** - Down
+- **k** - Up
+- **l** - Right
 
 ---
 
 ## **Contribution**
-**This is a showcase project!** Do not expect any contribution being accepted or done to this project consistently. Even though, you are free to create mods of this app or use any parts of its code for your own needs.
+**This is a showcase project.** Any contribution won't be accepted or done to this project consistently. Even though, I suggest you create forks of this app or use any parts of its code for your own needs.
