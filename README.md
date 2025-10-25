@@ -67,7 +67,10 @@ Nsketch (Nano-Sketch) is a minimalistic linux CLI sketching app. No bloated inte
     ```bash
     chmod +x ./install.sh
     ./install.sh
-    # The application is now installed and can be launched with:
+    ```
+
+4. **Done! Now you can launch it like this:**
+    ```bash
     nsketch
     ```
 
