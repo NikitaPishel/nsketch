@@ -36,7 +36,7 @@ Nsketch (Nano-Sketch) is a minimalistic linux CLI sketching app. No bloated inte
 
 2.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/NikitaPishel/nsketch](https://github.com/NikitaPishel/nsketch)
+    git clone https://github.com/NikitaPishel/nsketch
     cd nsketch
     ```
 
@@ -59,7 +59,7 @@ Nsketch (Nano-Sketch) is a minimalistic linux CLI sketching app. No bloated inte
 
 2.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/NikitaPishel/nsketch](https://github.com/NikitaPishel/nsketch)
+    git clone https://github.com/NikitaPishel/nsketch
     cd nsketch
     ```
 
@@ -83,15 +83,15 @@ nsketch
 ### **2. Controls**
 Application uses vim-like controls
 
-- q - exit
+- **q** - exit
 
-- w - draw
-- e - erase
+- **w** - draw
+- **e** - erase
 
-- h - left
-- j - down
-- k - up
-- l - right
+- **h** - left
+- **j** - down
+- **k** - up
+- **l** - right
 
 ---
 
