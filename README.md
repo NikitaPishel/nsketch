@@ -20,7 +20,7 @@ Nsketch (Nano-Sketch) is a minimalistic linux CLI sketching app. No bloated inte
 - Blazing Fast
 - easy to install
 
-[Screenshot 1](./readmeFiles/)
+![Screenshot 1](./readmeFiles/screenshot-1.png)
 
 ---
 
