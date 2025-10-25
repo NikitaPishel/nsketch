@@ -26,6 +26,8 @@ namespace nsk {
         UiCanv();
         ~UiCanv();
         void linkApp(AppManager* appPtr);
+
+        static std::string buildTexturePath(const std::string& path);
     
         void autoScale();
         void updateSketch();

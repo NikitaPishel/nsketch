@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include "nsketch/uiCanv.h"
 #include "nsketch/appManager.h"
 #include "nsketch/sketch/cursor.h"
@@ -6,8 +7,9 @@
 #include "nsketch/iokey.h"
 
 namespace nsk {
+    
     UiCanv::UiCanv() :
-        uiTexPtr(std::make_unique<UiTex>("./data/textures/tex-base-dark.gph")),
+        uiTexPtr(std::make_unique<UiTex>(this->buildTexturePath(".nsketch/data/textures/tex-base-dark.gph"))),
         appPtr(nullptr) {}
 
     UiCanv::~UiCanv() {}
@@ -21,6 +23,21 @@ namespace nsk {
         this->updateSketch();
         this->updatePalette();
         this->updateCursor();
+    }
+
+    // Helper function to build the path safely
+    std::string UiCanv::buildTexturePath(const std::string& path) {
+        // 1. Get the C-string from the environment
+        const char* home_c_str = std::getenv("HOME");
+
+        // 2. Critical Null Check
+        if (home_c_str == nullptr) {
+            // Throw an exception if HOME isn't set, as the app can't find its files
+            throw std::runtime_error("FATAL: HOME environment variable not set. Cannot locate application files.");
+        }
+
+        // 3. Convert C-string to std::string and append the rest of the path
+        return std::string(home_c_str) + "/" + path;
     }
     
     void UiCanv::autoScale() {
