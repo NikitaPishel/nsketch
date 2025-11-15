@@ -39,19 +39,24 @@ Nsketch (Nano-Sketch) is a minimalistic linux CLI sketching app. No bloated inte
     sudo apt install git
     ```
 
-2.  **Clone the Repository:**
+2.  **Install CMake (if necessary):**
+    ```bash
+    sudo apt install cmake
+    ```
+
+3.  **Clone the Repository:**
     ```bash
     git clone https://github.com/NikitaPishel/nsketch
     cd nsketch
     ```
 
-3.  **Run the Installation Script:**
+4.  **Run the Installation Script:**
     ```bash
     chmod +x ./install.sh
     ./install.sh
     ```
 
-4. **Done! Now you can launch it like this:**
+5. **Done! Now you can launch it like this:**
     ```bash
     nsketch
     ```
@@ -62,19 +67,24 @@ Nsketch (Nano-Sketch) is a minimalistic linux CLI sketching app. No bloated inte
     sudo pacman -S git
     ```
 
-2.  **Clone the Repository:**
+2.  **Install CMake (if necessary):**
+    ```bash
+    sudo pacman -S cmake
+    ```
+
+3.  **Clone the Repository:**
     ```bash
     git clone https://github.com/NikitaPishel/nsketch
     cd nsketch
     ```
 
-3.  **Run the Installation Script:**
+4.  **Run the Installation Script:**
     ```bash
     chmod +x ./install.sh
     ./install.sh
     ```
 
-4. **Done! Now you can launch it like this:**
+5. **Done! Now you can launch it like this:**
     ```bash
     nsketch
     ```
